@@ -61,12 +61,28 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-2-5 sentences describing what the system does
+This is a chore reward application that helps parents create incentives for children to complete daily chores. A parent can set up custom tasks that reward the child with an in-app currency. This currency can then be exchanged for items in a shop. Items available in the shop are all created by the parent and represent real-life rewards provided by the parent for the child.
 
 ### Pages
 
-* Home: 1-3 sentences describing what the page displays and what a user can do
-* Shopping cart: ...
+* Login/Registration
+During registration the user has to choose a username, account password and a parental password. When logging into an already existing account a user can select to log in as a parent or child using a checkbox and then type username and the account password or parent password depending on which mode one chooses. Logging in as a parent grants the parental functionalities.
+
+* Calendar
+This is the first page the user sees when logging in. The user can see all the days of the month, and a quick overview of the amount of tasks they have for a certain day, and have the option to select a certain day for a more detailed view.
+
+* Quest log
+The quest log page displays a list of all available chores for the currently selected date along with the amount of currency received for completing it and a chore description text. Each quest can be selected as complete using a button.
+
+* Shop
+The shop page displays all items available to purchase and their price. 
+
+* Quest log (Parent view)
+The parent view of the quest log is a page that is only accessible to the parent. The parent can access this page by using the parent password. From here, the parent can create quests and delete or update already existing quests. Any quests added by the parent will be visible to the child in the regular quest log page. Quests which are selected as completed will be greyed out and marked as complete. A completed quest can be deleted and grant the reward for the chore or deleted without rewarding if the chore was not actually completed.
+
+* Shop (Parent view)
+The parent view of the shop is a page that is only accessible to the parent. By using the parent password, the parent can add, edit and delete items from the store page. The items in the shop will consist of a name, description and a price tag, and will represent a real life item/activity for the child.
+
 
 ### Entity-Relationship (ER) Diagram
 
