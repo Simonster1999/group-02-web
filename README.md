@@ -72,10 +72,10 @@ During registration the user has to choose a username, account password and a pa
 This is the first page the user sees when logging in. The user can see all the days of the month, and a quick overview of the amount of tasks they have for a certain day, and have the option to select a certain day for a more detailed view.
 
 * Quest log
-The quest log page displays a list of all available chores for the currently selected date along with the amount of currency received for completing it and a chore description text. Each quest can be selected as complete using a button.
+The quest log page displays a list of all available chores for the currently selected date along with the amount of currency received for completing it and a chore description text. Every quest has an icon displayed next to it, selected by the parent from a handful of available icons when creating the quest. Each quest can be marked as complete by clicking the “quest complete” button.
 
-* Shop
-The shop page displays all items available to purchase and their price. 
+* Rewards
+The reward page displays all items available to purchase and their price. Every reward has an icon displayed next to it, selected by the parent from a handful of available icons when creating the reward.
 
 * Quest log (Parent view)
 The parent view of the quest log is a page that is only accessible to the parent. The parent can access this page by using the parent password. From here, the parent can create quests and delete or update already existing quests. Any quests added by the parent will be visible to the child in the regular quest log page. Quests which are selected as completed will be greyed out and marked as complete. A completed quest can be deleted and grant the reward for the chore or deleted without rewarding if the chore was not actually completed.
