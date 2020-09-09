@@ -3,7 +3,7 @@ var router = express.Router();
 var Quest = require('../models/quest');
 
 // Return a list of all quests
-router.get('/api/quests', function(req, res, next) {
+router.get('/api/:quests', function(req, res, next) {
     Quest.find(function(err, quests) {
         if (err) { return next(err); }
         res.json({'quests': quests});
@@ -11,7 +11,7 @@ router.get('/api/quests', function(req, res, next) {
 });
 
 // Create a new quest
-router.post('/api/quests', function(req, res, next) {
+router.post('/api/:quests', function(req, res, next) {
     var quest = new Quest(req.body);
     quest.save(function(err) {
         if (err) { return next(err); }
@@ -20,7 +20,7 @@ router.post('/api/quests', function(req, res, next) {
 });
 
 // Return the quest with the given ID
-router.get('/api/quests/quest_id', function(req, res, next) {
+router.get('/api/quests/:quest_id', function(req, res, next) {
     var id = req.params.id;
     Quest.findById(id, function(err, quest) {
         if (err) { return next(err); }
@@ -32,7 +32,7 @@ router.get('/api/quests/quest_id', function(req, res, next) {
 });
 
 // Delete the quest with the given ID
-router.delete('/api/quests/quest_id', function(req, res, next) {
+router.delete('/api/quests/:quest_id', function(req, res, next) {
     var id = req.params.id;
     Quest.findOneAndDelete({_id: id}, function(err, quest) {
         if (err) { return next(err); }
@@ -44,7 +44,7 @@ router.delete('/api/quests/quest_id', function(req, res, next) {
 });
 
 //Changes entire entity
-router.put('/api/quests/quest_id', function(req, res, next) {
+router.put('/api/quests/:quest_id', function(req, res, next) {
     var id = req.params.id;
     Quest.findById(id, function(err, quest) {
         if (err) { return next(err); }
@@ -56,6 +56,7 @@ router.put('/api/quests/quest_id', function(req, res, next) {
         quest.is_Completed = req.body.is_Completed;
         quest.quest_Desc = req.body.quest_Desc;
         quest.date = req.body.date;
+        quest.icon = req.body.icon;
         quest.account = req.body.account;
         quest.save();
         res.json(quest);
@@ -63,7 +64,7 @@ router.put('/api/quests/quest_id', function(req, res, next) {
 });
 
 //Changes specified attribute
-router.patch('/api/quests/quest_id', function(req, res, next) {
+router.patch('/api/quests/:quest_id', function(req, res, next) {
     var id = req.params.id;
     Quest.findById(id, function(err, quest) {
         if (err) { return next(err); }
@@ -75,6 +76,7 @@ router.patch('/api/quests/quest_id', function(req, res, next) {
         quest.is_Completed = (req.body.is_Completed || quest.is_Completed);
         quest.quest_Desc = (req.body.quest_Desc || quest.quest_Desc);
         quest.date = (req.body.date || quest.date);
+        quest.icon = (req.body.icon || quest.icon);
         quest.account = (req.body.account || quest.account);
         quest.save();
         res.json(quest);
