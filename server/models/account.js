@@ -8,4 +8,4 @@ var accountSchema = new Schema({
     balance             : Number
 });
 
-module.exports = mongoose.model('account', accountSchema);
+module.exports = mongoose.model('accounts', accountSchema);
