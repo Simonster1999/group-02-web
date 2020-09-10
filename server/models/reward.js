@@ -1,5 +1,6 @@
-const { Schema } = require("mongoose");
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+
 var rewardSchema = new Schema(
     {
         account: {type: Schema.Types.ObjectId, ref: 'Account'},
