@@ -6,6 +6,11 @@ var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
+var accountController = require('./controllers/accounts');
+var iconController = require('./controllers/icons');
+var questController = require('./controllers/quests');
+var rewardController = require('./controllers/rewards');
+
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
 var port = process.env.PORT || 3000;
@@ -34,6 +39,11 @@ app.use(cors());
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
 });
+
+app.use(accountController);
+app.use(iconController);
+app.use(questController);
+app.use(rewardController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
