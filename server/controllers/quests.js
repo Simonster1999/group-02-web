@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Quest = require('../models/quest');
+var Icon = require('../models/icon');
 
 // Return a list of all quests
 router.get('/api/:quests', function(req, res, next) {
@@ -11,11 +12,20 @@ router.get('/api/:quests', function(req, res, next) {
 });
 
 // Create a new quest
-router.post('/api/:quests', function(req, res, next) {
+router.post('/api/account/:account_id/quests', function(req, res, next) {
     var quest = new Quest(req.body);
     quest.save(function(err) {
         if (err) { return next(err); }
         res.status(201).json(quest);
+    });
+});
+
+// Create a new icon for a specified quest
+router.post('/api/quests/:quest_id/icon', function(req, res, next) {
+    var icon = new Icon(req.body);
+    icon.save(function(err) {
+        if (err) { return next(err); }
+        res.status(201).json(icon);
     });
 });
 
