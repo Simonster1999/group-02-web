@@ -20,7 +20,7 @@ router.post('/api/accounts', function(req, res, next) {
 });
 
 // Return the account with the given ID
-router.get('/api/account/:account_id', function(req, res, next) {
+router.get('/api/accounts/:account_id', function(req, res, next) {
     var id = req.params.account_id;
     Account.findById(id, function(err, account) {
         if (err) { return next(err); }
