@@ -32,8 +32,8 @@ router.get('/api/parents/:parent_id', function(req, res, next) {
 });
 
 // Delete the parent with the given ID
-router.delete('/api/parents/:parentnt_id', function(req, res, next) {
-    var id = req.params.id;
+router.delete('/api/parents/:parent_id', function(req, res, next) {
+    var id = req.params.parent_id;
     Parent.findOneAndDelete({_id: id}, function(err, parent) {
         if (err) { return next(err); }
         if (parent === null) {
