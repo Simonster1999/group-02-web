@@ -12,7 +12,7 @@ var questController = require('./controllers/quests');
 var rewardController = require('./controllers/rewards');
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/questRewardDB';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
