@@ -7,7 +7,6 @@ var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
 var accountController = require('./controllers/accounts');
-var iconController = require('./controllers/icons');
 var questController = require('./controllers/quests');
 var rewardController = require('./controllers/rewards');
 
@@ -41,7 +40,6 @@ app.get('/api', function(req, res) {
 });
 
 app.use(accountController);
-app.use(iconController);
 app.use(questController);
 app.use(rewardController);
 
