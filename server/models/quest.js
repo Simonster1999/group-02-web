@@ -7,7 +7,6 @@ var questSchema = new Schema({
     is_Completed: { type: Boolean },
     quest_Desc: { type: String },
     date: { type: Date },
-    icon: { type: Schema.Types.ObjectId, ref: 'Icon'},
     account: { type: Schema.Types.ObjectId, ref: 'Account'}
 });
 
