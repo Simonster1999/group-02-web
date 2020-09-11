@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Quest = require('../models/quest');
 
+
 // Return a list of all quests
 router.get('/api/:quests', function(req, res, next) {
     Quest.find(function(err, quests) {
@@ -11,7 +12,16 @@ router.get('/api/:quests', function(req, res, next) {
 });
 
 // Create a new quest
-router.post('/api/:quests', function(req, res, next) {
+router.post('/api/parents/:parent_id/quests', function(req, res, next) {
+    var quest = new Quest(req.body);
+    quest.save(function(err) {
+        if (err) { return next(err); }
+        res.status(201).json(quest);
+    });
+});
+
+// Create a new quest for postman testing
+router.post('/api/quests', function(req, res, next) {
     var quest = new Quest(req.body);
     quest.save(function(err) {
         if (err) { return next(err); }
@@ -31,8 +41,44 @@ router.get('/api/quests/:quest_id', function(req, res, next) {
     });
 });
 
+// Return a all quests for the given parent
+router.get('/api/parents/:parent_id/quests', function(req, res, next) {
+    var id = req.params.id;
+    Quest.findById(id, function(err, quest) {
+        if (err) { return next(err); }
+        if (quest === null) {
+            return res.status(404).json({'message': 'Quest not found'});
+        }
+        res.json(quest);
+    });
+});
+
+// Return a given quest for the given parent
+router.get('/api/parents/:parent_id/quests/:quest_id', function(req, res, next) {
+    var id = req.params.id;
+    Quest.findById(id, function(err, quest) {
+        if (err) { return next(err); }
+        if (quest === null) {
+            return res.status(404).json({'message': 'Quest not found'});
+        }
+        res.json(quest);
+    });
+});
+
 // Delete the quest with the given ID
 router.delete('/api/quests/:quest_id', function(req, res, next) {
+    var id = req.params.id;
+    Quest.findOneAndDelete({_id: id}, function(err, quest) {
+        if (err) { return next(err); }
+        if (quest === null) {
+            return res.status(404).json({'message': 'Quest not found'});
+        }
+        res.json(quest);
+    });
+});
+
+// Delete the quest with the given ID for the given parent
+router.delete('/api/parents/:parent_id/quests/:quest_id', function(req, res, next) {
     var id = req.params.id;
     Quest.findOneAndDelete({_id: id}, function(err, quest) {
         if (err) { return next(err); }
