@@ -1,79 +1,79 @@
 var express = require('express');
 var router = express.Router();
-var Account = require('../models/account');
+var Child = require('../models/child');
 
-// Return a list of all accounts
-router.get('/api/accounts', function(req, res, next) {
-    Account.find(function(err, accounts) {
+// Return a list of all children
+router.get('/api/children', function(req, res, next) {
+    Child.find(function(err, children) {
         if (err) { return next(err); }
-        res.json({'accounts': accounts});
+        res.json({'children': children});
     });
 });
 
-// Create a new account
-router.post('/api/accounts', function(req, res, next) {
-    var account = new Account(req.body);
-    account.save(function(err) {
+// Create a new child
+router.post('/api/children', function(req, res, next) {
+    var child = new Child(req.body);
+    child.save(function(err) {
         if (err) { return next(err); }
-        res.status(201).json(account);
+        res.status(201).json(child);
     });
 });
 
-// Return the account with the given ID
-router.get('/api/accounts/:account_id', function(req, res, next) {
-    var id = req.params.account_id;
-    Account.findById(id, function(err, account) {
+// Return the child with the given ID
+router.get('/api/children/:child_id', function(req, res, next) {
+    var id = req.params.child_id;
+    Child.findById(id, function(err, child) {
         if (err) { return next(err); }
-        if (account === null) {
-            return res.status(404).json({'message': 'Account not found'});
+        if (child === null) {
+            return res.status(404).json({'message': 'Child not found'});
         }
-        res.json(account);
+        res.json(child);
     });
 });
 
-// Delete the account with the given ID
-router.delete('/api/accounts/:account_id', function(req, res, next) {
+// Delete the child with the given ID
+router.delete('/api/children/:child_id', function(req, res, next) {
     var id = req.params.id;
-    Account.findOneAndDelete({_id: id}, function(err, account) {
+    Child.findOneAndDelete({_id: id}, function(err, child) {
         if (err) { return next(err); }
-        if (account === null) {
-            return res.status(404).json({'message': 'Account not found'});
+        if (child === null) {
+            return res.status(404).json({'message': 'Child not found'});
         }
-        res.json(account);
+        res.json(child);
     });
 });
 
-// Update the account with given ID
-router.put('/api/accounts/:account_id', function(req, res, next) {
-    var id = req.params.account_id;
-    Account.findById(id, function(err, account) {
+// Update the child with given ID
+router.put('/api/children/:child_id', function(req, res, next) {
+    var id = req.params.child_id;
+    Child.findById(id, function(err, child) {
         if (err) {return next(err); }
-        if (account === null) {
-            return res.status(404).json({"message" : "Account not found"});
+        if (child === null) {
+            return res.status(404).json({"message" : "Child not found"});
         }
-        account.username         = req.body.username;
-        account.account_password = req.body.account_password;
-        account.parent_password  = req.body.parent_password;
-        account.balance          = req.body.balance;
-        account.save();
-        res.json(account);
+        child.username         = req.body.username;
+        child.child_password = req.body.child_password;
+        child.parent_password  = req.body.parent_password;
+        child.balance          = req.body.balance;
+        child.save();
+        res.json(child);
     });
 });
 
-// Partially update account with given ID
-router.patch('/api/accounts/:account_id', function(req, res, next) {
-    var id = req.params.account_id;
-    Account.findById(id, function(err, account) {
+// Partially update child with given ID
+router.patch('/api/children/:child_id', function(req, res, next) {
+    var id = req.params.child_id;
+    Child.findById(id, function(err, child) {
         if (err) {return next(err); }
-        if (account === null) {
-            return res.status(404).json({"message" : "Account not found"});
+        if (child === null) {
+            return res.status(404).json({"message" : "Child not found"});
         }
-        account.username         = ( req.body.username         || account.username );
-        account.account_password = ( req.body.account_password || account.account_password );
-        account.parent_password  = ( req.body.parent_password  || account.parent_password );
-        account.balance          = ( req.body.balance          || account.balance );
-        account.save();
-        res.json(account);
+        child.username         = ( req.body.username         || child.username );
+        child.child_password = ( req.body.child_password || child.child_password );
+        child.parent_password  = ( req.body.parent_password  || child.parent_password );
+        child.balance          = ( req.body.balance          || child.balance );
+        child.save();
+        res.json(child);
     });
 });
 
