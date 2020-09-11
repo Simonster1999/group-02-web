@@ -6,7 +6,8 @@ var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
-var accountController = require('./controllers/accounts');
+var childrenController = require('./controllers/children');
+var parentController = require('./controllers/parents');
 var questController = require('./controllers/quests');
 var rewardController = require('./controllers/rewards');
 
@@ -39,7 +40,8 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
 });
 
-app.use(accountController);
+app.use(childrenController);
+app.use(parentController);
 app.use(questController);
 app.use(rewardController);
 
