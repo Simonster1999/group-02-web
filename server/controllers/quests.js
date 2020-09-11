@@ -4,7 +4,7 @@ var Quest = require('../models/quest');
 
 
 // Return a list of all quests
-router.get('/api/:quests', function(req, res, next) {
+router.get('/api/quests', function(req, res, next) {
     Quest.find(function(err, quests) {
         if (err) { return next(err); }
         res.json({'quests': quests});
@@ -31,7 +31,7 @@ router.post('/api/quests', function(req, res, next) {
 
 // Return the quest with the given ID
 router.get('/api/quests/:quest_id', function(req, res, next) {
-    var id = req.params.id;
+    var id = req.params.quest_id;
     Quest.findById(id, function(err, quest) {
         if (err) { return next(err); }
         if (quest === null) {
@@ -43,7 +43,7 @@ router.get('/api/quests/:quest_id', function(req, res, next) {
 
 // Return a all quests for the given parent
 router.get('/api/parents/:parent_id/quests', function(req, res, next) {
-    var id = req.params.id;
+    var id = req.params.parent_id;
     Quest.findById(id, function(err, quest) {
         if (err) { return next(err); }
         if (quest === null) {
@@ -55,7 +55,7 @@ router.get('/api/parents/:parent_id/quests', function(req, res, next) {
 
 // Return a given quest for the given parent
 router.get('/api/parents/:parent_id/quests/:quest_id', function(req, res, next) {
-    var id = req.params.id;
+    var id = req.params.quest_id;
     Quest.findById(id, function(err, quest) {
         if (err) { return next(err); }
         if (quest === null) {
@@ -67,7 +67,7 @@ router.get('/api/parents/:parent_id/quests/:quest_id', function(req, res, next) 
 
 // Delete the quest with the given ID
 router.delete('/api/quests/:quest_id', function(req, res, next) {
-    var id = req.params.id;
+    var id = req.params.quest_id;
     Quest.findOneAndDelete({_id: id}, function(err, quest) {
         if (err) { return next(err); }
         if (quest === null) {
@@ -79,7 +79,7 @@ router.delete('/api/quests/:quest_id', function(req, res, next) {
 
 // Delete the quest with the given ID for the given parent
 router.delete('/api/parents/:parent_id/quests/:quest_id', function(req, res, next) {
-    var id = req.params.id;
+    var id = req.params.quest_id;
     Quest.findOneAndDelete({_id: id}, function(err, quest) {
         if (err) { return next(err); }
         if (quest === null) {
@@ -91,7 +91,7 @@ router.delete('/api/parents/:parent_id/quests/:quest_id', function(req, res, nex
 
 //Changes entire entity
 router.put('/api/quests/:quest_id', function(req, res, next) {
-    var id = req.params.id;
+    var id = req.params.quest_id;
     Quest.findById(id, function(err, quest) {
         if (err) { return next(err); }
         if (quest === null) {
@@ -111,19 +111,19 @@ router.put('/api/quests/:quest_id', function(req, res, next) {
 
 //Changes specified attribute
 router.patch('/api/quests/:quest_id', function(req, res, next) {
-    var id = req.params.id;
+    var id = req.params.quest_id;
     Quest.findById(id, function(err, quest) {
         if (err) { return next(err); }
         if (quest === null) {
             return res.status(404).json({'message': 'Quest not found'});
         }
-        quest.quest_Name = (req.body.quest_Name || quest.quest_Name);
-        quest.money_Reward = (req.body.money_Reward || quest.money_Reward);
-        quest.is_Completed = (req.body.is_Completed || quest.is_Completed);
-        quest.quest_Desc = (req.body.quest_Desc || quest.quest_Desc);
-        quest.date = (req.body.date || quest.date);
-        quest.icon = (req.body.icon || quest.icon);
-        quest.account = (req.body.account || quest.account);
+        quest.quest_Name    = (req.body.quest_Name || quest.quest_Name);
+        quest.money_Reward  = (req.body.money_Reward || quest.money_Reward);
+        quest.is_Completed  = (req.body.is_Completed || quest.is_Completed);
+        quest.quest_Desc    = (req.body.quest_Desc || quest.quest_Desc);
+        quest.date          = (req.body.date || quest.date);
+        quest.icon          = (req.body.icon || quest.icon);
+        quest.account       = (req.body.account || quest.account);
         quest.save();
         res.json(quest);
     });
