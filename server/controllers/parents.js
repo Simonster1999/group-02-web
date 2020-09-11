@@ -4,7 +4,7 @@ var Parent = require('../models/parent');
 
 // Return a list of all parents
 router.get('/api/parents', function(req, res, next) {
-    Parents.find(function(err, parents) {
+    Parent.find(function(err, parents) {
         if (err) { return next(err); }
         res.json({'parents': parents});
     });
