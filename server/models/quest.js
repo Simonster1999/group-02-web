@@ -7,7 +7,7 @@ var questSchema = new Schema({
     is_Completed: { type: Boolean },
     quest_Desc: { type: String },
     date: { type: Date },
-    account: { type: Schema.Types.ObjectId, ref: 'Account'}
+    Parent: { type: Schema.Types.ObjectId, ref: 'Parent'}
 });
 
 module.exports = mongoose.model('quests', questSchema);
