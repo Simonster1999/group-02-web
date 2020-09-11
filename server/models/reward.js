@@ -9,4 +9,4 @@ var rewardSchema = new Schema({
     parent      : {type: Schema.Types.ObjectId, ref: 'Parent'}
 });
 
-module.exports = mongoose.model('reward', rewardSchema);
+module.exports = mongoose.model('rewards', rewardSchema);
