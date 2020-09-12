@@ -51,10 +51,8 @@ router.put('/api/parents/:parent_id', function(req, res, next) {
         if (parent === null) {
             return res.status(404).json({"message" : "Parent not found"});
         }
-        parent.username        = req.body.username;
-        parent.parent_password = req.body.parent_password;
-        parent.parent_password = req.body.parent_password;
-        parent.balance         = req.body.balance;
+        parent.username = req.body.username;
+        parent.password = req.body.password;
         parent.save();
         res.json(parent);
     });
