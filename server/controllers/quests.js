@@ -148,6 +148,14 @@ router.patch('/api/quests/:quest_id', function(req, res, next) {
 });
 */
 
+//Returns quests sorted by currency reward amount
+router.get('/api/quests?sortBounty=asc', function(req, res, next) {
+    Quest.find({parent: id}).sort({money_bounty : 'asc'}); 
+        if (err) { return next(err); }
+        res.json({'quests': quests});
+    });
+
+
 module.exports = router;
 
 
