@@ -129,6 +129,25 @@ router.patch('/api/quests/:quest_id', function(req, res, next) {
     });
 });
 
+//TODO: 
+//Displays uncompleted quests by filtering out completed ones. 
+/* router.get('/api/quests/:quest_id?is_Completed = false', function(req, res, next){
+    var id = req.params.quest_id;
+    var isComplete = req.params.get('is_Completed');
+    if (isComplete === null) {
+        return res.status(404).json({'message': ''});
+    }
+    Quest.find({parent: id, is_Completed = isComplete, function(req, res, next){
+        if (err) { return next(err); }
+        if (quest === null) {
+            return res.status(404).json({'message': ''});
+        }
+        res.json(quest);
+    }
+    });
+});
+*/
+
 module.exports = router;
 
 
