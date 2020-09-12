@@ -1,364 +1,385 @@
 {
 	"info": {
-		"_postman_id": "71fc4bc3-9953-4c12-9c2d-6e901c753850",
+		"_postman_id": "9de52b0e-e482-42c7-8d9c-82a8a7c0271f",
 		"name": "questRewardDB",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "List All Parents",
-			"event": [
+			"name": "Parent",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "649866d1-89a2-4335-b5b5-a562f3f43882",
-						"exec": [
-							"pm.test(\"Correct status code\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"List is empty\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.parents).to.eql([]);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/parents",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"parents"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create Parent",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "712d45a4-6961-4797-b508-9e2c84b0a372",
-						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"pm.environment.set(\"parent_id\", jsonData._id);\r",
-							"\r",
-							"pm.test(\"response is CREATED\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Parent is created\", function () {\r",
-							"    pm.expect(jsonData.username).to.eql('Simonsterxx');\r",
-							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"username\": \"Simonsterxx\", \"password\": \"123\"}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"name": "List All Parents",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7c2bfc60-610d-4394-a73f-19133a4aedec",
+								"exec": [
+									"pm.test(\"Correct status code\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"List is empty\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.parents).to.eql([]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/parents",
-					"protocol": "http",
-					"host": [
-						"localhost"
 					],
-					"port": "3000",
-					"path": [
-						"api",
-						"parents"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "List All Parents",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "d508cfd3-9fed-4fc4-8792-51aeac426779",
-						"exec": [
-							"pm.test(\"Correct status code\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Username for [0] is Simonsterxx\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.parents[0].username).to.eql('Simonsterxx');\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/parents",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"parents"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Return parent with given ID",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "fb03b032-d402-4dc8-857e-7b18346095ef",
-						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Correct status code\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Returns correct parent\", function () {\r",
-							"    pm.expect(jsonData.username).to.eql('Simonsterxx');\r",
-							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/parents/{{parent_id}}",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"parents",
-						"{{parent_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update entire parent with given id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "d9fac76c-33e2-438e-9987-ad62fc384f7b",
-						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Correct status code\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Parent info is updated\", function () {\r",
-							"    pm.expect(jsonData.username).to.eql('Simonsterxxx');\r",
-							"    pm.expect(jsonData.password).to.eql(\"143\");\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"username\": \"Simonsterxxx\", \"password\": \"143\"}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/parents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"parents"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:3000/api/parents/{{parent_id}}",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"parents",
-						"{{parent_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update password for given parent",
-			"event": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "37fcc5d0-25ef-4b79-9c4e-629ee330fef5",
-						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Correct status code\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Parent password is updated\", function () {\r",
-							"    pm.expect(jsonData.password).to.eql(\"333\");\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"password\": \"333\"}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"name": "Create Parent",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "072d967a-cbe2-4ffd-bdf7-ae29fbddd02b",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"parent_id\", jsonData._id);\r",
+									"\r",
+									"pm.test(\"response is CREATED\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Parent is created\", function () {\r",
+									"    pm.expect(jsonData.username).to.eql('Simonsterxx');\r",
+									"    pm.expect(jsonData.password).to.eql(\"123\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
-					}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"Simonsterxx\", \"password\": \"123\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/parents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"parents"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:3000/api/parents/{{parent_id}}",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"parents",
-						"{{parent_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete given parent",
-			"event": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "900bf528-9214-4fb6-84f9-3f8fa0a9882d",
-						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Correct status code\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
+					"name": "List All Parents",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8630171b-ba98-42ac-9181-2a14214b6e12",
+								"exec": [
+									"pm.test(\"Correct status code\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Username for [0] is Simonsterxx\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.parents[0].username).to.eql('Simonsterxx');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/parents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"parents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Return parent with given ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "96a9e4f0-f013-456b-8595-53eca501eb77",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Correct status code\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Returns correct parent\", function () {\r",
+									"    pm.expect(jsonData.username).to.eql('Simonsterxx');\r",
+									"    pm.expect(jsonData.password).to.eql(\"123\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/parents/{{parent_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"parents",
+								"{{parent_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update entire parent with given id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "be3191cf-037d-4d74-8067-1108653b2e06",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Correct status code\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Parent info is updated\", function () {\r",
+									"    pm.expect(jsonData.username).to.eql('Simonsterxxx');\r",
+									"    pm.expect(jsonData.password).to.eql(\"143\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"Simonsterxxx\", \"password\": \"143\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/parents/{{parent_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"parents",
+								"{{parent_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update password for given parent",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0c741326-43ab-4b55-9400-c3d7a5bcf8d8",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Correct status code\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Parent password is updated\", function () {\r",
+									"    pm.expect(jsonData.password).to.eql(\"333\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"password\": \"333\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/parents/{{parent_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"parents",
+								"{{parent_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete given parent",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "569aeae8-93ba-450c-ab5c-b2e80e3f1188",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Correct status code\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/parents/{{parent_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"parents",
+								"{{parent_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get non existing parent",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3f7f5472-9998-4c97-8f0b-9740da1015f3",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Correct status code\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response should have valid JSON data\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"Parent not found\");\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/parents/{{parent_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"parents",
+								"{{parent_id}}"
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/parents/{{parent_id}}",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"parents",
-						"{{parent_id}}"
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Get non existing parent",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "40d77020-f406-41a7-8aeb-acf854442f3f",
-						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Correct status code\", function () {\r",
-							"    pm.response.to.have.status(404);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"response should have valid JSON data\", function () {\r",
-							"    pm.expect(jsonData.message).to.eql(\"Parent not found\");\r",
-							"\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/parents/{{parent_id}}",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"parents",
-						"{{parent_id}}"
-					]
-				}
-			},
-			"response": []
+			"name": "Child",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Quest",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Reward",
+			"item": [],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}
