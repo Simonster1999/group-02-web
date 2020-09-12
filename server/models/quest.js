@@ -7,7 +7,7 @@ var questSchema = new Schema({
     is_completed : { type: Boolean, required: true, default: false },
     quest_desc   : { type: String },
     date         : { type: Date, required: true },
-    parent       : { type: Schema.Types.ObjectId, ref: 'Parent'}
+    parent       : { type: Schema.Types.ObjectId, ref: 'Parent', required: true}
 });
 
 module.exports = mongoose.model('quests', questSchema);
