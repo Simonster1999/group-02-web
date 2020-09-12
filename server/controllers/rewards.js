@@ -19,7 +19,7 @@ router.post('/api/rewards', function(req, res, next){
 });
 
 router.get('/api/rewards/:reward_id', function(req, res, next){
-    var id = req.params.id;
+    var id = req.params.reward_id;
     Reward.findById(id, function (err, reward){
         if (err) {return next(err); }
         if (reward === null) {
@@ -30,7 +30,7 @@ router.get('/api/rewards/:reward_id', function(req, res, next){
 });
 
 router.delete('/api/rewards/:reward_id', function(req, res, next){
-    var id = req.params.id;
+    var id = req.params.reward_id;
     Reward.findOneAndDelete({_id: id}, function(err, reward) {
         if (err) { return next(err); }
         if (reward === null) {
