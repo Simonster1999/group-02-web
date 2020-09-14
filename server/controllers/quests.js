@@ -117,12 +117,12 @@ router.patch('/api/quests/:quest_id', function(req, res, next) {
         if (quest === null) {
             return res.status(404).json({'message': 'Quest not found'});
         }
-        quest.quest_Name    = (req.body.quest_Name || quest.quest_Name);
-        quest.money_Reward  = (req.body.money_Reward || quest.money_Reward);
-        quest.is_Completed  = (req.body.is_Completed || quest.is_Completed);
-        quest.quest_Desc    = (req.body.quest_Desc || quest.quest_Desc);
-        quest.date          = (req.body.date || quest.date);
-        quest.account       = (req.body.account || quest.account);
+        quest.quest_name    = (req.body.quest_name   || quest.quest_name);
+        quest.money_bounty  = (req.body.money_bounty || quest.money_bounty);
+        quest.is_completed  = (req.body.is_completed || quest.is_completed);
+        quest.quest_desc    = (req.body.quest_desc   || quest.quest_desc);
+        quest.date          = (req.body.date         || quest.date);
+        quest.account       = (req.body.account      || quest.account);
         quest.save();
         res.json(quest);
     });
