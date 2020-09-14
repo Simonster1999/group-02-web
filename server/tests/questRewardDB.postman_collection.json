@@ -1,385 +1,715 @@
 {
 	"info": {
-		"_postman_id": "9de52b0e-e482-42c7-8d9c-82a8a7c0271f",
+		"_postman_id": "71fc4bc3-9953-4c12-9c2d-6e901c753850",
 		"name": "questRewardDB",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Parent",
-			"item": [
+			"name": "List All Parents",
+			"event": [
 				{
-					"name": "List All Parents",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "7c2bfc60-610d-4394-a73f-19133a4aedec",
-								"exec": [
-									"pm.test(\"Correct status code\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"List is empty\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.parents).to.eql([]);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/parents",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"parents"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Parent",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "072d967a-cbe2-4ffd-bdf7-ae29fbddd02b",
-								"exec": [
-									"var jsonData = pm.response.json();\r",
-									"pm.environment.set(\"parent_id\", jsonData._id);\r",
-									"\r",
-									"pm.test(\"response is CREATED\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Parent is created\", function () {\r",
-									"    pm.expect(jsonData.username).to.eql('Simonsterxx');\r",
-									"    pm.expect(jsonData.password).to.eql(\"123\");\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"username\": \"Simonsterxx\", \"password\": \"123\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/parents",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"parents"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "List All Parents",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "8630171b-ba98-42ac-9181-2a14214b6e12",
-								"exec": [
-									"pm.test(\"Correct status code\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Username for [0] is Simonsterxx\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.parents[0].username).to.eql('Simonsterxx');\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/parents",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"parents"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Return parent with given ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "96a9e4f0-f013-456b-8595-53eca501eb77",
-								"exec": [
-									"var jsonData = pm.response.json();\r",
-									"\r",
-									"pm.test(\"Correct status code\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Returns correct parent\", function () {\r",
-									"    pm.expect(jsonData.username).to.eql('Simonsterxx');\r",
-									"    pm.expect(jsonData.password).to.eql(\"123\");\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/parents/{{parent_id}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"parents",
-								"{{parent_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update entire parent with given id",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "be3191cf-037d-4d74-8067-1108653b2e06",
-								"exec": [
-									"var jsonData = pm.response.json();\r",
-									"\r",
-									"pm.test(\"Correct status code\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Parent info is updated\", function () {\r",
-									"    pm.expect(jsonData.username).to.eql('Simonsterxxx');\r",
-									"    pm.expect(jsonData.password).to.eql(\"143\");\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"username\": \"Simonsterxxx\", \"password\": \"143\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/parents/{{parent_id}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"parents",
-								"{{parent_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update password for given parent",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "0c741326-43ab-4b55-9400-c3d7a5bcf8d8",
-								"exec": [
-									"var jsonData = pm.response.json();\r",
-									"\r",
-									"pm.test(\"Correct status code\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Parent password is updated\", function () {\r",
-									"    pm.expect(jsonData.password).to.eql(\"333\");\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"password\": \"333\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/parents/{{parent_id}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"parents",
-								"{{parent_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete given parent",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "569aeae8-93ba-450c-ab5c-b2e80e3f1188",
-								"exec": [
-									"var jsonData = pm.response.json();\r",
-									"\r",
-									"pm.test(\"Correct status code\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/parents/{{parent_id}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"parents",
-								"{{parent_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get non existing parent",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "3f7f5472-9998-4c97-8f0b-9740da1015f3",
-								"exec": [
-									"var jsonData = pm.response.json();\r",
-									"\r",
-									"pm.test(\"Correct status code\", function () {\r",
-									"    pm.response.to.have.status(404);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"response should have valid JSON data\", function () {\r",
-									"    pm.expect(jsonData.message).to.eql(\"Parent not found\");\r",
-									"\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/parents/{{parent_id}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"parents",
-								"{{parent_id}}"
-							]
-						}
-					},
-					"response": []
+					"listen": "test",
+					"script": {
+						"id": "649866d1-89a2-4335-b5b5-a562f3f43882",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"List is empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.parents).to.eql([]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
-			"protocolProfileBehavior": {}
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/parents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
 		},
 		{
-			"name": "Child",
-			"item": [],
-			"protocolProfileBehavior": {}
+			"name": "Create Parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "712d45a4-6961-4797-b508-9e2c84b0a372",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"parent_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Parent is created\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('parent_acc');\r",
+							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"parent_acc\", \"password\": \"123\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/parents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
 		},
 		{
-			"name": "Quest",
-			"item": [],
-			"protocolProfileBehavior": {}
+			"name": "List All Parents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d508cfd3-9fed-4fc4-8792-51aeac426779",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Username for [0] is Simonsterxx\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.parents[0].username).to.eql('parent_acc');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/parents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
 		},
 		{
-			"name": "Reward",
-			"item": [],
-			"protocolProfileBehavior": {}
+			"name": "Return parent with given ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fb03b032-d402-4dc8-857e-7b18346095ef",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct parent\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('parent_acc');\r",
+							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update entire parent with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d9fac76c-33e2-438e-9987-ad62fc384f7b",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Parent info is updated\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('parent_acc2');\r",
+							"    pm.expect(jsonData.password).to.eql(\"143\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"parent_acc2\", \"password\": \"143\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update password for given parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "37fcc5d0-25ef-4b79-9c4e-629ee330fef5",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Parent password is updated\", function () {\r",
+							"    pm.expect(jsonData.password).to.eql(\"333\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"password\": \"333\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all children",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9da4b138-8fa1-4c50-968c-47a039793863",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"List is empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.children).to.eql([]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/children",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "15da5354-6b2a-41ec-b274-13539e001b69",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"child_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Child is created\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('child_acc');\r",
+							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"child_acc\", \"password\": \"123\", \"parent\": \"{{parent_id}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/children",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all children",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cacf2b61-17b4-429e-89a8-6bbf749376b6",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Username for [0] is Simonsterxx\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.children[0].username).to.eql('child_acc');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/children",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return child with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0ab7d42c-c84d-4b3e-8be3-6ee3fa974548",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct child\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('child_acc');\r",
+							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/children/{{child_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"children",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update entire child with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1fe9f8ff-3691-416e-ba79-c0d4f4d15765",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Child info is updated\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('child_acc2');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"child_acc2\", \"balance\": 100}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/children/{{child_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"children",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Partially update child with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "db7434f3-aade-42a9-8fe4-de6f9c33bd7b",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Child balance is updated\", function () {\r",
+							"    pm.expect(jsonData.balance).to.eql(9999);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"balance\" : 9999}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/children/{{child_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"children",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete child with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0e4e0efb-c195-410d-bd07-fb6d8e81cadb",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/children/{{child_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"children",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get non extisting child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "98432ee6-fd1c-4f56-aa71-c991b12df94f",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response should have valid JSON data\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"Child not found\");\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/children/{{child_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"children",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete given parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "900bf528-9214-4fb6-84f9-3f8fa0a9882d",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get non existing parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "40d77020-f406-41a7-8aeb-acf854442f3f",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response should have valid JSON data\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"Parent not found\");\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}
