@@ -33,7 +33,7 @@ router.get('/api/children/:child_id', function(req, res, next) {
 
 // Delete the child with the given ID
 router.delete('/api/children/:child_id', function(req, res, next) {
-    var id = req.params.id;
+    var id = req.params.child_id;
     Child.findOneAndDelete({_id: id}, function(err, child) {
         if (err) { return next(err); }
         if (child === null) {
