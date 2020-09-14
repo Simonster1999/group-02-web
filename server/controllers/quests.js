@@ -103,7 +103,6 @@ router.put('/api/quests/:quest_id', function(req, res, next) {
         quest.is_Completed = req.body.is_Completed;
         quest.quest_Desc = req.body.quest_Desc;
         quest.date = req.body.date;
-        quest.icon = req.body.icon;
         quest.account = req.body.account;
         quest.save();
         res.json(quest);
@@ -123,7 +122,6 @@ router.patch('/api/quests/:quest_id', function(req, res, next) {
         quest.is_Completed  = (req.body.is_Completed || quest.is_Completed);
         quest.quest_Desc    = (req.body.quest_Desc || quest.quest_Desc);
         quest.date          = (req.body.date || quest.date);
-        quest.icon          = (req.body.icon || quest.icon);
         quest.account       = (req.body.account || quest.account);
         quest.save();
         res.json(quest);
