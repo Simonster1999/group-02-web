@@ -6,7 +6,7 @@ var Reward = require('../models/reward');
 router.get('/api/rewards', function(req, res, next){
     Reward.find(function(err, reward) {
         if (err) { return next(err); }
-        res.json({'rewards': rewards});
+        res.json({'rewards': reward});
     });
 });
 
@@ -75,7 +75,7 @@ router.put('/api/rewards/:reward_id', function(req, res, next) {
 });
 
 // Partially replace reward
-router.patch('api/rewards/:reward_id', function(req, res, next) {
+router.patch('/api/rewards/:reward_id', function(req, res, next) {
     var id = req.params.reward_id;
     Reward.findById(id, function(err, reward) {
         if (err) { return next(err); }
