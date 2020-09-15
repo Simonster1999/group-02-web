@@ -1,4 +1,5 @@
 var express = require('express');
+const reward = require('../models/reward');
 var router = express.Router();
 var Reward = require('../models/reward');
 
@@ -45,7 +46,7 @@ router.get('/api/parents/:parent_id/rewards/', function(req, res, next){
 });
 
 // Get a parents reward with the given id
-router.get('/api/parents/:parent_id/rewards/:reward_id', function(req, res, next){
+/*router.get('/api/parents/:parent_id/rewards/:reward_id', function(req, res, next){
     var id = req.params.reward_id;
     Reward.findById(id, function (err, reward){
         if (err) {return next(err); }
@@ -54,8 +55,9 @@ router.get('/api/parents/:parent_id/rewards/:reward_id', function(req, res, next
         }
         res.json(reward);
     });
-});
+});*/
 
+//Check parent exists or throw error "parent does not exist"
 // Replace a reward
 router.put('/api/rewards/:reward_id', function(req, res, next) {
     var id = req.params.reward_id;
@@ -87,8 +89,8 @@ router.patch('/api/rewards/:reward_id', function(req, res, next) {
         reward.is_bought   = (req.body.is_bought   || reward.is_bought);
         reward.price       = (req.body.price       || reward.price);
         reward.parent      = (req.body.parent      || reward.parent);
-        quest.save();
-        res.json(quest);
+        reward.save();
+        res.json(reward);
     });
 });
 
@@ -100,6 +102,7 @@ router.delete('/api/rewards/:reward_id', function(req, res, next){
         if (reward === null) {
             return res.status(404).json({'message': 'Reward not found'});
         }
+        res.json(reward);
     });
 });
 
