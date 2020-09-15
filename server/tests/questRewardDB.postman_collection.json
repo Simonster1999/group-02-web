@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "71fc4bc3-9953-4c12-9c2d-6e901c753850",
+		"_postman_id": "77e4f841-86e9-462b-ac72-9f776c86172f",
 		"name": "questRewardDB",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,7 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "649866d1-89a2-4335-b5b5-a562f3f43882",
+						"id": "ffae9fc3-62b3-46fe-b82b-818d5f074c95",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -50,7 +50,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "712d45a4-6961-4797-b508-9e2c84b0a372",
+						"id": "46b8e745-22e3-4011-9a13-ed922a253ef6",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"parent_id\", jsonData._id);\r",
@@ -102,7 +102,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "d508cfd3-9fed-4fc4-8792-51aeac426779",
+						"id": "51f13234-70bd-4251-9836-cd00a4ba4f90",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -141,7 +141,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "fb03b032-d402-4dc8-857e-7b18346095ef",
+						"id": "296c08cc-e562-45d8-8240-aa2b0c97999b",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -183,7 +183,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "d9fac76c-33e2-438e-9987-ad62fc384f7b",
+						"id": "2784b6e7-6932-436a-a142-e90fa13d3e2d",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -234,7 +234,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "37fcc5d0-25ef-4b79-9c4e-629ee330fef5",
+						"id": "cfc8af17-82e1-4b93-a33c-00f9f8af87be",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -284,7 +284,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "9da4b138-8fa1-4c50-968c-47a039793863",
+						"id": "70727afd-1f4e-4805-bf29-4414f0022399",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -323,7 +323,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "15da5354-6b2a-41ec-b274-13539e001b69",
+						"id": "f08526be-6a1c-47e8-a5fd-c5d03c017585",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"child_id\", jsonData._id);\r",
@@ -374,7 +374,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "cacf2b61-17b4-429e-89a8-6bbf749376b6",
+						"id": "b6ee4d01-5834-443c-ba55-6bb52f3e9c97",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -413,7 +413,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0ab7d42c-c84d-4b3e-8be3-6ee3fa974548",
+						"id": "fd28cae1-2d7c-4a08-a0cb-6821b8675ca9",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -455,7 +455,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "1fe9f8ff-3691-416e-ba79-c0d4f4d15765",
+						"id": "1222d55f-ea70-4baa-bb56-de27be642dc3",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -505,7 +505,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "db7434f3-aade-42a9-8fe4-de6f9c33bd7b",
+						"id": "d662b60c-d705-49cd-9a1e-be11411f3a47",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -555,7 +555,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0e4e0efb-c195-410d-bd07-fb6d8e81cadb",
+						"id": "f3d897f8-af4e-45a6-abed-f6d78d699a10",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -593,7 +593,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "98432ee6-fd1c-4f56-aa71-c991b12df94f",
+						"id": "77ae71dd-747f-4e65-b060-6a9ffb0072cf",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -635,7 +635,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "900bf528-9214-4fb6-84f9-3f8fa0a9882d",
+						"id": "c794ddc7-9d5e-452e-b63e-c27e5738aa35",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -675,7 +675,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "40d77020-f406-41a7-8aeb-acf854442f3f",
+						"id": "41855d59-a021-46af-a278-bed90eb4a10c",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -706,6 +706,637 @@
 						"api",
 						"parents",
 						"{{parent_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Rewards (empty)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ef86491a-5d30-410e-bb92-a8af03495642",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"List is empty\", function () {\r",
+							"    pm.expect(jsonData.rewards).to.eql([]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/rewards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Parent For Reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c3e857a4-2beb-4f5a-8855-3afe5525f63e",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"parent_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Correct parent is created\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('parent_acc1');\r",
+							"    pm.expect(jsonData.password).to.eql(\"1234\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"parent_acc1\", \r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/parents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "15161a9b-5eea-4747-b8a6-438d2e215017",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"reward_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Reward is created\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('Candy');\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('1 piece of candy');\r",
+							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
+							"    pm.expect(jsonData.price).to.eql(15);\r",
+							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"Candy\", \r\n    \"reward_desc\": \"1 piece of candy\", \r\n    \"price\": \"15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/rewards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get reward with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "169e8335-508e-451e-9ac5-d11a64b333d2",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct reward\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('Candy');\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('1 piece of candy');\r",
+							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
+							"    pm.expect(jsonData.price).to.eql(15);\r",
+							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/rewards/{{reward_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create 2nd Reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a4bba96-1ceb-4203-9d22-ce083728c23e",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"reward_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Reward is created\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('2nd');\r",
+							"    pm.expect(jsonData.reward_desc).to.be.undefined;\r",
+							"    pm.expect(jsonData.is_bought).to.eql(true);\r",
+							"    pm.expect(jsonData.price).to.eql(25);\r",
+							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd\", \r\n    \"is_bought\": \"true\", \r\n    \"price\": \"25\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/rewards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all rewards with given parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "82981da3-0b7b-4316-90f1-9cb330d16129",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct rewards\", function () {\r",
+							"    pm.expect(jsonData[0].reward_name).to.eql('Candy');\r",
+							"    pm.expect(jsonData[1].reward_name).to.eql('2nd');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}/rewards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab1dfdca-0c5b-4c15-af3a-ab28f1b1baaf",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Reward is replaced\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('2nd v2');\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('Now replaced');\r",
+							"    pm.expect(jsonData.is_bought).to.eql(true);\r",
+							"    pm.expect(jsonData.price).to.eql(30);\r",
+							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v2\", \r\n    \"reward_desc\": \"Now replaced\",\r\n    \"is_bought\": \"true\", \r\n    \"price\": \"30\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/rewards/{{reward_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9c9e31a6-3f32-4ae8-acdf-13f87078ea87",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Reward is updated\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('2nd v3');\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('Now replaced');\r",
+							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
+							"    pm.expect(jsonData.price).to.eql(10);\r",
+							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v3\", \r\n    \"is_bought\": \"false\", \r\n    \"price\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/rewards/{{reward_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b57469ce-ae20-400a-8658-3cd28b1a37c6",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v3\", \r\n    \"is_bought\": \"false\", \r\n    \"price\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/rewards/{{reward_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get non existing reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0870c78-37fa-4079-8a63-c1a0b395990e",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns no reward\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql('Reward not found');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/rewards/{{reward_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete non existing reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3c6a8d63-bd73-4369-b504-3ef13fac86c7",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns no reward\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql('Reward not found');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v3\", \r\n    \"is_bought\": \"false\", \r\n    \"price\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/rewards/{{reward_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace non existing reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9305a898-2b75-4a1d-bfac-bfbead10a6b1",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns no reward\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql('Reward not found');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v2\", \r\n    \"reward_desc\": \"Now replaced\",\r\n    \"is_bought\": \"true\", \r\n    \"price\": \"30\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/rewards/{{reward_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update non existing reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f20ff6fc-a3ea-466e-b57d-85265fa6acb7",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns no reward\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql('Reward not found');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v3\", \r\n    \"is_bought\": \"false\", \r\n    \"price\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/rewards/{{reward_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
 					]
 				}
 			},
