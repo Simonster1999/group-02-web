@@ -6,10 +6,17 @@ var Quest = require('../models/quest');
 
 // Return a list of all quests
 router.get('/api/quests', function(req, res, next) {
-    Quest.find(function(err, quests) {
-        if (err) { return next(err); }
-        res.json({'quests': quests});
-    });
+    var sort = req.query.sort_bounty;
+    if (sort == asc) {
+        Quest.find({}).sort([['money_bounty', -1]]).exec(function(err, quests) {
+            res.json({'parents': quests});
+        });
+    } else {
+        Quest.find(function(err, quests) {
+            if (err) { return next(err); }
+            res.json({'quests': quests});
+        });
+    }
 });
 
 // Create a new quest
@@ -128,45 +135,4 @@ router.patch('/api/quests/:quest_id', function(req, res, next) {
     });
 });
 
-//TODO: 
-//Displays uncompleted quests by filtering out completed ones. 
-/* router.get('/api/quests/:quest_id?is_Completed = false', function(req, res, next){
-    var id = req.params.quest_id;
-    var isComplete = req.params.get('is_Completed');
-    if (isComplete === null) {
-        return res.status(404).json({'message': ''});
-    }
-    Quest.find({parent: id, is_Completed = isComplete, function(req, res, next){
-        if (err) { return next(err); }
-        if (quest === null) {
-            return res.status(404).json({'message': ''});
-        }
-        res.json(quest);
-    }
-    });
-});
-*/
-
-//Returns quests sorted by currency reward amount
-router.get('/api/quests?sortBounty=asc', function(req, res, next) {
-    var quest = new Quest(req.body);
-    if(URLSearchParams(sortBounty)){
-        if(urlencoded.searchParams.get("sortBounty") == "asc"){
-            Quest.find({parent: id}).sort({money_bounty : 'asc'}); 
-            if (err) { return next(err); }
-            res.json({'quests': quests});
-        }
-        Quest.find(function(err, quests){
-            if(err) { return next(err);}
-            res.json({'quests': quests});
-        });
-        
-    }
-});
-    
-    
-
-
 module.exports = router;
-
-
