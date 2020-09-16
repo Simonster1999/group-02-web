@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "77e4f841-86e9-462b-ac72-9f776c86172f",
+		"_postman_id": "ff3b33eb-c3e4-42ac-be30-406597d40ebf",
 		"name": "questRewardDB",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,7 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "ffae9fc3-62b3-46fe-b82b-818d5f074c95",
+						"id": "8f10a112-673b-4938-81e4-26bafcbfe693",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -50,7 +50,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "46b8e745-22e3-4011-9a13-ed922a253ef6",
+						"id": "a768e232-0a7c-427a-a72e-0ea12a10e46f",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"parent_id\", jsonData._id);\r",
@@ -102,7 +102,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "51f13234-70bd-4251-9836-cd00a4ba4f90",
+						"id": "5fcacb3c-2723-4b83-898e-48e6534954f3",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -141,7 +141,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "296c08cc-e562-45d8-8240-aa2b0c97999b",
+						"id": "3d8d00fa-f579-46ee-aac3-aa73674f8502",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -183,7 +183,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "2784b6e7-6932-436a-a142-e90fa13d3e2d",
+						"id": "11db2ffb-eddb-4f7c-af5e-ac04fd50aa43",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -234,7 +234,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "cfc8af17-82e1-4b93-a33c-00f9f8af87be",
+						"id": "f264beaa-5622-4e13-a251-832cbd4e1d8d",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -284,7 +284,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "70727afd-1f4e-4805-bf29-4414f0022399",
+						"id": "c2da17ca-194b-4807-9061-75455f9e88f9",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -323,7 +323,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f08526be-6a1c-47e8-a5fd-c5d03c017585",
+						"id": "ce4eabf0-8867-4e8f-bfb8-32f61c52dd35",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"child_id\", jsonData._id);\r",
@@ -374,7 +374,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b6ee4d01-5834-443c-ba55-6bb52f3e9c97",
+						"id": "49ca4798-ed1e-468d-b4a4-edc021b42a7c",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -413,7 +413,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "fd28cae1-2d7c-4a08-a0cb-6821b8675ca9",
+						"id": "3883222a-a593-4718-846e-d6ef6237cc79",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -455,7 +455,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "1222d55f-ea70-4baa-bb56-de27be642dc3",
+						"id": "9c845981-e1de-496c-8f7b-7f8b5010958a",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -505,7 +505,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "d662b60c-d705-49cd-9a1e-be11411f3a47",
+						"id": "4daef089-d31c-4645-a458-d88e07d374a5",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -555,7 +555,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f3d897f8-af4e-45a6-abed-f6d78d699a10",
+						"id": "a3101115-319a-4053-aad4-7b97a498e1e2",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -593,7 +593,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "77ae71dd-747f-4e65-b060-6a9ffb0072cf",
+						"id": "2bebe336-cfb4-401d-8cd0-a404474bc22c",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -635,7 +635,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "c794ddc7-9d5e-452e-b63e-c27e5738aa35",
+						"id": "065dea81-e284-4dfc-9dc2-83613a7c956f",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -675,7 +675,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "41855d59-a021-46af-a278-bed90eb4a10c",
+						"id": "98a72d43-760c-432e-9cdd-a150403ed8a1",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -712,12 +712,528 @@
 			"response": []
 		},
 		{
+			"name": "List All Quests (empty)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "226f5d67-6bd0-44d6-8dc8-fd635722cd72",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"List is empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.quests).to.eql([]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/quests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Quest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "04212c5a-ad3b-41f9-ab02-43638a1df171",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"quest_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Quest is created\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql('test quest');\r",
+							"    pm.expect(jsonData.money_bounty).to.eql(5);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"quest_name\": \"test quest\", \"money_bounty\": \"5\", \"date\": \"2020-09-15\", \"parent\": \"{{parent_id}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}/quests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return quest with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a443746-8b63-4088-a214-7e694d1392e2",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Returns correct quest\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql(\"test quest\");\r",
+							"    pm.expect(jsonData.money_bounty).to.eql(\"5\");\r",
+							"    pm.expect(jsonData.)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/quests/{{quest_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"quests",
+						"{{quest_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List All Quests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "12fb3759-f128-405d-a12e-c4d32ec477cc",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct quests\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.quests[0].quest_name).to.eql('test quest');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/quests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return all quests for given parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d2ffe5ff-80de-4263-991a-40ce604263a2",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct quests\", function () {\r",
+							"    pm.expect(jsonData[0].quest_name).to.eql('test quest');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}/quests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return a given quest for a given parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "edb7c0c2-6891-44d3-8895-010617e6246b",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct quest\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql('test quest');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}/quests/{{quest_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests",
+						"{{quest_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete the quest with the given ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7764dc20-0c3f-4dab-9e93-0dad29685957",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/quests/{{quest_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"quests",
+						"{{quest_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete the quest with the given ID for the given parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "76f83c25-3fda-46a6-a1ae-9fd2b8b367bf",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}/quests/{{quest_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests",
+						"{{quest_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change entire quest entity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fcae62cd-0cf2-4378-a55b-867132ca4da5",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Quest has been replaced\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql('The new, refined test quest');\r",
+							"    pm.expect(jsonData.quest_desc).to.eql('A much more lucrative quest than its predecessor');\r",
+							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
+							"    pm.expect(jsonData.money_bounty).to.eql(13.37);\r",
+							"    pm.expect(jsonData.date).to.eql(\"2020-09-16\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quest_name\": \"The new, refined test quest\", \r\n    \"money_bounty\": 13.37,\r\n    \"is_completed\": \"false\", \r\n    \"quest_desc\": \"A much more lucrative quest than its predecessor\", \r\n    \"date\": \"2020-09-16\",\r\n    \"quest\": \"{{quest_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/quests/{{quest_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"quests",
+						"{{quest_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change specified quest attribute",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b229a121-c344-46ea-a9d2-cf5232fe1833",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Attributes have been updated\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql(\"test quest 2\");\r",
+							"    pm.expect(jsonData.money_bounty).to.eql(10);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"quest_name\": \"test quest 2\",\r\n\"money_bounty\": 10}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/quests/{{quest_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"quests",
+						"{{quest_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return all quests sorted by reward amount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b8ff5a9c-2398-4469-8fdd-c388525756c2",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct quests\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var lastElement = jsonData.quests.length - 1;\r",
+							"    pm.expect(jsonData.quests[0].money_bounty).to.lessThan(jsonData.quests[jsonData.quests.length - 1].money_bounty);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/quests?sortBounty=asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"quests"
+					],
+					"query": [
+						{
+							"key": "sortBounty",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get All Rewards (empty)",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "ef86491a-5d30-410e-bb92-a8af03495642",
+						"id": "59c17a0a-bd96-4cc0-9d91-7149e2e01743",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -757,7 +1273,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "c3e857a4-2beb-4f5a-8855-3afe5525f63e",
+						"id": "ca2b8256-61e0-4614-a53b-c7b6e46939bc",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"parent_id\", jsonData._id);\r",
@@ -809,7 +1325,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "15161a9b-5eea-4747-b8a6-438d2e215017",
+						"id": "633e87a3-1e79-4d38-95f8-1a4a8e814c78",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"reward_id\", jsonData._id);\r",
@@ -863,7 +1379,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "169e8335-508e-451e-9ac5-d11a64b333d2",
+						"id": "c8af552d-8ee1-4c0b-88ab-1e4666c8a3d3",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -908,7 +1424,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "8a4bba96-1ceb-4203-9d22-ce083728c23e",
+						"id": "0286a5b5-7b56-485d-bcce-9a3f7a88c283",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"reward_id\", jsonData._id);\r",
@@ -962,7 +1478,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "82981da3-0b7b-4316-90f1-9cb330d16129",
+						"id": "d6e56ab4-60cf-46a1-9d72-05d4e824fe9a",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1005,7 +1521,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "ab1dfdca-0c5b-4c15-af3a-ab28f1b1baaf",
+						"id": "395011d7-ba76-4d72-a89e-f40fdf87db7f",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1059,7 +1575,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "9c9e31a6-3f32-4ae8-acdf-13f87078ea87",
+						"id": "0f8bf026-8b9b-4a39-a204-c0a9c25dcb0e",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1113,7 +1629,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b57469ce-ae20-400a-8658-3cd28b1a37c6",
+						"id": "cff32a29-1841-4d46-a129-dafbce84479e",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -1157,7 +1673,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b0870c78-37fa-4079-8a63-c1a0b395990e",
+						"id": "5a369609-0850-4ee7-b183-8f01207c851c",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1198,7 +1714,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "3c6a8d63-bd73-4369-b504-3ef13fac86c7",
+						"id": "5ed428b7-b3d0-4393-997e-de5ac256b735",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1248,7 +1764,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "9305a898-2b75-4a1d-bfac-bfbead10a6b1",
+						"id": "0120663c-4d27-4f8a-87b8-5d89a53e3c2d",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1298,7 +1814,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f20ff6fc-a3ea-466e-b57d-85265fa6acb7",
+						"id": "15761f3c-1a22-42c0-8803-f7c40cb3e8c2",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
