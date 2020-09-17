@@ -4,10 +4,10 @@ var router = express.Router();
 var Quest = require('../models/quest');
 
 
-// Return a list of all quests
+// Return a list of all quests. Also allows sorting by money_bounty
 router.get('/api/quests', function(req, res, next) {
     var sort = req.query.sort_bounty;
-    if (sort == asc) {
+    if (sort == 'asc') {
         Quest.find({}).sort([['money_bounty', -1]]).exec(function(err, quests) {
             res.json({'parents': quests});
         });
