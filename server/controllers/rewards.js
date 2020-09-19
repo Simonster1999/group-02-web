@@ -3,14 +3,6 @@ const reward = require('../models/reward');
 var router = express.Router();
 var Reward = require('../models/reward');
 
-// Get all rewards
-router.get('/api/rewards', function(req, res, next){
-    Reward.find(function(err, reward) {
-        if (err) { return next(err); }
-        res.json({'rewards': reward});
-    });
-});
-
 // Create a reward
 router.post('/api/rewards', function(req, res, next){
     var reward = new Reward(req.body);
@@ -18,7 +10,27 @@ router.post('/api/rewards', function(req, res, next){
         if (err) { return next(err);}
         res.status(201).json(reward);
     });
+});
 
+// Create a reward belonging to parent
+router.post('/api/parents/:parent_id/rewards', function(req, res, next) {
+    var parent_id = req.params.parent_id;
+    var reward = new Quest(req.body);
+    reward.save(function(err) {
+        if (err) { return next(err); }
+        if (reward.parent != parent_id) {
+            return res.status(400).json({'message': 'Reward does not belong to this parent'});
+        }
+        res.status(201).json(reward);
+    });
+});
+
+// Get all rewards
+router.get('/api/rewards', function(req, res, next){
+    Reward.find(function(err, reward) {
+        if (err) { return next(err); }
+        res.json({'rewards': reward});
+    });
 });
 
 // Get the reward with the given id
@@ -55,7 +67,7 @@ router.get('/api/parents/:parent_id/rewards/:reward_id', function(req, res, next
            return res.status(404).json({'message': 'Reward not found'}); 
         }
         if (reward.parent != parent_id) {
-            return res.status(404).json({'message': 'Reward does not belong to this parent'});
+            return res.status(400).json({'message': 'Reward does not belong to this parent'});
         }
         res.json(reward);
     });
