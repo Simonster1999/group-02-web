@@ -8,6 +8,10 @@ var Quest = require('../models/quest');
 router.get('/api/quests', function(req, res, next) {
     var sort = req.query.sort_bounty;
     if (sort == 'asc') {
+        Quest.find({}).sort([['money_bounty', 1]]).exec(function(err, quests) {
+            res.json({'parents': quests});
+        });
+    } else if (sort == 'desc') {
         Quest.find({}).sort([['money_bounty', -1]]).exec(function(err, quests) {
             res.json({'parents': quests});
         });
