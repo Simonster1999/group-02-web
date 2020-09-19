@@ -9,10 +9,12 @@ router.get('/api/quests', function(req, res, next) {
     var sort = req.query.sort_bounty;
     if (sort == 'asc') {
         Quest.find({}).sort([['money_bounty', 1]]).exec(function(err, quests) {
+            if (err) { return next(err); }
             res.json({'quests': quests});
         });
     } else if (sort == 'desc') {
         Quest.find({}).sort([['money_bounty', -1]]).exec(function(err, quests) {
+            if (err) { return next(err); }
             res.json({'quests': quests});
         });
     } else {
@@ -109,12 +111,12 @@ router.put('/api/quests/:quest_id', function(req, res, next) {
         if (quest === null) {
             return res.status(404).json({'message': 'Quest not found'});
         }
-        quest.quest_name = req.body.quest_name;
-        quest.money_reward = req.body.money_reward;
+        quest.quest_name   = req.body.quest_name;
+        quest.money_bounty = req.body.money_bounty;
         quest.is_completed = req.body.is_completed;
-        quest.quest_desc = req.body.quest_desc;
-        quest.date = req.body.date;
-        quest.parent = req.body.parent;
+        quest.quest_desc   = req.body.quest_desc;
+        quest.date         = req.body.date;
+        quest.parent       = req.body.parent;
         quest.save();
         res.json(quest);
     });
@@ -133,7 +135,7 @@ router.patch('/api/quests/:quest_id', function(req, res, next) {
         quest.is_completed  = (req.body.is_completed || quest.is_completed);
         quest.quest_desc    = (req.body.quest_desc   || quest.quest_desc);
         quest.date          = (req.body.date         || quest.date);
-        quest.parent       = (req.body.parent      || quest.parent);
+        quest.parent        = (req.body.parent       || quest.parent);
         quest.save();
         res.json(quest);
     });
