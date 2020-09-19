@@ -46,16 +46,20 @@ router.get('/api/parents/:parent_id/rewards/', function(req, res, next){
 });
 
 // Get a parents reward with the given id
-/*router.get('/api/parents/:parent_id/rewards/:reward_id', function(req, res, next){
+router.get('/api/parents/:parent_id/rewards/:reward_id', function(req, res, next){
+    var parent_id = req.params.parent_id;
     var id = req.params.reward_id;
     Reward.findById(id, function (err, reward){
         if (err) {return next(err); }
         if (reward === null) {
            return res.status(404).json({'message': 'Reward not found'}); 
         }
+        if (reward.parent != parent_id) {
+            return res.status(404).json({'message': 'Reward does not belong to this parent'});
+        }
         res.json(reward);
     });
-});*/
+});
 
 //Check parent exists or throw error "parent does not exist"
 // Replace a reward
