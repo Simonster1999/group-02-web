@@ -9,11 +9,11 @@ router.get('/api/quests', function(req, res, next) {
     var sort = req.query.sort_bounty;
     if (sort == 'asc') {
         Quest.find({}).sort([['money_bounty', 1]]).exec(function(err, quests) {
-            res.json({'parents': quests});
+            res.json({'quests': quests});
         });
     } else if (sort == 'desc') {
         Quest.find({}).sort([['money_bounty', -1]]).exec(function(err, quests) {
-            res.json({'parents': quests});
+            res.json({'quests': quests});
         });
     } else {
         Quest.find(function(err, quests) {
