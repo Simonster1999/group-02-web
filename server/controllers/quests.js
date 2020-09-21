@@ -1,4 +1,3 @@
-const { urlencoded } = require('body-parser');
 var express = require('express');
 var router = express.Router();
 var Quest = require('../models/quest');

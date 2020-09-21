@@ -1582,7 +1582,7 @@
 							"\r",
 							"pm.test(\"Reward is created\", function () {\r",
 							"    pm.expect(jsonData.reward_name).to.eql('2nd');\r",
-							"    pm.expect(jsonData.reward_desc).to.be.undefined;\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('');\r",
 							"    pm.expect(jsonData.is_bought).to.eql(true);\r",
 							"    pm.expect(jsonData.price).to.eql(25);\r",
 							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
@@ -1998,6 +1998,337 @@
 					"port": "3000",
 					"path": [
 						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "056cfc35-a045-4c14-be77-8b5cdec92609",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"parent_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Parent\", \r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/parents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Reward For Fake Parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b94fa97b-8d4f-424d-a969-9b4bedbac1fc",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response is correct\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Error message recieved\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql('Reward does not belong to this parent');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"Reward\", \r\n    \"price\": \"123\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/parents/123/rewards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"123",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Reward For Parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "05dfbb32-b8ac-43b6-b2ac-128e70b40f07",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"reward_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"Reward\", \r\n    \"price\": \"123\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}/rewards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2b933365-9583-42df-9d14-8f114bd87e8c",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}/rewards/{{reward_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace reward with bad data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cf8250bd-35df-41a9-86cb-6a5c17b9bb55",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns no reward\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql('Bad Request');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v2\", \r\n    \"reward_desc\": \"Now replaced\",\r\n    \"is_bought\": \"true\", \r\n    \"price\": \"30\", \r\n    \"parent\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/rewards/{{reward_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update reward with bad data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "17097622-c0c9-4e68-a4cb-bf2d054e4d0e",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns no reward\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql('Bad Request');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v3\", \r\n    \"is_bought\": \"1a2b3c\", \r\n    \"price\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/rewards/{{reward_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get reward again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a0c3de5d-65c4-4085-b113-c9f55dc9b89a",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Bad data was not saved\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('Reward');\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('');\r",
+							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
+							"    pm.expect(jsonData.price).to.eql(123);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}/rewards/{{reward_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
 						"rewards",
 						"{{reward_id}}"
 					]

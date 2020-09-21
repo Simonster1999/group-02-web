@@ -1,5 +1,4 @@
 var express = require('express');
-const reward = require('../models/reward');
 var router = express.Router();
 var Reward = require('../models/reward');
 
@@ -15,7 +14,7 @@ router.post('/api/rewards', function(req, res, next){
 // Create a reward belonging to parent
 router.post('/api/parents/:parent_id/rewards', function(req, res, next) {
     var parent_id = req.params.parent_id;
-    var reward = new Quest(req.body);
+    var reward = new Reward(req.body);
     reward.save(function(err) {
         if (err) { return next(err); }
         if (reward.parent != parent_id) {
