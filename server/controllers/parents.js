@@ -17,7 +17,9 @@ router.get('/api/parents', function(req, res, next) {
 router.post('/api/parents', function(req, res, next) {
     var parent = new Parent(req.body);
     parent.save(function(err) {
-        if (err) { return next(err); }
+        if (err) {
+            return res.status(400).json({'message': 'Bad request'});
+        }
         res.status(201).json(parent);
     });
 });
@@ -26,7 +28,9 @@ router.post('/api/parents', function(req, res, next) {
 router.get('/api/parents/:parent_id', function(req, res, next) {
     var id = req.params.parent_id;
     Parent.findById(id, function(err, parent) {
-        if (err) { return next(err); }
+        if (err) {
+            return res.status(400).json({'message': 'Bad request'});
+        }
         if (parent === null) {
             return res.status(404).json({'message': 'Parent not found'});
         }
@@ -41,7 +45,9 @@ router.delete('/api/parents/:parent_id', function(req, res, next) {
     Quest.deleteMany({parent: id}, function(err) {});
     Reward.deleteMany({parent: id}, function(err) {});
     Parent.findOneAndDelete({_id: id}, function(err, parent) {
-        if (err) { return next(err); }
+        if (err) {
+            return res.status(400).json({'message': 'Bad request'});
+        }
         if (parent === null) {
             return res.status(404).json({'message': 'Parent not found'});
         }
@@ -53,7 +59,9 @@ router.delete('/api/parents/:parent_id', function(req, res, next) {
 router.put('/api/parents/:parent_id', function(req, res, next) {
     var id = req.params.parent_id;
     Parent.findById(id, function(err, parent) {
-        if (err) {return next(err); }
+        if (err) {
+            return res.status(400).json({'message': 'Bad request'});
+        }
         if (parent === null) {
             return res.status(404).json({"message" : "Parent not found"});
         }
@@ -68,7 +76,9 @@ router.put('/api/parents/:parent_id', function(req, res, next) {
 router.patch('/api/parents/:parent_id', function(req, res, next) {
     var id = req.params.parent_id;
     Parent.findById(id, function(err, parent) {
-        if (err) {return next(err); }
+        if (err) {
+            return res.status(400).json({'message': 'Bad request'});
+        }
         if (parent === null) {
             return res.status(404).json({"message" : "Parent not found"});
         }
