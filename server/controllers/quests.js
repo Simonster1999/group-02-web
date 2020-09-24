@@ -28,7 +28,7 @@ router.get('/api/quests', function(req, res, next) {
 router.post('/api/parents/:parent_id/quests', function(req, res, next) {
     var quest = new Quest(req.body);
     quest.save(function(err) {
-        if (err) { return next(err); }
+        if (err) { return res.status(400).json({'message': 'Bad Request'}); }
         res.status(201).json(quest);
     });
 });
@@ -37,7 +37,7 @@ router.post('/api/parents/:parent_id/quests', function(req, res, next) {
 router.post('/api/quests', function(req, res, next) {
     var quest = new Quest(req.body);
     quest.save(function(err) {
-        if (err) { return next(err); }
+        if (err) { return res.status(400).json({'message': 'Bad Request'}); }
         res.status(201).json(quest);
     });
 });
