@@ -779,7 +779,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"quest_name\": \"test quest\", \"money_bounty\": \"5\", \"date\": \"2020-09-15\", \"parent\": \"{{parent_id}}\"}",
+					"raw": "{\r\n    \"quest_name\": \"test quest\", \r\n    \"money_bounty\": \"5\", \r\n    \"date\": \"2020-09-15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1331,44 +1331,6 @@
 						"{{parent_id}}",
 						"quests",
 						"{{quest_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete the quest with the given ID for the given parent Copy",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "d4b11cd4-75db-481f-a3c3-d3fe6a580756",
-						"exec": [
-							"pm.test(\"Correct status code\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/parents/{{parent_id}}/quests/{{quest_id2}}",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"parents",
-						"{{parent_id}}",
-						"quests",
-						"{{quest_id2}}"
 					]
 				}
 			},
@@ -2331,6 +2293,310 @@
 						"{{parent_id}}",
 						"rewards",
 						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fd1e583a-282b-47b6-b077-64dcc6ab76d6",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"child_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"child_acc\", \"password\": \"123\", \"parent\": \"{{parent_id}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/children",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Quest Completed By Child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2e799d74-37a5-4da7-b15e-9c903b478035",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"quest_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quest_name\": \"delete me\", \r\n    \"money_bounty\": \"404\", \r\n    \"date\": \"2020-09-19\", \r\n    \"parent\": \"{{parent_id}}\",\r\n    \"completed_by\": \"{{child_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}/quests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7e190449-060e-4b43-b007-785a4d6ddbe8",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/children/{{child_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"children",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check that quest was deleted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4234e925-c5c1-4a18-93dd-2658a2ea3d91",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Quest was deleted\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/quests/{{child_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"quests",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create second child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "877c41a6-0166-4dec-8996-53de08ee9712",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"child_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"child\", \r\n    \"password\": \"321\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/children",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f348f770-5a30-401d-a926-c2c4ec732668",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/parents/{{parent_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check that child was deleted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fbf970f8-b4b8-49bd-b445-e099f6f8514d",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/children/{{child_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"children",
+						"{{child_id}}"
 					]
 				}
 			},
