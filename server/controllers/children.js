@@ -14,7 +14,7 @@ router.get('/api/children', function(req, res, next) {
 router.post('/api/children', function(req, res, next) {
     var child = new Child(req.body);
     child.save(function(err) {
-        if (err) { return next(err); }
+        if (err) { return res.status(400).json({'message': 'Bad Request'}); }
         res.status(201).json(child);
     });
 });
