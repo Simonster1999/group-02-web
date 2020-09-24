@@ -67,8 +67,10 @@ This is a chore reward application that helps parents create incentives for chil
 
 * Login/Registration
 
-During registration the user has to choose a username, account password and a parental password. When logging into an already existing account a user can select to log in as a parent or child using a checkbox and then type username and the account password or parent password depending on which mode one chooses. Logging in as a parent grants the parental functionalities.
+From the login screen, the user can choose to register a parent account. This prompts them to choose a username and account password. After completing the registration form, the user can log in using the credentials they chose when registering. When logging into an already existing account the user can select to log in as a parent or child. To user will or will not have access to special parent functionalities depending on whether or not they logged in as a parent.
 
+* Children
+When logged in as a parent, the user can go to this view to see a list of all connected child accounts. The parent can also create a new child account from this menu. This way, all child accounts will be connected to a parent from the moment they are created.
 
 * Calendar
 
@@ -87,12 +89,12 @@ The reward page displays all items available to purchase and their price. Every 
 
 * Quest log (Parent view)
 
-The parent view of the quest log is a page that is only accessible to the parent. The parent can access this page by using the parent password. From here, the parent can create quests and delete or update already existing quests. Any quests added by the parent will be visible to the child in the regular quest log page. Quests which are selected as completed will be greyed out and marked as complete. A completed quest can be deleted and grant the reward for the chore or deleted without rewarding if the chore was not actually completed.
+The parent view of the quest log is a page that is only accessible to the parent. The parent can access this page by using the parent password. From here, the parent can create quests and delete or update already existing quests. Any quests added by the parent will be visible to the child in the regular quest log page. Completed quests will be greyed out and marked as complete. A completed quest can be deleted and grant the reward for the chore or deleted without rewarding if the chore was not actually completed.
 
 
-* Shop (Parent view)
+* Reward (Parent view)
 
-The parent view of the shop is a page that is only accessible to the parent. By using the parent password, the parent can add, edit and delete items from the store page. The items in the shop will consist of a name, description and a price tag, and will represent a real life item/activity for the child.
+The parent view of the rewards page is only accessible to the parent. By using the parent password, the parent can add, edit and delete items from the store page. The items in the rewards page will consist of a name, description and a price tag, and will represent a real life item/activity for the child.
 
 
 ### Entity-Relationship (ER) Diagram
