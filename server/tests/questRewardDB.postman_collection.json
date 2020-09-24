@@ -476,7 +476,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"username\": \"child_acc2\", \"balance\": 100}",
+					"raw": "{\"username\": \"child_acc2\", \"password\": \"123\", \"balance\": 100}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1125,7 +1125,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"quest_name\": \"The new, refined test quest\", \r\n    \"money_bounty\": \"13.37\",\r\n    \"is_completed\": \"false\", \r\n    \"quest_desc\": \"A much more lucrative quest than its predecessor\", \r\n    \"date\": \"2020-09-16\",\r\n    \"quest\": \"{{quest_id}}\"\r\n}",
+					"raw": "{\r\n    \"quest_name\": \"The new, refined test quest\", \r\n    \"money_bounty\": \"13.37\",\r\n    \"is_completed\": \"false\", \r\n    \"quest_desc\": \"A much more lucrative quest than its predecessor\", \r\n    \"date\": \"2020-09-16\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
