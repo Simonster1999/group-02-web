@@ -116,8 +116,14 @@ router.put('/api/quests/:quest_id', function(req, res, next) {
         quest.quest_desc   = req.body.quest_desc;
         quest.date         = req.body.date;
         quest.parent       = req.body.parent;
-        quest.save();
-        res.json(quest);
+        quest.save(function(err, quest){
+            if (err){
+                res.status(400).json({'message': 'Bad Request'});
+            } else {
+                res.json(quest);
+            }
+        });
+       
     });
 });
 
@@ -135,8 +141,13 @@ router.patch('/api/quests/:quest_id', function(req, res, next) {
         quest.quest_desc    = (req.body.quest_desc   || quest.quest_desc);
         quest.date          = (req.body.date         || quest.date);
         quest.parent        = (req.body.parent       || quest.parent);
-        quest.save();
-        res.json(quest);
+        quest.save(function(err, quest){
+            if(err){
+                res.status(400).json({'message': 'Bad Request'});
+            } else {
+                res.json(quest);
+            }
+        });
     });
 });
 
