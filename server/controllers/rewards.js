@@ -98,6 +98,7 @@ router.put('/api/rewards/:reward_id', function(req, res, next) {
         reward.is_bought   = req.body.is_bought;
         reward.price       = req.body.price;
         reward.parent      = req.body.parent;
+        reward.bought_by   = req.body.bought_by;
         reward.save(function(err, reward) {
             if (err) {
                 res.status(400).json({'message': 'Bad Request'});
@@ -123,6 +124,7 @@ router.patch('/api/rewards/:reward_id', function(req, res, next) {
         reward.is_bought   = (req.body.is_bought   || reward.is_bought);
         reward.price       = (req.body.price       || reward.price);
         reward.parent      = (req.body.parent      || reward.parent);
+        reward.bought_by   = (req.body.bought_by   || reward.bought_by);
         reward.save(function(err, reward) {
             if (err) {
                 res.status(400).json({'message': 'Bad Request'});
