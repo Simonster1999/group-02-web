@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Child = require('../models/child');
+var Quest = require('../models/quest');
+var Reward = require('../models/reward');
 
 // Return a list of all children
 router.get('/api/children', function(req, res, next) {
@@ -34,6 +36,8 @@ router.get('/api/children/:child_id', function(req, res, next) {
 // Delete the child with the given ID
 router.delete('/api/children/:child_id', function(req, res, next) {
     var id = req.params.child_id;
+    Quest.deleteMany({completed_by: id}, function(err) {});
+    Reward.deleteMany({bought_by: id}, function(err) {});
     Child.findOneAndDelete({_id: id}, function(err, child) {
         if (err) { return next(err); }
         if (child === null) {
