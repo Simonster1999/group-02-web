@@ -55,8 +55,13 @@ router.put('/api/children/:child_id', function(req, res, next) {
         child.child_password = req.body.child_password;
         child.parent_password  = req.body.parent_password;
         child.balance          = req.body.balance;
-        child.save();
-        res.json(child);
+        child.save(function (err, child){
+            if (err){
+                res.status(400).json({'message': 'Bad Request'});
+            } else {
+                res.json(child)
+            }
+        });
     });
 });
 
@@ -72,8 +77,13 @@ router.patch('/api/children/:child_id', function(req, res, next) {
         child.child_password = ( req.body.child_password || child.child_password );
         child.parent_password  = ( req.body.parent_password  || child.parent_password );
         child.balance          = ( req.body.balance          || child.balance );
-        child.save();
-        res.json(child);
+        child.save(function (err, child){
+            if(err){
+                res.status(400).json({'message': 'Bad Request'});
+            } else {
+                res.json(child);
+            }
+        });
     });
 });
 
