@@ -51,10 +51,9 @@ router.put('/api/children/:child_id', function(req, res, next) {
         if (child === null) {
             return res.status(404).json({"message" : "Child not found"});
         }
-        child.username         = req.body.username;
-        child.child_password = req.body.child_password;
-        child.parent_password  = req.body.parent_password;
-        child.balance          = req.body.balance;
+        child.username = req.body.username;
+        child.password = req.body.password;
+        child.balance  = req.body.balance;
         child.save(function (err, child){
             if (err){
                 res.status(400).json({'message': 'Bad Request'});
@@ -73,10 +72,9 @@ router.patch('/api/children/:child_id', function(req, res, next) {
         if (child === null) {
             return res.status(404).json({"message" : "Child not found"});
         }
-        child.username         = ( req.body.username         || child.username );
-        child.child_password = ( req.body.child_password || child.child_password );
-        child.parent_password  = ( req.body.parent_password  || child.parent_password );
-        child.balance          = ( req.body.balance          || child.balance );
+        child.username = ( req.body.username || child.username );
+        child.password = ( req.body.password || child.password );
+        child.balance  = ( req.body.balance  || child.balance );
         child.save(function (err, child){
             if(err){
                 res.status(400).json({'message': 'Bad Request'});
