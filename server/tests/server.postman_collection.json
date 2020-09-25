@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "bda186c3-8d55-41ad-9b46-45e4f55bde11",
-		"name": "server.postman_collection",
+		"name": "server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -2045,11 +2045,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}api/parents/{{parent_id}}/rewards/{{reward_id}}",
+					"raw": "{{host}}/api/parents/{{parent_id}}/rewards/{{reward_id}}",
 					"host": [
-						"{{host}}api"
+						"{{host}}"
 					],
 					"path": [
+						"api",
 						"parents",
 						"{{parent_id}}",
 						"rewards",
@@ -2514,7 +2515,7 @@
 	],
 	"variable": [
 		{
-			"id": "9c646cf7-913c-4245-859e-26fc71ccbf52",
+			"id": "5fd0fc83-c5a8-4ac7-9f87-e0417bdd1bdd",
 			"key": "host",
 			"value": "http://localhost:3000"
 		}
