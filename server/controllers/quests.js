@@ -91,14 +91,15 @@ router.delete('/api/quests/:quest_id', function(req, res, next) {
 });
 
 // Delete all quests
-router.delete('api/quests'), function(req, res, next) {
-    Quest.deleteMany({}, function(err, quest){
+router.delete('/api/quests', function(req, res, next) {
+    Quest.deleteMany({}, function(err, result){
         if (err) { return next(err); }
-        if (quests.length === 0) { return res.status(404).json({'message': 'Quest not found'});
-    }
-    res.json(quest);
+        if (result.n === 0) { 
+            return res.status(404).json({'message': 'No Quests Found'});
+        }
+        res.json(result);
     }); 
-}
+});
 
 // Delete the quest with the given ID for the given parent
 router.delete('/api/parents/:parent_id/quests/:quest_id', function(req, res, next) {
