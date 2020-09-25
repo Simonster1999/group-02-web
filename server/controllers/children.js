@@ -47,6 +47,18 @@ router.delete('/api/children/:child_id', function(req, res, next) {
     });
 });
 
+// Delete all children
+router.delete('api/children'), function(req, res, next) {
+    Quest.deleteMany({completed_by: id}, function(err) {});
+    Reward.deleteMany({bought_by: id}, function(err) {});
+    Child.deleteMany({}, function(err, child){
+        if (err) { return res.status(400).json({'message': 'Bad Request'}); }
+        if (children.length === 0) { return res.status(404).json({'message': 'No Children Found'});
+    }
+    res.json(child);
+    }); 
+}
+
 // Update the child with given ID
 router.put('/api/children/:child_id', function(req, res, next) {
     var id = req.params.child_id;
