@@ -55,6 +55,20 @@ router.delete('/api/parents/:parent_id', function(req, res, next) {
     });
 });
 
+// Delete all parents
+router.delete('/api/parents', function(req, res, next) {
+    Child.deleteMany({}, function (err) {});
+    Quest.deleteMany({}, function(err) {});
+    Reward.deleteMany({}, function(err) {});
+    Parent.deleteMany({}, function(err, result){
+        if (err) { return next(err); }
+        if (result.n === 0) { 
+            return res.status(404).json({'message': 'No Parents Found'});
+        }
+        res.json(result);
+    }); 
+});
+
 // Update the parent with given ID
 router.put('/api/parents/:parent_id', function(req, res, next) {
     var id = req.params.parent_id;
