@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bda186c3-8d55-41ad-9b46-45e4f55bde11",
+		"_postman_id": "34420ea5-3844-41da-bf8d-07b7e764d507",
 		"name": "server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,7 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "c02409fc-9c10-49cd-876f-4fcb3d3b3c04",
+						"id": "ebd7e6aa-9d9b-4bae-957c-1d06cec029b9",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -48,7 +48,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a0e9fa26-fa93-49aa-b02a-c995bfc0290f",
+						"id": "7b3ab77d-7b2a-4fd0-8c25-7c767e25c56d",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"parent_id\", jsonData._id);\r",
@@ -98,7 +98,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "8c5616f2-db15-457b-afc6-408014593cdd",
+						"id": "b8e29010-f140-4367-b20a-f563d0ac41d9",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -135,7 +135,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "2db7ed17-c5f4-418e-9f48-7696d2ccddd5",
+						"id": "a29a064d-868b-4c68-8583-159a70baa4fa",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -175,7 +175,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "28aaa61a-9e83-46ec-9cf8-24137590f91c",
+						"id": "7a0c99e1-2593-4d9a-8e5d-5f779805ed94",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -224,7 +224,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "fe89c646-f25b-453c-9a93-2133df8d9f21",
+						"id": "aa25a858-a046-4aac-a617-4e4c1950e045",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -272,7 +272,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "1d67b606-f08e-483d-bf63-8b06c6d2ce65",
+						"id": "03566697-92d6-4788-87c0-f59c84c6fff3",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -309,7 +309,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "5cf8763f-c196-4493-826c-61acdb3679b8",
+						"id": "2da95a8a-c899-40c1-a903-a05195c5148e",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"child_id\", jsonData._id);\r",
@@ -358,7 +358,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "4ff57a4c-e87e-45ca-af9c-e71ba3c130d4",
+						"id": "c0891b37-e018-4cae-bbdf-ecac9ae43d79",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -395,7 +395,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "43449ec3-f3a3-455f-bf92-d37872d48ad8",
+						"id": "84f84ede-4091-498a-91d1-eabbca2eb3c1",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -435,7 +435,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "62573381-bf61-48c5-b421-67efc8ab46f5",
+						"id": "1addc7bc-dfe3-4a49-adfa-301f54c0c9cb",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -483,7 +483,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "4f01dc90-ab3f-4571-9c16-ba894e0a809e",
+						"id": "c34c7174-196f-4102-8ecd-2d0a9d4b2abb",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -531,7 +531,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "7972293d-b5ff-408c-884d-adeffcbf0424",
+						"id": "de35878f-f768-4577-a66a-0e88ac30f2b1",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -567,7 +567,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "7a48333d-e2df-4332-afdf-f50a4a1bd94c",
+						"id": "6c1f323d-e075-45d1-bcee-d6779ba6a999",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -607,7 +607,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "cd75501a-bc4b-4210-8d9e-a67faf5a742c",
+						"id": "a7b207bb-6e0f-4bd5-aec9-20f2f4a51a7f",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -645,7 +645,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f50d735f-a6fb-4f7c-8ecc-bcc6e99648ac",
+						"id": "4aabfd8b-20e2-441e-b98b-e77626478348",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -685,7 +685,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "d7f811cf-1a2a-486e-b4d7-02a177e8b87a",
+						"id": "7b9554f2-4290-4028-ae9f-10a1f35c7934",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -722,7 +722,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f13e1b77-a7ff-4262-a603-fc3386bdbcb9",
+						"id": "7ca047a9-5bb4-48e4-ab34-f1960ea9634f",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"quest_id\", jsonData._id);\r",
@@ -773,7 +773,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "7e06fd5a-7b68-4057-b24a-df97df053ba6",
+						"id": "e6981317-b0ec-47b3-808a-b75d4ce544c4",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -825,7 +825,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "c50690f9-8a62-44c8-ace3-9fdf2baebc56",
+						"id": "d2ffea34-5d1c-4098-bce9-358786ae375f",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -862,7 +862,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "ed470eea-8190-4699-b04d-37619c5cab95",
+						"id": "64000427-a46c-4331-96ac-adff5f167199",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -914,7 +914,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "2f3bde99-f37f-4181-a89b-59fbc0e8b162",
+						"id": "db54b85a-3e48-467a-8e87-5f62c6f1a837",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -955,7 +955,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "601abfb0-b9d3-417b-ad85-ad6d8eec41f6",
+						"id": "559740a8-9d6c-4a58-9479-a74b95cd2761",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -1000,7 +1000,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "3e1dd0c8-6976-47f4-81b6-d8dea7fad9e5",
+						"id": "1eae7ea0-b1c1-4abf-aff2-cd77a704f6e8",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"quest_id\", jsonData._id);\r",
@@ -1051,7 +1051,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "47c6a1f9-2bd2-4491-8dfe-14524c1a1a41",
+						"id": "c853b170-50fd-4933-9c10-fa74cfb4adea",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1104,7 +1104,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "39c95b13-1397-4a71-878d-c5b592f16c6c",
+						"id": "438ee948-23e8-4cb7-85ba-aee14afda002",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"quest_id2\", jsonData._id);\r",
@@ -1155,7 +1155,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f90b833a-b103-4c03-8cbd-82d94bb7b4c0",
+						"id": "ba39692d-da25-4864-bd24-91671508bf9a",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1204,7 +1204,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a0514781-d730-4c81-9815-6dda9113165f",
+						"id": "b2fcd9a8-aeaf-40d0-b899-5f0a61b14c51",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -1248,7 +1248,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f10fd405-1c41-4a7c-8b0d-cdac2576e704",
+						"id": "5c24df06-84cd-4809-aadb-d3b2687d54af",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -1284,7 +1284,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "ad4d1976-ec05-44ad-b64e-78db86d6136a",
+						"id": "e06cdcc5-788e-409c-81cf-349420a2cebe",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1322,7 +1322,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f05e3137-be56-4c3d-901c-4b5a59394001",
+						"id": "12e186bd-537d-48d4-8d4a-5399029df5b8",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"parent_id\", jsonData._id);\r",
@@ -1372,7 +1372,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "7ff776e5-2ee0-449a-a05c-8ea6d2c318c2",
+						"id": "b8547d4e-18e9-45dc-ac5a-8d747ab374e2",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"reward_id\", jsonData._id);\r",
@@ -1424,7 +1424,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "4da5b0e2-4b03-4f16-b6ab-4738dcb30343",
+						"id": "bc67c76c-254b-490a-878c-5b097909bf6b",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1467,7 +1467,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "43eb8c68-c47a-4d1f-827c-f1e9938fb7d2",
+						"id": "001dd9e7-3b86-45db-a7e5-3e03a6c0a028",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"reward_id\", jsonData._id);\r",
@@ -1519,7 +1519,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b9d40773-c052-4a60-a0c2-cbf2d4ee85d8",
+						"id": "7a46c1e5-02e7-4d18-89b8-e5c4fbc4ebfb",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1560,7 +1560,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "1b7ec3b1-a9ec-4edd-98bd-959f6fcd8495",
+						"id": "debd7ecd-2dc8-46a1-bd31-a876039bde19",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1612,7 +1612,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "38679bb5-489c-4b5d-a944-fac14ab125cc",
+						"id": "ad5a2e39-543a-40aa-8d21-9452d5a80de9",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1664,7 +1664,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "63dfa9f5-9480-4dc2-85fd-aad456d5a452",
+						"id": "df4a3900-e07d-46d3-83bb-47f008e9b6f8",
 						"exec": [
 							"pm.test(\"Correct status code\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -1706,7 +1706,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "fa5a6502-7e2e-4add-bd83-9d2f34a22132",
+						"id": "bf8f1fc0-fd90-49ed-8994-b6bb2af70402",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1745,7 +1745,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "65529a10-937c-47f8-bd5b-9a7b8e895114",
+						"id": "168462b2-8fbe-416f-93b3-82bfa85bb393",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1793,7 +1793,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "1272a143-3275-4c65-816f-776da5a53f02",
+						"id": "e745d9c1-d7af-4f11-9608-b0933e06241b",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1841,7 +1841,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "28defb97-4dd7-49f3-b2c1-2131f2766d9c",
+						"id": "0d1e24bd-f412-447f-8a53-fc2738b4a105",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1889,7 +1889,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "056cfc35-a045-4c14-be77-8b5cdec92609",
+						"id": "68e70808-61a6-4e25-88f0-5ceff32ee71c",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"parent_id\", jsonData._id);\r",
@@ -1934,7 +1934,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b94fa97b-8d4f-424d-a969-9b4bedbac1fc",
+						"id": "7bfbfeb4-4383-47ac-9654-c2aa878532bc",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -1983,7 +1983,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "05dfbb32-b8ac-43b6-b2ac-128e70b40f07",
+						"id": "d151ce9f-760a-44a3-b73a-a3cdb42a00b7",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"reward_id\", jsonData._id);\r",
@@ -2029,7 +2029,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "2b933365-9583-42df-9d14-8f114bd87e8c",
+						"id": "eb7295b8-05cf-4b63-ab2a-c16301be89c6",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -2066,7 +2066,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "cf8250bd-35df-41a9-86cb-6a5c17b9bb55",
+						"id": "f86ad5a0-de90-4c67-8ac6-6a1e71887062",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -2114,7 +2114,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "17097622-c0c9-4e68-a4cb-bf2d054e4d0e",
+						"id": "8139b273-3e22-4db9-911f-116b07e5c8ff",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -2162,7 +2162,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a0c3de5d-65c4-4085-b113-c9f55dc9b89a",
+						"id": "0b390644-8fd9-4419-bd2e-67c7ab8da759",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -2206,7 +2206,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "fd1e583a-282b-47b6-b077-64dcc6ab76d6",
+						"id": "2d361f1f-e394-4f89-bf49-4c36e81c8ffb",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"child_id\", jsonData._id);\r",
@@ -2250,7 +2250,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "2e799d74-37a5-4da7-b15e-9c903b478035",
+						"id": "61e29070-ff3a-4fdf-bc8a-ae9b305a4646",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"quest_id\", jsonData._id);\r",
@@ -2296,7 +2296,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "7e190449-060e-4b43-b007-785a4d6ddbe8",
+						"id": "e52ae7fb-bcb8-4cba-b806-1846a3bfee33",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -2332,7 +2332,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "4234e925-c5c1-4a18-93dd-2658a2ea3d91",
+						"id": "c145dd69-1c20-464e-bc83-761ef9ad6a5f",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -2379,7 +2379,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "fbf970f8-b4b8-49bd-b445-e099f6f8514d",
+						"id": "af464caa-1062-4965-b52f-25cfefd141d6",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -2414,7 +2414,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "877c41a6-0166-4dec-8996-53de08ee9712",
+						"id": "05db4d42-b40d-471b-b71e-d39f9426d428",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"child_id\", jsonData._id);\r",
@@ -2458,7 +2458,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f348f770-5a30-401d-a926-c2c4ec732668",
+						"id": "5ac5493d-76ba-4ae0-b809-3e4ce4374958",
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -2489,13 +2489,142 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Delete all children",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2f94d1ee-8f20-4ed1-8691-69536b25d77a",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete All Parents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4d6cd9a6-6aa9-43a9-aa72-700b3368493f",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete All Quests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "35dac39b-2230-4258-8045-c01fe6bf7f4a",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete All Rewards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "63fd00d9-1393-4bd3-bb7b-d32b128f5877",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/rewards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "b4dee285-a149-4611-a3eb-d9166ca69f85",
+				"id": "f47ace92-579f-4c90-b79a-406c51546463",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -2505,7 +2634,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "c6ec34f2-ebde-4521-a73c-b86563dddc83",
+				"id": "8df4f951-be5c-4932-b491-b57faac64c7e",
 				"type": "text/javascript",
 				"exec": [
 					""
