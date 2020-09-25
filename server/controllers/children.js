@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Child = require('../models/child');
+var Quest = require('../models/quest');
+var Reward = require('../models/reward');
 
 // Return a list of all children
 router.get('/api/children', function(req, res, next) {
@@ -34,6 +36,8 @@ router.get('/api/children/:child_id', function(req, res, next) {
 // Delete the child with the given ID
 router.delete('/api/children/:child_id', function(req, res, next) {
     var id = req.params.child_id;
+    Quest.deleteMany({completed_by: id}, function(err) {});
+    Reward.deleteMany({bought_by: id}, function(err) {});
     Child.findOneAndDelete({_id: id}, function(err, child) {
         if (err) { return next(err); }
         if (child === null) {
@@ -51,10 +55,9 @@ router.put('/api/children/:child_id', function(req, res, next) {
         if (child === null) {
             return res.status(404).json({"message" : "Child not found"});
         }
-        child.username         = req.body.username;
-        child.child_password = req.body.child_password;
-        child.parent_password  = req.body.parent_password;
-        child.balance          = req.body.balance;
+        child.username = req.body.username;
+        child.password = req.body.password;
+        child.balance  = req.body.balance;
         child.save(function (err, child){
             if (err){
                 res.status(400).json({'message': 'Bad Request'});
@@ -73,10 +76,9 @@ router.patch('/api/children/:child_id', function(req, res, next) {
         if (child === null) {
             return res.status(404).json({"message" : "Child not found"});
         }
-        child.username         = ( req.body.username         || child.username );
-        child.child_password = ( req.body.child_password || child.child_password );
-        child.parent_password  = ( req.body.parent_password  || child.parent_password );
-        child.balance          = ( req.body.balance          || child.balance );
+        child.username = ( req.body.username || child.username );
+        child.password = ( req.body.password || child.password );
+        child.balance  = ( req.body.balance  || child.balance );
         child.save(function (err, child){
             if(err){
                 res.status(400).json({'message': 'Bad Request'});

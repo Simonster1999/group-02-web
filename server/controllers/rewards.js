@@ -6,7 +6,9 @@ var Reward = require('../models/reward');
 router.post('/api/rewards', function(req, res, next){
     var reward = new Reward(req.body);
     reward.save(function(err){
-        if (err) { return next(err);}
+        if (err) { 
+            return res.status(400).json({'message': 'Bad request'});
+        }
         res.status(201).json(reward);
     });
 });
@@ -16,7 +18,9 @@ router.post('/api/parents/:parent_id/rewards', function(req, res, next) {
     var parent_id = req.params.parent_id;
     var reward = new Reward(req.body);
     reward.save(function(err) {
-        if (err) { return next(err); }
+        if (err) {
+            return res.status(400).json({'message': 'Bad request'});
+        }
         if (reward.parent != parent_id) {
             return res.status(400).json({'message': 'Reward does not belong to this parent'});
         }
@@ -36,7 +40,9 @@ router.get('/api/rewards', function(req, res, next){
 router.get('/api/rewards/:reward_id', function(req, res, next){
     var id = req.params.reward_id;
     Reward.findById(id, function (err, reward){
-        if (err) {return next(err); }
+        if (err) {
+            return res.status(400).json({'message': 'Bad request'});
+        }
         if (reward === null) {
            return res.status(404).json({'message': 'Reward not found'}); 
         }
@@ -48,7 +54,9 @@ router.get('/api/rewards/:reward_id', function(req, res, next){
 router.get('/api/parents/:parent_id/rewards/', function(req, res, next){
     var id = req.params.parent_id;
     Reward.find({parent: id}, function (err, reward){
-        if (err) {return next(err); }
+        if (err) {
+            return res.status(400).json({'message': 'Bad request'});
+        }
         if (reward === null) {
            return res.status(404).json({'message': 'Reward not found'}); 
         }
@@ -61,7 +69,9 @@ router.get('/api/parents/:parent_id/rewards/:reward_id', function(req, res, next
     var parent_id = req.params.parent_id;
     var id = req.params.reward_id;
     Reward.findById(id, function (err, reward){
-        if (err) {return next(err); }
+        if (err) {
+            return res.status(400).json({'message': 'Bad request'});
+        }
         if (reward === null) {
            return res.status(404).json({'message': 'Reward not found'}); 
         }
@@ -77,7 +87,9 @@ router.get('/api/parents/:parent_id/rewards/:reward_id', function(req, res, next
 router.put('/api/rewards/:reward_id', function(req, res, next) {
     var id = req.params.reward_id;
     Reward.findById(id, function(err, reward) {
-        if (err) { return next(err); }
+        if (err) {
+            return res.status(400).json({'message': 'Bad request'});
+        }
         if (reward === null) {
             return res.status(404).json({'message': 'Reward not found'});
         }
@@ -86,6 +98,7 @@ router.put('/api/rewards/:reward_id', function(req, res, next) {
         reward.is_bought   = req.body.is_bought;
         reward.price       = req.body.price;
         reward.parent      = req.body.parent;
+        reward.bought_by   = req.body.bought_by;
         reward.save(function(err, reward) {
             if (err) {
                 res.status(400).json({'message': 'Bad Request'});
@@ -100,7 +113,9 @@ router.put('/api/rewards/:reward_id', function(req, res, next) {
 router.patch('/api/rewards/:reward_id', function(req, res, next) {
     var id = req.params.reward_id;
     Reward.findById(id, function(err, reward) {
-        if (err) { return next(err); }
+        if (err) {
+            return res.status(400).json({'message': 'Bad request'});
+        }
         if (reward === null) {
             return res.status(404).json({'message': 'Reward not found'});
         }
@@ -109,6 +124,7 @@ router.patch('/api/rewards/:reward_id', function(req, res, next) {
         reward.is_bought   = (req.body.is_bought   || reward.is_bought);
         reward.price       = (req.body.price       || reward.price);
         reward.parent      = (req.body.parent      || reward.parent);
+        reward.bought_by   = (req.body.bought_by   || reward.bought_by);
         reward.save(function(err, reward) {
             if (err) {
                 res.status(400).json({'message': 'Bad Request'});
@@ -123,7 +139,9 @@ router.patch('/api/rewards/:reward_id', function(req, res, next) {
 router.delete('/api/rewards/:reward_id', function(req, res, next){
     var id = req.params.reward_id;
     Reward.findOneAndDelete({_id: id}, function(err, reward) {
-        if (err) { return next(err); }
+        if (err) {
+            return res.status(400).json({'message': 'Bad request'});
+        }
         if (reward === null) {
             return res.status(404).json({'message': 'Reward not found'});
         }
