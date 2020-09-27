@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { Api } from '@/Api' 
+import { Api } from '@/Api'
 import QuestItem from '@/components/QuestItem.vue'
 import Calendar from '@/components/Calendar.vue'
 export default {
