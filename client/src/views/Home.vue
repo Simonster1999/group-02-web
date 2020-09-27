@@ -1,19 +1,19 @@
 <template>
   <div>
-    <b-jumbotron header="DIT341 Frontend" lead="Welcome to your DIT341 Frontend Vue.js App">
-      <b-button class="btn_message" variant="primary" v-on:click="getMessage()" >Get Message from Server</b-button>
-      <p>Message from the server:<br/>
-      {{ message }}</p>
-    </b-jumbotron>
+    <quest-item/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
-
+import QuestItem from '@/components/QuestItem.vue'
 export default {
+  beforeCreate: function () { document.body.className = 'home' },
   name: 'home',
+  components: {
+    QuestItem
+  },
   data() {
     return {
       message: 'none'
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style>
-.btn_message {
-  margin-bottom: 1em;
+#b-jumbotron  {
+  background-color: brown;
 }
 </style>
