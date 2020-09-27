@@ -2,7 +2,7 @@
   <div>
     <b-container>
       <b-row>
-        <b-col><calendar/>
+        <b-col><b-calendar value-as-date class="border rounded p-4" v-model="value" selected-variant="danger" @context="onContext" locale="en-US" length="100px" width="700px" hide-header="hideHeader" /> />
         <b-button v-on:click="createQuest">Create Quest</b-button>
         <b-form-input v-model="name" placeholder="Enter quest name"></b-form-input>
         <b-form-input v-model="quest_desc" placeholder="Enter quest description"></b-form-input>
@@ -17,15 +17,13 @@
 </template>
 
 <script>
-import { Api } from '@/Api' 
+import { Api } from '@/Api'
 import QuestItem from '@/components/QuestItem.vue'
-import Calendar from '@/components/Calendar.vue'
 export default {
   beforeCreate: function () { document.body.className = 'parent-quest' },
   name: 'quests',
   components: {
-    QuestItem,
-    Calendar
+    QuestItem
   },
   mounted() {
     console.log('PAGE is loaded')
@@ -46,7 +44,8 @@ export default {
       quests: [],
       name: '',
       quest_desc: '',
-      money_bounty: ''
+      money_bounty: '',
+      value: ''
     }
   },
   methods: {
@@ -72,15 +71,13 @@ export default {
     createQuest() {
       Api.post('/quests',
         {
-          params:
-            {
-              quest_name: this.quests.quest_name,
-              quest_desc: this.quests.quest_desc,
-              money_bounty: this.quests.money_bounty,
-              date: this.quests.date,
-              parent: this.quests.parent
-            }
+          quest_name: this.name,
+          quest_desc: this.quest_desc,
+          money_bounty: this.money_bounty,
+          date: this.value,
+          parent: '5f60b206ea77e02c3c712dc2'
         })
+      Api.get('/quests')
     }
   }
 }

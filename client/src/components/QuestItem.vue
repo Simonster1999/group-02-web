@@ -4,7 +4,7 @@
            <p>Name: {{quest.quest_name}}</p>
            <p>Quest Description: {{quest.quest_desc}}</p>
            <p>Reward: {{quest.money_bounty}}</p>
-           <p>Date: {{ value }} </p>
+           <p>Date: {{ quest.date }} </p>
            <b-button variant="danger" v-on:click="$emit('del-quest', quest._id)">X</b-button>
         </div>
 </template>
