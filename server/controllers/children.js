@@ -34,7 +34,7 @@ router.get('/api/children/:child_id', function(req, res, next) {
 });
 
 // Get all children belonging to a parent
-router.get('/api/parents/:parent_id/children/', function(req, res, next){
+router.get('/api/parents/:parent_id/children', function(req, res, next){
     var id = req.params.parent_id;
     Child.find({parent: id}, function (err, children){
         if (err) {
