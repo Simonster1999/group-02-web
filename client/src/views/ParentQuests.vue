@@ -11,13 +11,13 @@
         <b-col> <b-sidebar bg-variant="light" visible="true" right="true" width="35%" no-header-close > <div  v-for="quest in quests" v-bind:key="quest._id">
         <quest-item v-bind:quest="quest" v-on:del-quest="deleteQuest"/>
         </div> </b-sidebar></b-col>
-        </b-row>
+      </b-row>
     </b-container>
   </div>
 </template>
 
 <script>
-import { Api } from '@/Api' 
+import { Api } from '@/Api'
 import QuestItem from '@/components/QuestItem.vue'
 import Calendar from '@/components/Calendar.vue'
 export default {
