@@ -24,7 +24,7 @@ p {
 font-size: 20px
 }
 .b-jumbotron {
-  background-color:rgb(48, 104, 52)
+  background-color:rgb(48, 104, 52);
 }
 
 </style>

@@ -2491,15 +2491,23 @@
 			"response": []
 		},
 		{
-			"name": "Delete all children",
+			"name": "Create Parent",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "2f94d1ee-8f20-4ed1-8691-69536b25d77a",
+						"id": "4c0f1b34-0e00-485f-b6b4-807deabfdf05",
 						"exec": [
-							"pm.test(\"Correct status code\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"parent_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Parent is created\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('parent_acc');\r",
+							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
 							"});\r",
 							""
 						],
@@ -2508,8 +2516,166 @@
 				}
 			],
 			"request": {
-				"method": "DELETE",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"parent_acc\", \"password\": \"123\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6cbd5702-b632-4b6a-adee-a9d0938435eb",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"parent_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Parent is created\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('parent_acc');\r",
+							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"parent_acc2\", \"password\": \"123\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c73bd03-fecb-4989-b71c-b9e3b3cac9b1",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"parent_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Parent is created\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('parent_acc');\r",
+							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"parent_acc3\", \"password\": \"123\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d8abf7e-b713-48be-8e76-1ca345d19f4e",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"child_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Child is created\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('child_acc');\r",
+							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"child_acc\", \"password\": \"123\", \"parent\": \"{{parent_id}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{host}}/api/children",
 					"host": [
@@ -2524,15 +2690,23 @@
 			"response": []
 		},
 		{
-			"name": "Delete All Parents",
+			"name": "Create Child",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "4d6cd9a6-6aa9-43a9-aa72-700b3368493f",
+						"id": "4e31eb3d-f9b9-4971-b4a3-2391185a0fb5",
 						"exec": [
-							"pm.test(\"Correct status code\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"child_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Child is created\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('child_acc');\r",
+							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -2540,16 +2714,383 @@
 				}
 			],
 			"request": {
-				"method": "DELETE",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"child_acc2\", \"password\": \"123\", \"parent\": \"{{parent_id}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{host}}/api/parents",
+					"raw": "{{host}}/api/children",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"parents"
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ecc3c22-11c9-4338-b8fc-46c87a3a7807",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"child_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Child is created\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('child_acc');\r",
+							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"child_acc3\", \"password\": \"123\", \"parent\": \"{{parent_id}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/children",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Quest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "54530f45-ddc1-40cd-8349-7c93ce7a633e",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"quest_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Quest is created\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql('test quest');\r",
+							"    pm.expect(jsonData.money_bounty).to.eql(5);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quest_name\": \"test quest\", \r\n    \"money_bounty\": \"5\", \r\n    \"date\": \"2020-09-15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Quest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "be3198d1-c64c-4b7a-96c0-4e004ed3a85e",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"quest_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Quest is created\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql('test quest');\r",
+							"    pm.expect(jsonData.money_bounty).to.eql(5);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quest_name\": \"test quest2\", \r\n    \"money_bounty\": \"5\", \r\n    \"date\": \"2020-09-15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Quest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b1898db-c0b4-4b57-b03b-c4230d729ae7",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"quest_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Quest is created\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql('test quest');\r",
+							"    pm.expect(jsonData.money_bounty).to.eql(5);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quest_name\": \"test quest3\", \r\n    \"money_bounty\": \"5\", \r\n    \"date\": \"2020-09-15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ed8a3f8-d876-444e-9824-3327df8c940a",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"reward_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Reward is created\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('Candy');\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('1 piece of candy');\r",
+							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
+							"    pm.expect(jsonData.price).to.eql(15);\r",
+							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"Candy\", \r\n    \"reward_desc\": \"1 piece of candy\", \r\n    \"price\": \"15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b32c85fa-060d-4891-8972-da0600bf70fc",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"reward_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Reward is created\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('Candy');\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('1 piece of candy');\r",
+							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
+							"    pm.expect(jsonData.price).to.eql(15);\r",
+							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"Extra Homework\", \r\n    \"reward_desc\": \"Your reward is more hard work\", \r\n    \"price\": \"15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "51bf2f7b-594f-4d6e-807c-07100637e575",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"reward_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Reward is created\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('Candy');\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('1 piece of candy');\r",
+							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
+							"    pm.expect(jsonData.price).to.eql(15);\r",
+							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"Friendship\", \r\n    \"reward_desc\": \"The true reward is the friendships we created along the way.\", \r\n    \"price\": \"15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards"
 					]
 				}
 			},
@@ -2614,6 +3155,71 @@
 					"path": [
 						"api",
 						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all children",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2f94d1ee-8f20-4ed1-8691-69536b25d77a",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete All Parents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4d6cd9a6-6aa9-43a9-aa72-700b3368493f",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents"
 					]
 				}
 			},
