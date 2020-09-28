@@ -26,7 +26,7 @@
               >
                 <b-form-input
                   id="input-1"
-                  v-model="username"
+                  v-model="p_username"
                   required
                   placeholder="Enter username"
                 ></b-form-input>
@@ -35,7 +35,7 @@
               <b-form-group id="input-group-2" label="Your Password" label-for="input-2">
                 <b-form-input
                   id="input-2"
-                  v-model="password"
+                  v-model="p_password"
                   type="password"
                   required
                   placeholder="Enter password"
@@ -80,8 +80,11 @@ export default {
       message: 'none',
       parents: [],
       children: [],
-      username: '',
-      password: '',
+      c_username: '',
+      c_password: '',
+      balance: '',
+      p_username: '',
+      p_password: '',
       selected: false,
       selectedId: ''
     }
@@ -96,7 +99,19 @@ export default {
           this.message = error
         })
     },
-    postParent() {},
+    postParent() {
+      Api.post('/parents',
+        {
+          username: this.p_username,
+          password: this.p_password
+        }).then(response => {
+        var parent = response.data
+        this.parents.push(parent)
+      })
+        .catch(error => {
+          console.error(error)
+        })
+    },
     postChild() {},
     deleteParent(id) {
       Api.delete(`/parents/${id}`)
@@ -123,7 +138,6 @@ export default {
         this.selected = false
       } else {
         this.selectedId = id
-        this.selected = true
         Api.get('/parents/' + id + '/children').then(response => {
           this.children = response.data.children
         })
@@ -134,6 +148,7 @@ export default {
           })
           .then(() => {
           })
+        this.selected = true
       }
     }
   }
