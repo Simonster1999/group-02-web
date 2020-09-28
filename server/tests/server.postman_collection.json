@@ -2503,13 +2503,7 @@
 							"\r",
 							"pm.test(\"response is CREATED\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Parent is created\", function () {\r",
-							"    pm.expect(jsonData.username).to.eql('parent_acc');\r",
-							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
-							"});\r",
-							""
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -2553,13 +2547,7 @@
 							"\r",
 							"pm.test(\"response is CREATED\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Parent is created\", function () {\r",
-							"    pm.expect(jsonData.username).to.eql('parent_acc');\r",
-							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
-							"});\r",
-							""
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -2603,13 +2591,7 @@
 							"\r",
 							"pm.test(\"response is CREATED\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Parent is created\", function () {\r",
-							"    pm.expect(jsonData.username).to.eql('parent_acc');\r",
-							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
-							"});\r",
-							""
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -2653,11 +2635,6 @@
 							"\r",
 							"pm.test(\"response is CREATED\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Child is created\", function () {\r",
-							"    pm.expect(jsonData.username).to.eql('child_acc');\r",
-							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -2702,11 +2679,6 @@
 							"\r",
 							"pm.test(\"response is CREATED\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Child is created\", function () {\r",
-							"    pm.expect(jsonData.username).to.eql('child_acc');\r",
-							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -2751,11 +2723,6 @@
 							"\r",
 							"pm.test(\"response is CREATED\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Child is created\", function () {\r",
-							"    pm.expect(jsonData.username).to.eql('child_acc');\r",
-							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -2800,11 +2767,6 @@
 							"\r",
 							"pm.test(\"response is CREATED\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Quest is created\", function () {\r",
-							"    pm.expect(jsonData.quest_name).to.eql('test quest');\r",
-							"    pm.expect(jsonData.money_bounty).to.eql(5);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -2851,11 +2813,6 @@
 							"\r",
 							"pm.test(\"response is CREATED\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Quest is created\", function () {\r",
-							"    pm.expect(jsonData.quest_name).to.eql('test quest');\r",
-							"    pm.expect(jsonData.money_bounty).to.eql(5);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -2902,11 +2859,6 @@
 							"\r",
 							"pm.test(\"response is CREATED\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Quest is created\", function () {\r",
-							"    pm.expect(jsonData.quest_name).to.eql('test quest');\r",
-							"    pm.expect(jsonData.money_bounty).to.eql(5);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -2953,14 +2905,6 @@
 							"\r",
 							"pm.test(\"Response is CREATED\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Reward is created\", function () {\r",
-							"    pm.expect(jsonData.reward_name).to.eql('Candy');\r",
-							"    pm.expect(jsonData.reward_desc).to.eql('1 piece of candy');\r",
-							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
-							"    pm.expect(jsonData.price).to.eql(15);\r",
-							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -3005,14 +2949,6 @@
 							"\r",
 							"pm.test(\"Response is CREATED\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Reward is created\", function () {\r",
-							"    pm.expect(jsonData.reward_name).to.eql('Candy');\r",
-							"    pm.expect(jsonData.reward_desc).to.eql('1 piece of candy');\r",
-							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
-							"    pm.expect(jsonData.price).to.eql(15);\r",
-							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -3057,14 +2993,6 @@
 							"\r",
 							"pm.test(\"Response is CREATED\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Reward is created\", function () {\r",
-							"    pm.expect(jsonData.reward_name).to.eql('Candy');\r",
-							"    pm.expect(jsonData.reward_desc).to.eql('1 piece of candy');\r",
-							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
-							"    pm.expect(jsonData.price).to.eql(15);\r",
-							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
 							"});"
 						],
 						"type": "text/javascript"
