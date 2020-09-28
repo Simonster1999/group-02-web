@@ -33,6 +33,20 @@ router.get('/api/children/:child_id', function(req, res, next) {
     });
 });
 
+// Get all children belonging to a parent
+router.get('/api/parents/:parent_id/children/', function(req, res, next){
+    var id = req.params.parent_id;
+    Child.find({parent: id}, function (err, children){
+        if (err) {
+            return res.status(400).json({'message': 'Bad request'});
+        }
+        if (children === null) {
+           return res.status(404).json({'message': 'Child not found'}); 
+        }
+        res.json({'children': children});
+    });
+});
+
 // Delete the child with the given ID
 router.delete('/api/children/:child_id', function(req, res, next) {
     var id = req.params.child_id;
