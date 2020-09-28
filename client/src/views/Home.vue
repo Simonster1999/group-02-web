@@ -8,8 +8,48 @@
             <parent-item v-bind:parent="parent" v-on:del-parent="deleteParent"/>
           </div>
         </b-col>
-        <!-- Box for parents  children (if selected) -->
+        <!-- Box for parents children (if selected) AND child creation form -->
         <b-col v-if="selected">
+          <!-- Box for child creation form -->
+          <div>
+            <b-form @submit.prevent="postChild">
+              <b-form-group
+                id="input-group-1"
+                label="Your Username"
+                label-for="input-1"
+                description="Your username must be unique"
+              >
+                <b-form-input
+                  id="input-1"
+                  v-model="c_username"
+                  required
+                  placeholder="Enter username"
+                ></b-form-input>
+              </b-form-group>
+
+              <b-form-group id="input-group-2" label="Your Password" label-for="input-2">
+                <b-form-input
+                  id="input-2"
+                  v-model="c_password"
+                  type="password"
+                  required
+                  placeholder="Enter password"
+                ></b-form-input>
+              </b-form-group>
+
+              <b-form-group id="input-group-3" label="Your Balance" label-for="input-3">
+                <b-form-input
+                  id="input-3"
+                  v-model="balance"
+                  type="number"
+                  required
+                  placeholder="Enter balance"
+                ></b-form-input>
+              </b-form-group>
+              <b-button variant="primary" type="submit">Create</b-button>
+            </b-form>
+          </div>
+          <!-- Box for parents children (if selected) -->
           <div v-for="child in children" v-bind:key="child._id">
             <child-item v-bind:child="child" v-on:del-child="deleteChild"/>
           </div>
@@ -112,7 +152,21 @@ export default {
           console.error(error)
         })
     },
-    postChild() {},
+    postChild() {
+      Api.post('/children',
+        {
+          username: this.c_username,
+          password: this.c_password,
+          balance: this.balance,
+          parent: this.selectedId
+        }).then(response => {
+        var child = response.data
+        this.children.push(child)
+      })
+        .catch(error => {
+          console.error(error)
+        })
+    },
     deleteParent(id) {
       Api.delete(`/parents/${id}`)
         .then(reponse => {
@@ -136,7 +190,9 @@ export default {
     getChildren(id) {
       if (this.selectedId === id) {
         this.selected = false
+        this.selectedId = ''
       } else {
+        this.selected = true
         this.selectedId = id
         Api.get('/parents/' + id + '/children').then(response => {
           this.children = response.data.children
@@ -148,7 +204,6 @@ export default {
           })
           .then(() => {
           })
-        this.selected = true
       }
     }
   }
