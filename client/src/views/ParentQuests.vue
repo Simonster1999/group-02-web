@@ -139,10 +139,10 @@ export default {
 </script>
 
 <style>
-.parent-quest{
+.parent-quest {
   background-color: rgb(82, 71, 36);
 }
-h1 {
+.parent-quest h1 {
 background-color:rgb(114, 85, 46);
 color:rgba(247, 210, 2, 0.748)
 }
