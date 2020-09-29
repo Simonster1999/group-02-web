@@ -31,7 +31,7 @@
           placeholder="Enter balance"
         ></b-form-input>
       </b-form-group>
-      <b-button variant="primary" type="submit">Create</b-button>
+      <b-button variant="primary" type="submit">Update</b-button>
     </b-form>
   </div>
 </template>

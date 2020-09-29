@@ -13,12 +13,17 @@
             />
           </div>
         </b-col>
-        <!-- Box for parents children (if selected) AND child creation form -->
+        <!-- Box for parents children (if selected) AND child update form -->
         <b-col>
-          <!-- Box for child creation form -->
+          <!-- Box for child update form -->
+          <div v-if="editChild" style="margin-top:50px">
+            <h1>Update Child</h1>
+            <p>Leave blank if unchanged</p>
+            <UpdateChildForm v-on:updateChild="updateChild" />
+          </div>
           <div v-if="viewChildren">
             <h1>Children</h1>
-            <!-- Box for parents children (if selected) -->
+            <!-- Box for children (if selected) -->
             <div v-for="child in children" v-bind:key="child._id">
               <child-item v-bind:child="child"
                 v-on:del-child="deleteChild"
@@ -27,16 +32,19 @@
             </div>
           </div>
         </b-col>
-        <!-- Box for parent creation form -->
         <b-col>
+          <!-- Box for parent creation form -->
           <h1>Create new Parent</h1>
           <PostParentForm v-on:postParent="postParent" />
+          <!-- Box for child creation form (if parent selected) -->
           <div v-if="viewChildren" style="margin-top:50px">
             <h1>Create new Child</h1>
             <PostChildForm v-on:postChild="postChild" />
           </div>
+          <!-- Box for parent update form (if parent selected) -->
           <div v-if="editParent" style="margin-top:50px">
             <h1>Update Parent</h1>
+            <p>Leave blank if unchanged</p>
             <UpdateParentForm v-on:updateParent="updateParent" />
           </div>
         </b-col>
@@ -53,6 +61,7 @@ import ChildItem from '@/components/ChildItem.vue'
 import PostParentForm from '@/components/PostParentForm.vue'
 import PostChildForm from '@/components/PostChildForm.vue'
 import UpdateParentForm from '@/components/UpdateParentForm.vue'
+import UpdateChildForm from '@/components/UpdateChildForm.vue'
 export default {
   beforeCreate: function () { document.body.className = 'home' },
   name: 'home',
@@ -61,8 +70,8 @@ export default {
     ChildItem,
     PostChildForm,
     PostParentForm,
-    UpdateParentForm
-
+    UpdateParentForm,
+    UpdateChildForm
   },
   mounted() {
     console.log('PAGE is loaded')
@@ -119,11 +128,43 @@ export default {
       this.editParent = !this.editParent
     },
     updateParent(username, password) {
-      if (username === null || password === null) {
-        alert('patch')
+      if ((username === null || password === null) || (username === null && password === null)) {
+        Api.patch('/parents/' + this.parentId,
+          {
+            username: username,
+            password: password
+          })
+          .then(response => {
+            const index = this.parents.findIndex(parent => parent._id === this.parentId)
+            this.parents.splice(index, 1,
+              {
+                username: response.data.username,
+                password: response.data.password
+              })
+          })
+          .catch(error => {
+            console.error(error)
+          })
       } else {
-        alert('put')
+        Api.put('/parents/' + this.parentId,
+          {
+            username: username,
+            password: password
+          })
+          .then(response => {
+            const index = this.parents.findIndex(parent => parent._id === this.parentId)
+            this.parents.splice(index, 1,
+              {
+                username: response.data.username,
+                password: response.data.password
+              })
+          })
+          .catch(error => {
+            console.error(error)
+          })
       }
+      this.parentId = false
+      this.editParent = false
     },
     deleteParent(id) {
       Api.delete(`/parents/${id}`)
@@ -154,9 +195,53 @@ export default {
           console.error(error)
         })
     },
-    toggleEditChild(id) {},
-    updateChild(id) {
-      alert('child')
+    toggleEditChild(id) {
+      this.childId = id
+      this.editChild = !this.editChild
+      this.editParent = false
+    },
+    updateChild(username, password, balance) {
+      if (username === null || password === null || balance === null) {
+        Api.patch('/children/' + this.childId,
+          {
+            username: username,
+            password: password,
+            balance: balance
+          })
+          .then(response => {
+            const index = this.children.findIndex(child => child._id === this.childId)
+            this.children.splice(index, 1,
+              {
+                username: response.data.username,
+                password: response.data.password,
+                balance: response.data.balance
+              })
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      } else {
+        Api.put('/children/' + this.childId,
+          {
+            username: username,
+            password: password,
+            balance: balance
+          })
+          .then(response => {
+            const index = this.children.findIndex(child => child._id === this.childId)
+            this.children.splice(index, 1,
+              {
+                username: response.data.username,
+                password: response.data.password,
+                balance: response.data.balance
+              })
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
+      this.editChild = false
+      this.childId = ''
     },
     deleteChild(id) {
       Api.delete(`/children/${id}`)

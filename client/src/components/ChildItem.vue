@@ -3,12 +3,7 @@
     <p>Username: {{child.username}}</p>
     <p>Balance: {{child.balance}}</p>
     <b-button variant="danger" v-on:click="$emit('del-child', child._id)">X</b-button>
-    <b-button variant="warning" v-on:click="$emit('edit-child',
-      child._id,
-      child.username,
-      child.password,
-      child.balance
-      )">Edit</b-button>
+    <b-button variant="warning" v-on:click="$emit('edit-child', child._id)">Edit</b-button>
   </div>
 </template>
 
