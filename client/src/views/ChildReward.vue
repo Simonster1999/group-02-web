@@ -2,13 +2,11 @@
   <div>
     <b-container>
       <b-row>
-        <b-col><b-button v-on:click="createReward">Create Reward</b-button>
-        <b-form-input v-model="name" placeholder="Enter Reward name"></b-form-input>
-        <b-form-input v-model="reward_desc" placeholder="Enter Reward Description"></b-form-input>
-        <b-form-input v-model="price" placeholder="Enter Price"></b-form-input>
-        </b-col>
         <b-col> <b-sidebar bg-variant="light" visible="true" right="true" width="35%" no-header-close > <div  v-for="reward in rewards" v-bind:key="reward._id">
         <reward-item v-bind:reward="reward" v-on:del-reward="deleteReward"/>
+        </div> </b-sidebar>
+        <b-sidebar bg-variant="light" visible="true" width="20%" no-header-close > <div  v-for="child in children" v-bind:key="child._id">
+        <reward-item v-bind:reward="reward"/>
         </div> </b-sidebar></b-col>
         </b-row>
     </b-container>
@@ -74,6 +72,25 @@ export default {
           parent: '5f60b206ea77e02c3c712dc2'
         })
       Api.get('/rewards')
+    },
+    getRewards(id) {
+      if (this.selectedId === id) {
+        this.selected = false
+        this.selectedId = ''
+      } else {
+        this.selected = true
+        this.selectedId = id
+        Api.get('/parents/' + id + '/rewards').then(response => {
+          this.rewards = response.data.rewards
+        })
+          .catch(error => {
+            this.message = error.message
+            console.error(error)
+            this.children = []
+          })
+          .then(() => {
+          })
+      }
     }
   }
 }

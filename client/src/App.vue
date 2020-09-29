@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/"> Home </router-link>
       <router-link to="quests"> Quests </router-link>
-      <router-link to="rewards"> Rewards </router-link>
+      <router-link to="rewards">Rewards</router-link>
     </div>
     <!-- Render the content of the current page view -->
     <router-view/>
