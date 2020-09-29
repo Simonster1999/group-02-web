@@ -57,12 +57,12 @@ router.get('/api/quests/:quest_id', function(req, res, next) {
 // Return all quests for the given parent
 router.get('/api/parents/:parent_id/quests', function(req, res, next) {
     var id = req.params.parent_id;
-    Quest.find({parent: id}, function(err, quest) {
+    Quest.find({parent: id}, function(err, quests) {
         if (err) { return next(err); }
-        if (quest === null) {
+        if (quests === null) {
             return res.status(404).json({'message': 'Quest not found'});
         }
-        res.json(quest);
+        res.json({'quests': quests});
     });
 });
 
