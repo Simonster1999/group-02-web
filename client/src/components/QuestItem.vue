@@ -1,17 +1,16 @@
 <template>
        <div>
-         <b-container>
+           <h1 class="p-3 mb-2 bg-dark text-dark"/>
+          <b-container class="bv-example-row">
            <b-row>
+             <b-col><b-button variant="warning" v-on:click="$emit('put-quest', quest._id)">Edit</b-button></b-col>
+             <b-col><b-button variant="danger" v-on:click="$emit('del-quest', quest._id)">X</b-button></b-col>
+           </b-row>
+          </b-container>
            <p>Name: {{quest.quest_name}}</p>
-           <br>
            <p>Quest Description: {{quest.quest_desc}}</p>
-           <br>
            <p>Reward: {{quest.money_bounty}}</p>
            <p>Date: {{ quest.date }} </p>
-      <b-button variant="danger" v-on:click="$emit('del-quest', quest._id)">X</b-button>
-      <b-button variant="warning" v-on:click="$emit('put-quest', quest._id)">Edit</b-button>
-       </b-row>
-      </b-container>
         </div>
 </template>
 
@@ -30,17 +29,15 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
+h1 {
+background-color:burlywood;
+}
 p {
-font-size: 20px;
-text-align: left;
-margin-left: 5px;
+font-size: 20px
 }
-.row {
-border: solid;
-}
-.container {
-  background-color:rgb(179, 181, 166)
+.b-jumbotron {
+  background-color:blue
 }
 
 </style>

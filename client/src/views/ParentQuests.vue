@@ -2,42 +2,15 @@
   <div>
     <b-container>
       <b-row>
-        <b-col>
-          <b-sidebar
-           no-header-close
-           bg-variant="light"
-           visible="true">
-             <div
-             v-for="parent in parents"
-             v-bind:key="parent._id"
-             v-on:click="getQuests(parent._id)">
-             <parent-item
-             v-bind:parent="parent"/>
-              </div> </b-sidebar>
-          </b-col>
-           <b-col>
-        <b-calendar value-as-date class="border rounded p-4" v-model="value" selected-variant="danger" @context="value" locale="en-US" width="480px" hide-header="hideHeader"/>
-        </b-col>
-           <b-col v-if="selected">
-           <b-sidebar  right bg-variant="dark" visible="true" no-header-close >
-            <b-col>
-              <h1>Quest List</h1>
-              <b-button variant="warning" v-on:click="selectedCreate= true">Create Quest</b-button>
-            </b-col>
-            <b-col v-if="selectedCreate">
-              <div>
-              <b-form-input v-model="name" placeholder="Enter quest name"></b-form-input>
+        <b-col><b-calendar value-as-date class="border rounded p-4" v-model="value" selected-variant="danger" @context="onContext" locale="en-US" length="100px" width="700px" hide-header="hideHeader"/>
+        <b-button v-on:click="createQuest">Create Quest</b-button>
+        <b-form-input v-model="name" placeholder="Enter quest name"></b-form-input>
         <b-form-input v-model="quest_desc" placeholder="Enter quest description"></b-form-input>
-        <b-form-input v-model="money_bounty" placeholder="Enter reward amount"></b-form-input>
-        <b-form-input v-model="value" placeholder="Select date"></b-form-input>
-        <b-button variant="light" v-on:click="createQuest">Add</b-button>
-        </div>
-            </b-col>
-          <div  v-for="quest in quests" v-bind:key="quest._id">
-          <quest-item v-bind:quest="quest" v-on:del-quest="deleteQuest" v-on:put-quest="putQuest"/>
-          </div>
-          </b-sidebar>
+        <b-form-input v-model="money_bounty" placeholder="Enter reward"></b-form-input>
         </b-col>
+        <b-col> <b-sidebar bg-variant="light" visible="true" right="true" width="35%" no-header-close > <div  v-for="quest in quests" v-bind:key="quest._id">
+        <quest-item v-bind:quest="quest" v-on:del-quest="deleteQuest" v-on:put-quest="putQuest"/>
+        </div> </b-sidebar></b-col>
       </b-row>
     </b-container>
   </div>
@@ -46,19 +19,18 @@
 <script>
 import { Api } from '@/Api'
 import QuestItem from '@/components/QuestItem.vue'
-import ParentItem from '@/components/ParentItem.vue'
 export default {
   beforeCreate: function () { document.body.className = 'parent-quest' },
   name: 'parent-quests',
   components: {
-    QuestItem,
-    ParentItem
+    QuestItem
   },
   mounted() {
     console.log('PAGE is loaded')
-    Api.get('/parents').then(response => {
-      this.parents = response.data.parents
-    })
+    Api.get('/quests')
+      .then(response => {
+        this.quests = response.data.quests
+      })
       .catch(error => {
         this.message = error.message
         console.error(error)
@@ -70,14 +42,10 @@ export default {
   data() {
     return {
       quests: [],
-      parents: [],
       name: '',
       quest_desc: '',
       money_bounty: '',
-      value: '',
-      selected: false,
-      selectedId: '',
-      selectedCreate: false
+      value: ''
     }
   },
   methods: {
@@ -107,31 +75,8 @@ export default {
           quest_desc: this.quest_desc,
           money_bounty: this.money_bounty,
           date: this.value,
-          parent: this.selectedId
-        }).then(response => {
-        var quest = response.data
-        this.quests.push(quest)
-      })
-      this.selectedCreate = false
-    },
-    getQuests(id) {
-      if (this.selectedId === id) {
-        this.selected = false
-        this.selectedId = ''
-      } else {
-        this.selected = true
-        this.selectedId = id
-        Api.get('/parents/' + id + '/quests').then(response => {
-          this.quests = response.data.quests
+          parent: '5f60b206ea77e02c3c712dc2'
         })
-          .catch(error => {
-            this.message = error.message
-            console.error(error)
-            this.quests = []
-          })
-          .then(() => {
-          })
-      }
     }
   }
 }
@@ -142,8 +87,5 @@ export default {
 .parent-quest{
   background-color: rgb(82, 71, 36);
 }
-h1 {
-background-color:rgb(114, 85, 46);
-color:rgba(247, 210, 2, 0.748)
-}
+
 </style>
