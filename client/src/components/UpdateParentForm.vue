@@ -10,7 +10,6 @@
         <b-form-input
           id="input-1"
           v-model="username"
-          required
           placeholder="Enter username"
         ></b-form-input>
       </b-form-group>
@@ -20,7 +19,6 @@
           id="input-2"
           v-model="password"
           type="password"
-          required
           placeholder="Enter password"
         ></b-form-input>
       </b-form-group>
@@ -33,13 +31,13 @@
 export default {
   data() {
     return {
-      username: '',
-      password: ''
+      username: null,
+      password: null
     }
   },
   methods: {
     onSubmit() {
-      this.$emit('postParent', this.username, this.password)
+      this.$emit('updateParent', this.username, this.password)
     }
   }
 }

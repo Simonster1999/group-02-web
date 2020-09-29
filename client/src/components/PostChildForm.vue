@@ -1,9 +1,9 @@
 <template>
   <div>
-    <b-form @submit.prevent="onSubmit">
+    <b-form @submit.prevent="onSubmit" autocomplete="off">
       <b-form-group
         id="input-group-1"
-        label="Your Username"
+        label="Username"
         label-for="input-1"
         description="Your username must be unique"
       >
@@ -15,7 +15,7 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Your Password" label-for="input-2">
+      <b-form-group id="input-group-2" label="Password" label-for="input-2">
         <b-form-input
           id="input-2"
           v-model="password"
@@ -25,7 +25,7 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-3" label="Your Balance" label-for="input-3">
+      <b-form-group id="input-group-3" label="Balance" label-for="input-3">
         <b-form-input
           id="input-3"
           v-model="balance"
@@ -45,7 +45,7 @@ export default {
     return {
       username: '',
       password: '',
-      balance: 0
+      balance: null
     }
   },
   methods: {

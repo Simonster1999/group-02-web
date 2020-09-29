@@ -4,10 +4,11 @@
       <b-row>
         <!-- Box for parents -->
         <b-col>
+          <h1>Parents</h1>
           <div v-for="parent in parents" v-bind:key="parent._id">
             <parent-item v-bind:parent="parent"
               v-on:del-parent="deleteParent"
-              v-on:edit-parent="editParent"
+              v-on:edit-parent="toggleEditParent"
               v-on:show-children="getChildren"
             />
           </div>
@@ -15,17 +16,29 @@
         <!-- Box for parents children (if selected) AND child creation form -->
         <b-col>
           <!-- Box for child creation form -->
-          <div v-if="selected">
-            <PostChildForm v-on:postChild="postChild" />
+          <div v-if="viewChildren">
+            <h1>Children</h1>
             <!-- Box for parents children (if selected) -->
             <div v-for="child in children" v-bind:key="child._id">
-              <child-item v-bind:child="child" v-on:del-child="deleteChild"/>
+              <child-item v-bind:child="child"
+                v-on:del-child="deleteChild"
+                v-on:edit-child="toggleEditChild"
+              />
             </div>
           </div>
         </b-col>
         <!-- Box for parent creation form -->
         <b-col>
+          <h1>Create new Parent</h1>
           <PostParentForm v-on:postParent="postParent" />
+          <div v-if="viewChildren" style="margin-top:50px">
+            <h1>Create new Child</h1>
+            <PostChildForm v-on:postChild="postChild" />
+          </div>
+          <div v-if="editParent" style="margin-top:50px">
+            <h1>Update Parent</h1>
+            <UpdateParentForm v-on:updateParent="updateParent" />
+          </div>
         </b-col>
       </b-row>
     </b-container>
@@ -39,6 +52,7 @@ import ParentItem from '@/components/ParentItem.vue'
 import ChildItem from '@/components/ChildItem.vue'
 import PostParentForm from '@/components/PostParentForm.vue'
 import PostChildForm from '@/components/PostChildForm.vue'
+import UpdateParentForm from '@/components/UpdateParentForm.vue'
 export default {
   beforeCreate: function () { document.body.className = 'home' },
   name: 'home',
@@ -46,7 +60,9 @@ export default {
     ParentItem,
     ChildItem,
     PostChildForm,
-    PostParentForm
+    PostParentForm,
+    UpdateParentForm
+
   },
   mounted() {
     console.log('PAGE is loaded')
@@ -66,8 +82,11 @@ export default {
       message: 'none',
       parents: [],
       children: [],
-      selected: false,
-      selectedId: ''
+      viewChildren: false,
+      parentId: '',
+      childId: '',
+      editChild: false,
+      editParent: false
     }
   },
   methods: {
@@ -93,12 +112,28 @@ export default {
           console.error(error)
         })
     },
-    editParent(id) {},
+    toggleEditParent(id) {
+      this.parentId = id
+      this.viewChildren = false
+      this.editChild = false
+      this.editParent = !this.editParent
+    },
+    updateParent(username, password) {
+      if (username === null || password === null) {
+        alert('patch')
+      } else {
+        alert('put')
+      }
+    },
     deleteParent(id) {
       Api.delete(`/parents/${id}`)
         .then(reponse => {
           const index = this.parents.findIndex(parent => parent._id === id)
           this.parents.splice(index, 1)
+          if (this.parentId === id) {
+            this.children = []
+            this.parentId = ''
+          }
         })
         .catch(error => {
           console.error(error)
@@ -110,7 +145,7 @@ export default {
           username: username,
           password: password,
           balance: balance,
-          parent: this.selectedId
+          parent: this.parentId
         }).then(response => {
         var child = response.data
         this.children.push(child)
@@ -119,7 +154,10 @@ export default {
           console.error(error)
         })
     },
-    editChild(id) {},
+    toggleEditChild(id) {},
+    updateChild(id) {
+      alert('child')
+    },
     deleteChild(id) {
       Api.delete(`/children/${id}`)
         .then(reponse => {
@@ -131,12 +169,15 @@ export default {
         })
     },
     getChildren(id) {
-      if (this.selectedId === id) {
-        this.selected = false
-        this.selectedId = ''
+      if (this.parentId === id && this.viewChildren) {
+        this.viewChildren = false
+        this.parentId = ''
+        this.children = []
       } else {
-        this.selected = true
-        this.selectedId = id
+        this.viewChildren = true
+        this.editChild = false
+        this.editParent = false
+        this.parentId = id
         Api.get('/parents/' + id + '/children').then(response => {
           this.children = response.data.children
         })
