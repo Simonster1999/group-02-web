@@ -4,86 +4,28 @@
       <b-row>
         <!-- Box for parents -->
         <b-col>
-          <div v-for="parent in parents" v-bind:key="parent._id" v-on:click="getChildren(parent._id)">
-            <parent-item v-bind:parent="parent" v-on:del-parent="deleteParent"/>
+          <div v-for="parent in parents" v-bind:key="parent._id">
+            <parent-item v-bind:parent="parent"
+              v-on:del-parent="deleteParent"
+              v-on:edit-parent="editParent"
+              v-on:show-children="getChildren"
+            />
           </div>
         </b-col>
         <!-- Box for parents children (if selected) AND child creation form -->
-        <b-col v-if="selected">
+        <b-col>
           <!-- Box for child creation form -->
-          <div>
-            <b-form @submit.prevent="postChild">
-              <b-form-group
-                id="input-group-1"
-                label="Your Username"
-                label-for="input-1"
-                description="Your username must be unique"
-              >
-                <b-form-input
-                  id="input-1"
-                  v-model="c_username"
-                  required
-                  placeholder="Enter username"
-                ></b-form-input>
-              </b-form-group>
-
-              <b-form-group id="input-group-2" label="Your Password" label-for="input-2">
-                <b-form-input
-                  id="input-2"
-                  v-model="c_password"
-                  type="password"
-                  required
-                  placeholder="Enter password"
-                ></b-form-input>
-              </b-form-group>
-
-              <b-form-group id="input-group-3" label="Your Balance" label-for="input-3">
-                <b-form-input
-                  id="input-3"
-                  v-model="balance"
-                  type="number"
-                  required
-                  placeholder="Enter balance"
-                ></b-form-input>
-              </b-form-group>
-              <b-button variant="primary" type="submit">Create</b-button>
-            </b-form>
-          </div>
-          <!-- Box for parents children (if selected) -->
-          <div v-for="child in children" v-bind:key="child._id">
-            <child-item v-bind:child="child" v-on:del-child="deleteChild"/>
+          <div v-if="selected">
+            <PostChildForm v-on:postChild="postChild" />
+            <!-- Box for parents children (if selected) -->
+            <div v-for="child in children" v-bind:key="child._id">
+              <child-item v-bind:child="child" v-on:del-child="deleteChild"/>
+            </div>
           </div>
         </b-col>
         <!-- Box for parent creation form -->
         <b-col>
-          <div>
-            <b-form @submit.prevent="postParent">
-              <b-form-group
-                id="input-group-1"
-                label="Your Username"
-                label-for="input-1"
-                description="Your username must be unique"
-              >
-                <b-form-input
-                  id="input-1"
-                  v-model="p_username"
-                  required
-                  placeholder="Enter username"
-                ></b-form-input>
-              </b-form-group>
-
-              <b-form-group id="input-group-2" label="Your Password" label-for="input-2">
-                <b-form-input
-                  id="input-2"
-                  v-model="p_password"
-                  type="password"
-                  required
-                  placeholder="Enter password"
-                ></b-form-input>
-              </b-form-group>
-              <b-button variant="primary" type="submit">Create</b-button>
-            </b-form>
-          </div>
+          <PostParentForm v-on:postParent="postParent" />
         </b-col>
       </b-row>
     </b-container>
@@ -95,12 +37,16 @@
 import { Api } from '@/Api'
 import ParentItem from '@/components/ParentItem.vue'
 import ChildItem from '@/components/ChildItem.vue'
+import PostParentForm from '@/components/PostParentForm.vue'
+import PostChildForm from '@/components/PostChildForm.vue'
 export default {
   beforeCreate: function () { document.body.className = 'home' },
   name: 'home',
   components: {
     ParentItem,
-    ChildItem
+    ChildItem,
+    PostChildForm,
+    PostParentForm
   },
   mounted() {
     console.log('PAGE is loaded')
@@ -120,11 +66,6 @@ export default {
       message: 'none',
       parents: [],
       children: [],
-      c_username: '',
-      c_password: '',
-      balance: '',
-      p_username: '',
-      p_password: '',
       selected: false,
       selectedId: ''
     }
@@ -139,11 +80,11 @@ export default {
           this.message = error
         })
     },
-    postParent() {
+    postParent(username, password) {
       Api.post('/parents',
         {
-          username: this.p_username,
-          password: this.p_password
+          username: username,
+          password: password
         }).then(response => {
         var parent = response.data
         this.parents.push(parent)
@@ -152,21 +93,7 @@ export default {
           console.error(error)
         })
     },
-    postChild() {
-      Api.post('/children',
-        {
-          username: this.c_username,
-          password: this.c_password,
-          balance: this.balance,
-          parent: this.selectedId
-        }).then(response => {
-        var child = response.data
-        this.children.push(child)
-      })
-        .catch(error => {
-          console.error(error)
-        })
-    },
+    editParent(id) {},
     deleteParent(id) {
       Api.delete(`/parents/${id}`)
         .then(reponse => {
@@ -177,6 +104,22 @@ export default {
           console.error(error)
         })
     },
+    postChild(username, password, balance) {
+      Api.post('/children',
+        {
+          username: username,
+          password: password,
+          balance: balance,
+          parent: this.selectedId
+        }).then(response => {
+        var child = response.data
+        this.children.push(child)
+      })
+        .catch(error => {
+          console.error(error)
+        })
+    },
+    editChild(id) {},
     deleteChild(id) {
       Api.delete(`/children/${id}`)
         .then(reponse => {
@@ -210,10 +153,7 @@ export default {
 }
 </script>
 
-<style>
-#b-jumbotron  {
-  background-color: brown;
-}
+<style scoped>
 .col {
   text-align: left;
 }
