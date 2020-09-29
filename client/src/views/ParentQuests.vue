@@ -2,7 +2,7 @@
   <div>
     <b-container>
       <b-row>
-        <b-col><b-calendar value-as-date class="border rounded p-4" v-model="value" selected-variant="danger" @context="onContext" locale="en-US" length="100px" width="700px" hide-header="hideHeader" /> />
+        <b-col><b-calendar value-as-date class="border rounded p-4" v-model="value" selected-variant="danger" @context="onContext" locale="en-US" length="100px" width="700px" hide-header="hideHeader"/>
         <b-button v-on:click="createQuest">Create Quest</b-button>
         <b-form-input v-model="name" placeholder="Enter quest name"></b-form-input>
         <b-form-input v-model="quest_desc" placeholder="Enter quest description"></b-form-input>
@@ -11,7 +11,7 @@
         <b-col> <b-sidebar bg-variant="light" visible="true" right="true" width="35%" no-header-close > <div  v-for="quest in quests" v-bind:key="quest._id">
         <quest-item v-bind:quest="quest" v-on:del-quest="deleteQuest" v-on:put-quest="putQuest"/>
         </div> </b-sidebar></b-col>
-        </b-row>
+      </b-row>
     </b-container>
   </div>
 </template>

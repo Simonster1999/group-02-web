@@ -7,7 +7,7 @@ var rewardSchema = new Schema({
     is_bought   : {type: Boolean, default: false},
     price       : {type: Number, required: true},
     parent      : {type: Schema.Types.ObjectId, ref: 'Parent', required: true},
-    bought_by   : { type: Schema.Types.ObjectId, ref: 'Child'}
+    bought_by   : {type: Schema.Types.ObjectId, ref: 'Child'}
 });
 
 module.exports = mongoose.model('rewards', rewardSchema);

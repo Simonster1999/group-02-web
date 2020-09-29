@@ -135,6 +135,17 @@ router.patch('/api/rewards/:reward_id', function(req, res, next) {
     });
 });
 
+// Delete All Rewards
+router.delete('/api/rewards', function(req, res, next) {
+    Reward.deleteMany({}, function(err, result){
+        if (err) { return next(err); }
+        if (result.n === 0) { 
+            return res.status(404).json({'message': 'No Rewards Found'});
+        }
+        res.json(result);
+    }); 
+});
+
 // Delete a reward
 router.delete('/api/rewards/:reward_id', function(req, res, next){
     var id = req.params.reward_id;
