@@ -29,15 +29,17 @@ p {
   font-size: 20px;
   text-align: left;
   margin-left: 5px;
+  color:black;
 }
 .row {
   border: solid;
 }
 div {
   margin-bottom: 10px;
-  padding: 5px;
+  padding: 10px;
   border: solid;
-  border-radius: 5px;
+  border-color:rgb(84, 84, 84);
+  border-radius: 20px;
   background-color:rgb(179, 181, 166)
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="parentDiv">
       <p class="parentUsername">Username: {{parent.username}}</p>
       <b-button class="deleteParent" variant="danger" v-on:click="$emit('del-parent', parent._id)">X</b-button>
       <b-button class="editParent" variant="warning" v-on:click="$emit('edit-parent', parent._id)">Edit</b-button>
@@ -22,6 +22,9 @@ div {
   border: solid;
   border-radius: 5px;
   background-color:rgb(179, 181, 166)
+}
+p {
+  color:black;
 }
 button {
   margin-right: 5px;
