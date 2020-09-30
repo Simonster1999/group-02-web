@@ -5,20 +5,22 @@
         <b-col>
           <b-sidebar
            no-header-close
-           bg-variant="light"
+           bg-variant="dark"
            visible="true">
+           <h1>Parent List</h1>
              <div
              v-for="parent in parents"
-             v-bind:key="parent._id"
-             v-on:click="getQuests(parent._id)">
+             v-bind:key="parent._id">
              <parent-item
-             v-bind:parent="parent"/>
+             v-bind:parent="parent"
+             v-on:show-quests="getQuests"/>
               </div> </b-sidebar>
           </b-col>
            <b-col>
-        <b-calendar value-as-date class="border rounded p-4" v-model="value" selected-variant="danger" @context="value" locale="en-US" width="480px" hide-header="hideHeader"/>
+        <b-calendar value-as-date class="border rounded p-4" v-model="value" selected-variant="danger" @context="value" locale="en-US" width="480px" :hide-header="true"/>
         </b-col>
-           <b-col v-if="selected">
+           <b-col>
+             <div v-if="selected">
            <b-sidebar  right bg-variant="dark" visible="true" no-header-close >
             <b-col>
               <h1>Quest List</h1>
@@ -26,17 +28,21 @@
             </b-col>
             <b-col v-if="selectedCreate">
               <div>
-              <b-form-input v-model="name" placeholder="Enter quest name"></b-form-input>
-        <b-form-input v-model="quest_desc" placeholder="Enter quest description"></b-form-input>
+                <b-form autocomplete="off" >
+        <b-form-input v-model="name" placeholder="Enter quest name"></b-form-input>
+        <b-form-input  v-model="quest_desc" placeholder="Enter quest description"></b-form-input>
         <b-form-input v-model="money_bounty" placeholder="Enter reward amount"></b-form-input>
         <b-form-input v-model="value" placeholder="Select date"></b-form-input>
-        <b-button variant="light" v-on:click="createQuest">Add</b-button>
+        <b-button variant="light" v-on:click="createQuest">Add </b-button>
+        <b-button variant="warning" v-on:click="cancelCreate">Cancel </b-button>
+        </b-form>
         </div>
             </b-col>
           <div  v-for="quest in quests" v-bind:key="quest._id">
           <quest-item v-bind:quest="quest" v-on:del-quest="deleteQuest" v-on:put-quest="putQuest"/>
           </div>
           </b-sidebar>
+          </div>
         </b-col>
       </b-row>
     </b-container>
@@ -113,6 +119,15 @@ export default {
         this.quests.push(quest)
       })
       this.selectedCreate = false
+      this.name = ''
+      this.quest_desc = ''
+      this.money_bounty = ''
+    },
+    cancelCreate() {
+      this.selectedCreate = false
+      this.name = ''
+      this.quest_desc = ''
+      this.money_bounty = ''
     },
     getQuests(id) {
       if (this.selectedId === id) {
@@ -145,5 +160,14 @@ export default {
 .parent-quest h1 {
 background-color:rgb(114, 85, 46);
 color:rgba(247, 210, 2, 0.748)
+}
+.parent-quest .showChildren {
+  display: none;
+}
+.parent-quest .deleteParent {
+  display: none;
+}
+.parent-quest .editParent {
+  display: none;
 }
 </style>
