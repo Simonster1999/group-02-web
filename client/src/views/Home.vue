@@ -279,8 +279,11 @@ export default {
 }
 </script>
 
-<style scoped>
-.col {
+<style>
+.home .col {
   text-align: left;
+}
+.home .showQuests {
+  display: none;
 }
 </style>
