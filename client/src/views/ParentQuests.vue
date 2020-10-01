@@ -290,6 +290,9 @@ export default {
 .parent-quest .editParent {
   display: none;
 }
+.parent-quest .showRewards {
+  display: none;
+}
 .parent-quest .parentUsername {
   font-size: 1.5em;
 }
