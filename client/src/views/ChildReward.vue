@@ -12,7 +12,7 @@
             <b-col>
                 <b-sidebar bg-variant="light" visible="true" right="true" width="35%" no-header-close >
                     <div  v-for="reward in rewards" v-bind:key="reward._id">
-                    <reward-item v-bind:reward="reward" v-on:del-reward="deleteReward"/>
+                    <reward-item v-bind:reward="reward" v-on:patch-reward="buyReward"/>
                 </div> </b-sidebar>
             </b-col>
         </b-row>
@@ -52,8 +52,9 @@ export default {
       name: '',
       price: '',
       selected: false,
-      selectedId: ''
-
+      selectedId: '',
+      childId: '',
+      childBalance: ''
     }
   },
   methods: {
@@ -87,11 +88,14 @@ export default {
         })
       Api.get('/rewards')
     },
-    getRewards(id) {
+    getRewards(id, child, balance) {
       this.selected = true
       this.selectedId = id
+      this.childId = child
+      this.childBalance = balance
       Api.get('/parents/' + id + '/rewards').then(response => {
         this.rewards = response.data.rewards
+        this.rewards = this.rewards.filter(reward => !reward.is_bought)
       })
         .catch(error => {
           this.message = error.message
@@ -100,6 +104,28 @@ export default {
         })
         .then(() => {
         })
+    },
+    buyReward(id, price) {
+      this.selected = true
+      this.selectedId = id
+      Api.patch('/rewards/' + id, { is_bought: true }).then(response => {
+        const index = this.rewards.findIndex(reward => reward._id === id)
+        this.rewards.splice(index, 1)
+      })
+        .catch(error => {
+          console.error(error)
+        })
+      if (this.childBalance - price >= 0) {
+        Api.patch('/children/' + this.childId, { balance: this.childBalance - price })
+          .then(response => {
+            const index = this.children.findIndex(child => child._id === id)
+            var child = response.data
+            this.children.splice(index, 1, child)
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
     }
   }
 }
@@ -117,6 +143,9 @@ export default {
   display: none;
 }
 .child-reward .showQuests {
+  display: none;
+}
+.child-reward .delReward {
   display: none;
 }
 
