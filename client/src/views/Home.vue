@@ -181,7 +181,7 @@ export default {
         })
     },
     postChild(username, password, balance) {
-      Api.post('/children',
+      Api.post('/parents/' + this.parentId + '/children',
         {
           username: username,
           password: password,
