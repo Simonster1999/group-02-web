@@ -286,4 +286,7 @@ export default {
 .home .showQuests {
   display: none;
 }
+.home .showRewards {
+  display: none;
+}
 </style>
