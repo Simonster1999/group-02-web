@@ -2,13 +2,27 @@
   <div>
     <b-container>
       <b-row>
-        <b-col> <b-sidebar bg-variant="light" visible="true" width="20%" no-header-close > <div  v-for="parent in parents" v-bind:key="parent._id">
-        <parent-item v-bind:parent="parent" v-on:show-rewards="getRewards"/>
-        </div> </b-sidebar></b-col>
-        <b-col> <b-sidebar bg-variant="light" visible="true" right="true" width="20%" no-header-close > <div  v-for="reward in rewards" v-bind:key="reward._id">
-        <reward-item v-bind:reward="reward" v-on:del-reward="deleteReward"/>
-        </div> </b-sidebar></b-col>
-        </b-row>
+        <b-col>
+          <b-sidebar bg-variant="light" visible="true" width="20%" no-header-close >
+            <div  v-for="parent in parents" v-bind:key="parent._id">
+            <parent-item v-bind:parent="parent" v-on:show-rewards="getRewards"/>
+            </div>
+          </b-sidebar>
+        </b-col>
+        <b-col>
+          <b-sidebar bg-variant="light" visible="true" right="true" width="20%" no-header-close >
+            <div v-if="showRewards">
+              <b-button class="createReward" v-on:click="(selectedCreate = true)">Create Reward</b-button>
+              <div v-if="selectedCreate">
+              <PostRewardForm v-on:postReward="createReward"/>
+            </div>
+              <div  v-for="reward in rewards" v-bind:key="reward._id">
+                <reward-item v-bind:reward="reward" v-on:del-reward="deleteReward"/>
+              </div>
+            </div>
+          </b-sidebar>
+        </b-col>
+      </b-row>
     </b-container>
   </div>
 </template>
@@ -17,12 +31,14 @@
 import { Api } from '@/Api'
 import RewardItem from '@/components/RewardItem.vue'
 import ParentItem from '@/components/ParentItem.vue'
+import PostRewardForm from '@/components/PostRewardForm.vue'
 export default {
   beforeCreate: function () { document.body.className = 'parent-reward' },
   name: 'parent-reward',
   components: {
     RewardItem,
-    ParentItem
+    ParentItem,
+    PostRewardForm
   },
   mounted() {
     console.log('PAGE is loaded')
@@ -43,7 +59,11 @@ export default {
       rewards: [],
       parents: [],
       name: '',
-      price: ''
+      price: '',
+      is_bought: '',
+      showRewards: false,
+      selectedCreate: false,
+      selectedParentId: ''
     }
   },
   methods: {
@@ -67,20 +87,27 @@ export default {
         })
     },
     getRewards(id) {
+      this.showRewards = true
+      this.selectedParentId = id
       Api.get('/parents/' + id + '/rewards')
         .then(response => {
           this.rewards = response.data.rewards
         })
     },
-    createReward() {
-      Api.post('/rewards',
+    createReward(name, rewardDesc, price) {
+      Api.post('/parents/' + this.selectedParentId + '/rewards',
         {
-          reward_name: this.name,
-          reward_desc: this.reward_desc,
-          price: this.price,
-          parent: '5f60b206ea77e02c3c712dc2'
+          reward_name: name,
+          reward_desc: rewardDesc,
+          price: price,
+          parent: this.selectedParentId
         })
-      Api.get('/rewards')
+        .then(response => {
+          this.rewards.push(response.data)
+        })
+        .catch(error => {
+          console.error(error)
+        })
     }
   }
 }
@@ -100,6 +127,9 @@ export default {
   display: none;
 }
 .parent-reward .showQuests {
+  display: none;
+}
+.parent-reward .buyReward {
   display: none;
 }
 </style>
