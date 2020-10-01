@@ -268,6 +268,7 @@ export default {
     getChildren(id) {
       if (this.parentId === id && this.viewChildren) {
         this.viewChildren = false
+        this.editChild = false
         this.parentId = ''
         this.children = []
       } else {

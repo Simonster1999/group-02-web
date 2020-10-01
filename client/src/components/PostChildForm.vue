@@ -51,6 +51,9 @@ export default {
   methods: {
     onSubmit() {
       this.$emit('postChild', this.username, this.password, this.balance)
+      this.username = null
+      this.password = null
+      this.balance = null
     }
   }
 }
