@@ -5,6 +5,7 @@
            <p>Description: {{reward.reward_desc}}</p>
            <p>Price: {{reward.price}}</p>
            <b-button variant="danger" v-on:click="$emit('del-reward', reward._id)">X</b-button>
+           <b-button variant="success" v-on:click="$emit('del-reward', reward._id)">Complete</b-button>
         </div>
 </template>
 
@@ -16,7 +17,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 h1 {
 background-color:rgb(44, 207, 112);
 }
