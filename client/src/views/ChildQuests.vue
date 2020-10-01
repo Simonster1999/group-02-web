@@ -80,8 +80,7 @@ export default {
       money_bounty: '',
       value: '',
       selectedId: '',
-      selected: '',
-      parent: ''
+      selected: ''
     }
   },
   methods: {
@@ -92,9 +91,9 @@ export default {
       } else {
         this.selected = true
         this.selectedId = id
-        Api.get('/children/' + id)
+        Api.get('/parents/' + id + '/quests')
           .then((response) => {
-            this.child = response.data.quests
+            this.quests = response.data.quests
           })
           .catch((error) => {
             this.message = error.message
