@@ -65,35 +65,30 @@ This is a chore reward application that helps parents create incentives for chil
 
 ### Pages
 
-* Login/Registration
+* Home
 
-From the login screen, the user can choose to register a parent account. This prompts them to choose a username and account password. After completing the registration form, the user can log in using the credentials they chose when registering. When logging into an already existing account the user can select to log in as a parent or child. The user will or will not have access to special parent functionalities depending on whether or not they logged in as a parent.
-
-
-* Children
-
-When logged in as a parent, the user can go to this view to see a list of all connected child accounts. The parent can also create a new child account from this menu. This way, all child accounts will be connected to a parent from the moment they are created.
+On the home screen, the user can choose to create a parent. This prompts them to choose a username and account password. After filling out the parent creation form, the parent will be listed in the left part of the page. This list has functionality for deleting a parent and editing a parent, as well as showing the children that are tied to the parent. 
+Pressing the "Show children" button presents the user with a form for creating a new child account which, upon creation, will be tied to the currently selected parent account. The user selects a username, password and balance for the child account before finally pressing the "Create"-button, after which it will be listed in the second list to the right of the parent list. This list contains buttons for deleting and editing each child account that is tied to the currently selected parent.
 
 
-* Quest log
+* Quests (Parent)
 
-The quest log page displays a calendar, and lists all available chores for the currently selected date along with the amount of currency received for completing it and a chore description text. Every quest has an icon displayed next to it, selected by the parent from a handful of available icons when creating the quest. Each quest can be marked as complete by clicking the “quest complete” button.
-
-
-* Rewards
-
-The reward page displays all items available to purchase and their price. Every reward has an icon displayed next to it, selected by the parent from a handful of available icons when creating the reward.
+The parent quest page allows a parent to create quests that will be available to their children. A user can press the "Show Quests"-button on any parent to display the quests that have been created by that parent. The user can then also create a quest on the rightmost part of the page. Pressing the "Create quest"-button will present a form where the user can enter quest details before pressing the add button to add it into the selected parent's list. Each object in the list can be edited or deleted.
 
 
-* Quest log (Parent view)
+* Quests (Child)
 
-The parent view of the quest log is a page that is only accessible to the parent. From here, the parent can create quests and delete or update already existing quests. Any quests added by the parent will be visible to the child in the regular quest log page. Completed quests will be greyed out and marked as complete. A completed quest can be deleted and grant the reward for the chore or deleted without rewarding if the chore was not actually completed.
+The child quest page displays a list of children on the left side, with buttons for displaying that child's available quests in the second list on the right side. The page has a calendar in the middle, and its currently selected date will determine what quests are shown on the right side based on the date they were created. The list of available quests has a "Complete"-button for each quest that marks the quest as completed and adds that quest's reward amount to the child's balance.
 
 
-* Reward (Parent view)
+* Rewards (Parent)
 
-The parent view of the rewards page is only accessible to the parent. By using the parent password, the parent can add, edit and delete items from the store page. The items in the rewards page will consist of a name, description and a price tag, and will represent a real life item/activity for the child.
+This page is where parents create rewards for the children to spend their reward currency on. Creating a reward adds it into the list of rewards that are available to that parent's children. The user can edit and delete each reward from this page. When a reward is bought, this page will show what child bought the reward. That way, a parent can keep track of what real-life rewards shall be awarded to whom.
 
+* Rewards (Child)
+
+This page shows all rewards that are available to the currently selected child. The list shows rewards that have a parent ID equal to the parent ID of the child. 
+From here, the children can select a reward and press the "Buy"-button. This will subtract the price of the reward from the child's balance and set the item to bought, removing it from the list of available rewards. If a child's balance is too low to buy a reward, they will be alerted that they don't have enough to buy it. The item will then remain on the list and the child's balance will remain the same as before attempting to buy it.
 
 ### Entity-Relationship (ER) Diagram
 
