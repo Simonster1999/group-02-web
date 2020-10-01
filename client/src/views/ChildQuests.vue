@@ -31,10 +31,7 @@
               <div v-for="quest in quests" v-bind:key="quest._id">
                 <quest-item
                   v-bind:quest="quest"
-                  v-on:del-quest="deleteQuest"
-                  v-on:put-quest="
-                    (selectedEdit = true), (selectedCreate = false)
-                  "
+                  v-on:complete-quest="completeQuest"
                 />
               </div>
             </b-sidebar>
@@ -79,18 +76,22 @@ export default {
       quest_desc: '',
       money_bounty: '',
       value: '',
-      selectedId: '',
-      selected: ''
+      selectedParentId: '',
+      selectedChildId: '',
+      selected: '',
+      selectedChildBalance: ''
     }
   },
   methods: {
-    getQuests(id) {
-      if (this.selectedId === id) {
+    getQuests(id, childId, childBalance) {
+      this.selectedChildId = childId
+      this.selectedChildBalance = childBalance
+      if (this.selectedParentId === id) {
         this.selected = false
-        this.selectedId = ''
+        this.selectedParentId = ''
       } else {
         this.selected = true
-        this.selectedId = id
+        this.selectedParentId = id
         Api.get('/parents/' + id + '/quests')
           .then((response) => {
             this.quests = response.data.quests
@@ -102,6 +103,23 @@ export default {
           })
           .then(() => {})
       }
+    },
+    completeQuest(id, reward) {
+      Api.patch(`/quests/${id}`, {
+        is_completed: true,
+        completed_by: this.selectedChildId
+      }).catch(error => {
+        console.error(error)
+      })
+      Api.patch('/children/' + this.selectedChildId,
+        {
+          balance: this.selectedChildBalance + reward
+        }).then(response => {
+        const index = this.children.findIndex(child => child._id === this.selectedChildId)
+        var child = response.data
+        this.children.splice(index, 1, child)
+      })
+      this.selectedChildBalance += reward
     }
   }
 }
@@ -119,6 +137,15 @@ export default {
 }
 .child-quest .childP {
   font-size: 1.5em;
+}
+.child-quest .delQuest {
+  display: none;
+}
+.child-quest .editQuest {
+  display: none;
+}
+.child-quest .showRewards {
+  display: none;
 }
 .child-quest .createQuestFormBox {
   background-color: rgb(82, 71, 36);
