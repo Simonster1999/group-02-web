@@ -181,7 +181,7 @@ export default {
         })
     },
     postChild(username, password, balance) {
-      Api.post('/children',
+      Api.post('/parents/' + this.parentId + '/children',
         {
           username: username,
           password: password,
@@ -279,8 +279,11 @@ export default {
 }
 </script>
 
-<style scoped>
-.col {
+<style>
+.home .col {
   text-align: left;
+}
+.home .showQuests {
+  display: none;
 }
 </style>

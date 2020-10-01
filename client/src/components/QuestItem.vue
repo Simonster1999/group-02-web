@@ -1,18 +1,12 @@
 <template>
-       <div>
-         <b-container>
-           <b-row>
-           <p>Name: {{quest.quest_name}}</p>
-           <br>
-           <p>Quest Description: {{quest.quest_desc}}</p>
-           <br>
-           <p>Reward: {{quest.money_bounty}}</p>
-           <p>Date: {{ quest.date }} </p>
-      <b-button variant="danger" v-on:click="$emit('del-quest', quest._id)">X</b-button>
-      <b-button variant="warning" v-on:click="$emit('put-quest', quest._id)">Edit</b-button>
-       </b-row>
-      </b-container>
-        </div>
+  <div>
+    <p>Name: {{quest.quest_name}}</p>
+    <p>Quest Description: {{quest.quest_desc}}</p>
+    <p>Reward: {{quest.money_bounty}}</p>
+    <p>Date: {{ quest.date }} </p>
+    <b-button variant="danger" v-on:click="$emit('del-quest', quest._id)">X</b-button>
+    <b-button variant="warning" v-on:click="$emit('put-quest', quest._id)">Edit</b-button>
+  </div>
 </template>
 
 <script>
@@ -32,14 +26,20 @@ export default {
 
 <style scoped>
 p {
-font-size: 20px;
-text-align: left;
-margin-left: 5px;
+  font-size: 20px;
+  text-align: left;
+  margin-left: 5px;
+  color:black;
 }
 .row {
-border: solid;
+  border: solid;
 }
-.container {
+div {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: solid;
+  border-color:rgb(84, 84, 84);
+  border-radius: 20px;
   background-color:rgb(179, 181, 166)
 }
 

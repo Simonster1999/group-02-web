@@ -21,6 +21,21 @@ router.post('/api/children', function(req, res, next) {
     });
 });
 
+// Create a child belonging to parent
+router.post('/api/parents/:parent_id/children', function(req, res, next) {
+    var parent_id = req.params.parent_id;
+    var child = new Child(req.body);
+    child.save(function(err) {
+        if (err) {
+            return res.status(400).json({'message': 'Bad request'});
+        }
+        if (child.parent != parent_id) {
+            return res.status(400).json({'message': 'Child does not belong to this parent'});
+        }
+        res.status(201).json(child);
+    });
+});
+
 // Return the child with the given ID
 router.get('/api/children/:child_id', function(req, res, next) {
     var id = req.params.child_id;

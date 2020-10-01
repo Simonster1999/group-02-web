@@ -3,40 +3,108 @@
     <b-container>
       <b-row>
         <b-col>
-          <b-sidebar
-           no-header-close
-           bg-variant="light"
-           visible="true">
-             <div
-             v-for="parent in parents"
-             v-bind:key="parent._id"
-             v-on:click="getQuests(parent._id)">
-             <parent-item
-             v-bind:parent="parent"/>
-              </div> </b-sidebar>
-          </b-col>
-           <b-col>
-        <b-calendar value-as-date class="border rounded p-4" v-model="value" selected-variant="danger" @context="value" locale="en-US" width="480px" hide-header="hideHeader"/>
-        </b-col>
-           <b-col v-if="selected">
-           <b-sidebar  right bg-variant="dark" visible="true" no-header-close >
-            <b-col>
-              <h1>Quest List</h1>
-              <b-button variant="warning" v-on:click="selectedCreate= true">Create Quest</b-button>
-            </b-col>
-            <b-col v-if="selectedCreate">
-              <div>
-              <b-form-input v-model="name" placeholder="Enter quest name"></b-form-input>
-        <b-form-input v-model="quest_desc" placeholder="Enter quest description"></b-form-input>
-        <b-form-input v-model="money_bounty" placeholder="Enter reward amount"></b-form-input>
-        <b-form-input v-model="value" placeholder="Select date"></b-form-input>
-        <b-button variant="light" v-on:click="createQuest">Add</b-button>
-        </div>
-            </b-col>
-          <div  v-for="quest in quests" v-bind:key="quest._id">
-          <quest-item v-bind:quest="quest" v-on:del-quest="deleteQuest" v-on:put-quest="putQuest"/>
-          </div>
+          <b-sidebar no-header-close bg-variant="dark" visible="true">
+            <h1>Parent List</h1>
+            <div v-for="parent in parents" v-bind:key="parent._id">
+              <parent-item
+                v-bind:parent="parent"
+                v-on:show-quests="getQuests"
+              />
+            </div>
           </b-sidebar>
+        </b-col>
+        <b-col>
+          <b-calendar
+            class="calendar"
+            v-model="value"
+            selected-variant="danger"
+            @context="value"
+            locale="en-US"
+            width="480px"
+            :hide-header="true"
+          />
+        </b-col>
+        <b-col>
+          <div v-if="selected">
+            <b-sidebar right bg-variant="dark" visible="true" no-header-close>
+              <h1>Quest List</h1>
+              <b-col>
+                <b-button
+                  class="createQuestBtn"
+                  variant="warning"
+                  v-on:click="(selectedCreate = true), (selectedEdit = false)"
+                  >Create Quest</b-button
+                >
+              </b-col>
+              <b-col v-if="selectedEdit">
+                <div class="createQuestFormBox">
+                  <h1 class="createQuestHeader">Edit Quest</h1>
+                  <b-form autocomplete="off">
+                    <b-form-input
+                      v-model="name"
+                      placeholder="Enter quest name"
+                    ></b-form-input>
+                    <b-form-input
+                      v-model="quest_desc"
+                      placeholder="Enter quest description"
+                    ></b-form-input>
+                    <b-form-input
+                      v-model="money_bounty"
+                      placeholder="Enter reward amount"
+                    ></b-form-input>
+                    <b-form-input
+                      v-model="value"
+                      placeholder="Select date"
+                    ></b-form-input>
+                    <b-button variant="light" v-on:click="putQuest"
+                      >Add
+                    </b-button>
+                    <b-button variant="warning" v-on:click="cancelEdit"
+                      >Cancel
+                    </b-button>
+                  </b-form>
+                </div>
+              </b-col>
+              <b-col v-if="selectedCreate">
+                <div class="createQuestFormBox">
+                  <h1 class="createQuestHeader">Create Quest</h1>
+                  <b-form autocomplete="off">
+                    <b-form-input
+                      v-model="name"
+                      placeholder="Enter quest name"
+                    ></b-form-input>
+                    <b-form-input
+                      v-model="quest_desc"
+                      placeholder="Enter quest description"
+                    ></b-form-input>
+                    <b-form-input
+                      v-model="money_bounty"
+                      placeholder="Enter reward amount"
+                    ></b-form-input>
+                    <b-form-input
+                      v-model="value"
+                      placeholder="Select date"
+                    ></b-form-input>
+                    <b-button variant="light" v-on:click="createQuest"
+                      >Add
+                    </b-button>
+                    <b-button variant="warning" v-on:click="cancelCreate"
+                      >Cancel
+                    </b-button>
+                  </b-form>
+                </div>
+              </b-col>
+              <div v-for="quest in quests" v-bind:key="quest._id">
+                <quest-item
+                  v-bind:quest="quest"
+                  v-on:del-quest="deleteQuest"
+                  v-on:put-quest="
+                    (selectedEdit = true), (selectedCreate = false)
+                  "
+                />
+              </div>
+            </b-sidebar>
+          </div>
         </b-col>
       </b-row>
     </b-container>
@@ -48,7 +116,9 @@ import { Api } from '@/Api'
 import QuestItem from '@/components/QuestItem.vue'
 import ParentItem from '@/components/ParentItem.vue'
 export default {
-  beforeCreate: function () { document.body.className = 'parent-quest' },
+  beforeCreate: function () {
+    document.body.className = 'parent-quest'
+  },
   name: 'parent-quests',
   components: {
     QuestItem,
@@ -56,16 +126,16 @@ export default {
   },
   mounted() {
     console.log('PAGE is loaded')
-    Api.get('/parents').then(response => {
-      this.parents = response.data.parents
-    })
-      .catch(error => {
+    Api.get('/parents')
+      .then((response) => {
+        this.parents = response.data.parents
+      })
+      .catch((error) => {
         this.message = error.message
         console.error(error)
         this.quests = []
       })
-      .then(() => {
-      })
+      .then(() => {})
   },
   data() {
     return {
@@ -77,42 +147,62 @@ export default {
       value: '',
       selected: false,
       selectedId: '',
-      selectedCreate: false
+      selectedCreate: false,
+      selectedEdit: false
     }
   },
   methods: {
     deleteQuest(id) {
       Api.delete(`/quests/${id}`)
-        .then(reponse => {
-          const index = this.quests.findIndex(quest => quest._id === id)
+        .then((reponse) => {
+          const index = this.quests.findIndex((quest) => quest._id === id)
           this.quests.splice(index, 1)
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error)
         })
     },
     putQuest(id) {
-      Api.put(`/quests/${id}`,
-        {
-          quest_name: this.name,
-          quest_desc: this.quest_desc,
-          money_bounty: this.money_bounty,
-          date: this.value
-        })
+      Api.put(`/quests/${id}`, {
+        quest_name: this.name,
+        quest_desc: this.quest_desc,
+        money_bounty: this.money_bounty,
+        date: this.value
+      })
+    },
+    editQuest(id) {
+      if (this.selectedCreate) {
+        this.selectedCreate = false
+      }
+      this.selectedEdit = true
     },
     createQuest() {
-      Api.post('/quests',
-        {
-          quest_name: this.name,
-          quest_desc: this.quest_desc,
-          money_bounty: this.money_bounty,
-          date: this.value,
-          parent: this.selectedId
-        }).then(response => {
+      Api.post('/quests', {
+        quest_name: this.name,
+        quest_desc: this.quest_desc,
+        money_bounty: this.money_bounty,
+        date: this.value,
+        parent: this.selectedId
+      }).then((response) => {
         var quest = response.data
         this.quests.push(quest)
       })
       this.selectedCreate = false
+      this.name = ''
+      this.quest_desc = ''
+      this.money_bounty = ''
+    },
+    cancelCreate() {
+      this.selectedCreate = false
+      this.name = ''
+      this.quest_desc = ''
+      this.money_bounty = ''
+    },
+    cancelEdit() {
+      this.selectedEdit = false
+      this.name = ''
+      this.quest_desc = ''
+      this.money_bounty = ''
     },
     getQuests(id) {
       if (this.selectedId === id) {
@@ -121,29 +211,76 @@ export default {
       } else {
         this.selected = true
         this.selectedId = id
-        Api.get('/parents/' + id + '/quests').then(response => {
-          this.quests = response.data.quests
-        })
-          .catch(error => {
+        Api.get('/parents/' + id + '/quests')
+          .then((response) => {
+            this.quests = response.data.quests
+          })
+          .catch((error) => {
             this.message = error.message
             console.error(error)
             this.quests = []
           })
-          .then(() => {
-          })
+          .then(() => {})
       }
     }
   }
 }
-
 </script>
 
 <style>
-.parent-quest{
-  background-color: rgb(82, 71, 36);
+.parent-quest {
+  background-color: rgb(44, 42, 49);
 }
-h1 {
-background-color:rgb(114, 85, 46);
-color:rgba(247, 210, 2, 0.748)
+.parent-quest .createQuestFormBox {
+  background-color: rgb(82, 71, 36);
+  color: rgba(247, 210, 2, 0.748);
+  padding: 15px;
+  border: solid;
+  border-radius: 20px;
+}
+.parent-quest .parentDiv {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: solid;
+  border-color: rgb(84, 84, 84);
+  border-radius: 20px;
+  background-color: rgb(179, 181, 166);
+}
+.parent-quest .createQuestBtn {
+  margin-bottom: 10px;
+}
+.parent-quest .calendar {
+  background-color: rgb(82, 71, 36);
+  color: rgba(247, 210, 2, 0.748);
+  padding: 15px;
+  border: solid;
+  border-radius: 20px;
+}
+.parent-quest .createQuestHeader {
+  background-color: rgb(114, 85, 46);
+  color: rgba(247, 210, 2, 0.748);
+  padding: 5px;
+  border: solid;
+  border-radius: 5px;
+  font-size: 1.2em;
+}
+.parent-quest h1 {
+  background-color: rgb(114, 85, 46);
+  color: rgba(247, 210, 2, 0.748);
+  padding: 5px;
+  border: solid;
+  border-radius: 5px;
+}
+.parent-quest .showChildren {
+  display: none;
+}
+.parent-quest .deleteParent {
+  display: none;
+}
+.parent-quest .editParent {
+  display: none;
+}
+.parent-quest .parentUsername {
+  font-size: 1.5em;
 }
 </style>

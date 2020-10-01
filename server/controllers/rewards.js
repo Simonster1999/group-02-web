@@ -30,9 +30,9 @@ router.post('/api/parents/:parent_id/rewards', function(req, res, next) {
 
 // Get all rewards
 router.get('/api/rewards', function(req, res, next){
-    Reward.find(function(err, reward) {
+    Reward.find(function(err, rewards) {
         if (err) { return next(err); }
-        res.json({'rewards': reward});
+        res.json({'rewards': rewards});
     });
 });
 
@@ -60,7 +60,7 @@ router.get('/api/parents/:parent_id/rewards/', function(req, res, next){
         if (rewards === null) {
            return res.status(404).json({'message': 'Reward not found'}); 
         }
-        res.json({'rewards':rewards});
+        res.json({'rewards': rewards});
     });
 });
 
