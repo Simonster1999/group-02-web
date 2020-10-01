@@ -169,9 +169,8 @@ export default {
         date: this.value
       }).then((response) => {
         var quest = response.data
-        this.quests.push(quest)
         const index = this.quests.findIndex((quest) => quest._id === this.questId)
-        this.quests.splice(index, 1)
+        this.quests.splice(index, 1, quest)
       }).catch((error) => {
         console.error(error)
       })
