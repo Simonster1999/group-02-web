@@ -164,7 +164,6 @@ export default {
             console.error(error)
           })
       }
-      this.parentId = false
       this.editParent = false
     },
     deleteParent(id) {
@@ -220,14 +219,15 @@ export default {
             password: password,
             balance: balance
           })
-          .then(response => {
-            const index = this.children.findIndex(child => child._id === this.childId)
-            this.children.splice(index, 1,
-              {
-                username: response.data.username,
-                password: response.data.password,
-                balance: response.data.balance
-              })
+          .then((response) => {
+            console.log(this.children[0]._id)
+            console.log('spacer')
+            console.log(this.childId)
+            var test = this.childId
+            console.log(test)
+            var child = response.data
+            const index = this.children.findIndex((child) => child._id === test)
+            this.children.splice(index, 1, child)
           })
           .catch(error => {
             console.error(error)
@@ -253,7 +253,7 @@ export default {
           })
       }
       this.editChild = false
-      this.childId = ''
+      // this.childId = ''
     },
     deleteChild(id) {
       Api.delete(`/children/${id}`)
