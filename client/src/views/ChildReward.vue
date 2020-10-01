@@ -110,5 +110,14 @@ export default {
 .child-reward{
   background-color: rgb(5, 109, 11);
 }
+.child-reward .editChild {
+  display: none;
+}
+.child-reward .delChild {
+  display: none;
+}
+.child-reward .showQuests {
+  display: none;
+}
 
 </style>
