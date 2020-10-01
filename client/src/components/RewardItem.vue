@@ -4,8 +4,8 @@
            <p>Name: {{reward.reward_name}}</p>
            <p>Description: {{reward.reward_desc}}</p>
            <p>Price: {{reward.price}}</p>
-           <b-button variant="danger" v-on:click="$emit('del-reward', reward._id)">X</b-button>
-           <b-button variant="success" v-on:click="$emit('del-reward', reward._id)">Complete</b-button>
+           <b-button class="delReward" variant="danger" v-on:click="$emit('del-reward', reward._id)">X</b-button>
+           <b-button class="buyReward" variant="success" v-on:click="$emit('patch-reward', reward._id, reward.price)">Buy</b-button>
         </div>
 </template>
 

@@ -2,18 +2,18 @@
   <div>
     <b-container>
       <b-row>
-        <b-col><b-button v-on:click="createReward">Create Reward</b-button>
+        <b-col> <b-sidebar bg-variant="light" visible="true" width="20%" no-header-close > <div  v-for="parent in parents" v-bind:key="parent._id">
+        <parent-item v-bind:parent="parent" v-on:show-rewards="getRewards"/>
+        </div> </b-sidebar></b-col>
+                <b-col><b-button v-on:click="createReward">Create Reward</b-button>
         <b-form-input v-model="name" placeholder="Enter Reward name"></b-form-input>
         <b-form-input v-model="reward_desc" placeholder="Enter Reward Description"></b-form-input>
         <b-form-input v-model="price" placeholder="Enter Price"></b-form-input>
         </b-col>
-        <b-col> <b-sidebar bg-variant="light" visible="true" right="true" width="35%" no-header-close > <div  v-for="reward in rewards" v-bind:key="reward._id">
+        <b-col> <b-sidebar bg-variant="light" visible="true" right="true" width="20%" no-header-close > <div  v-for="reward in rewards" v-bind:key="reward._id">
         <reward-item v-bind:reward="reward" v-on:del-reward="deleteReward"/>
         </div> </b-sidebar></b-col>
         </b-row>
-        <b-col> <b-sidebar bg-variant="light" visible="true" width="20%" no-header-close > <div  v-for="parent in parents" v-bind:key="parent._id">
-        <parent-item v-bind:parent="parent"/>
-        </div> </b-sidebar></b-col>
     </b-container>
   </div>
 </template>
@@ -21,22 +21,24 @@
 <script>
 import { Api } from '@/Api'
 import RewardItem from '@/components/RewardItem.vue'
+import ParentItem from '@/components/ParentItem.vue'
 export default {
   beforeCreate: function () { document.body.className = 'parent-reward' },
   name: 'parent-reward',
   components: {
-    RewardItem
+    RewardItem,
+    ParentItem
   },
   mounted() {
     console.log('PAGE is loaded')
-    Api.get('/rewards')
+    Api.get('/parents')
       .then(response => {
-        this.rewards = response.data.rewards
+        this.parents = response.data.parents
       })
       .catch(error => {
         this.message = error.message
         console.error(error)
-        this.rewards = []
+        this.parents = []
       })
       .then(() => {
       })
@@ -44,6 +46,7 @@ export default {
   data() {
     return {
       rewards: [],
+      parents: [],
       name: '',
       price: ''
     }
@@ -68,6 +71,12 @@ export default {
           console.error(error)
         })
     },
+    getRewards(id) {
+      Api.get('/parents/' + id + '/rewards')
+        .then(response => {
+          this.rewards = response.data.rewards
+        })
+    },
     createReward() {
       Api.post('/rewards',
         {
@@ -82,9 +91,20 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .parent-reward{
   background-color: rgb(5, 109, 11);
 }
-
+.parent-reward .deleteParent {
+  display: none;
+}
+.parent-reward .editParent {
+  display: none;
+}
+.parent-reward .showChildren {
+  display: none;
+}
+.parent-reward .showQuests {
+  display: none;
+}
 </style>

@@ -33,7 +33,7 @@ export default new Router({
       component: ChildReward
     },
     {
-      path: '/parentrewards',
+      path: '/parent-rewards',
       name: 'Parent Reward',
       component: ParentReward
     }
