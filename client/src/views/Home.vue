@@ -253,7 +253,6 @@ export default {
           })
       }
       this.editChild = false
-      // this.childId = ''
     },
     deleteChild(id) {
       Api.delete(`/children/${id}`)
