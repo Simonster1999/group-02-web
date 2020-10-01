@@ -53,14 +53,14 @@ router.get('/api/rewards/:reward_id', function(req, res, next){
 // Get all rewards belonging to a parent
 router.get('/api/parents/:parent_id/rewards/', function(req, res, next){
     var id = req.params.parent_id;
-    Reward.find({parent: id}, function (err, reward){
+    Reward.find({parent: id}, function (err, rewards){
         if (err) {
             return res.status(400).json({'message': 'Bad request'});
         }
-        if (reward === null) {
+        if (rewards === null) {
            return res.status(404).json({'message': 'Reward not found'}); 
         }
-        res.json(reward);
+        res.json({'rewards':rewards});
     });
 });
 

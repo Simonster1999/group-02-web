@@ -4,85 +4,48 @@
       <b-row>
         <!-- Box for parents -->
         <b-col>
-          <div v-for="parent in parents" v-bind:key="parent._id" v-on:click="getChildren(parent._id)">
-            <parent-item v-bind:parent="parent" v-on:del-parent="deleteParent"/>
+          <h1>Parents</h1>
+          <div v-for="parent in parents" v-bind:key="parent._id">
+            <parent-item v-bind:parent="parent"
+              v-on:del-parent="deleteParent"
+              v-on:edit-parent="toggleEditParent"
+              v-on:show-children="getChildren"
+            />
           </div>
         </b-col>
-        <!-- Box for parents children (if selected) AND child creation form -->
-        <b-col v-if="selected">
-          <!-- Box for child creation form -->
-          <div>
-            <b-form @submit.prevent="postChild">
-              <b-form-group
-                id="input-group-1"
-                label="Your Username"
-                label-for="input-1"
-                description="Your username must be unique"
-              >
-                <b-form-input
-                  id="input-1"
-                  v-model="c_username"
-                  required
-                  placeholder="Enter username"
-                ></b-form-input>
-              </b-form-group>
-
-              <b-form-group id="input-group-2" label="Your Password" label-for="input-2">
-                <b-form-input
-                  id="input-2"
-                  v-model="c_password"
-                  type="password"
-                  required
-                  placeholder="Enter password"
-                ></b-form-input>
-              </b-form-group>
-
-              <b-form-group id="input-group-3" label="Your Balance" label-for="input-3">
-                <b-form-input
-                  id="input-3"
-                  v-model="balance"
-                  type="number"
-                  required
-                  placeholder="Enter balance"
-                ></b-form-input>
-              </b-form-group>
-              <b-button variant="primary" type="submit">Create</b-button>
-            </b-form>
-          </div>
-          <!-- Box for parents children (if selected) -->
-          <div v-for="child in children" v-bind:key="child._id">
-            <child-item v-bind:child="child" v-on:del-child="deleteChild"/>
-          </div>
-        </b-col>
-        <!-- Box for parent creation form -->
+        <!-- Box for parents children (if selected) AND child update form -->
         <b-col>
-          <div>
-            <b-form @submit.prevent="postParent">
-              <b-form-group
-                id="input-group-1"
-                label="Your Username"
-                label-for="input-1"
-                description="Your username must be unique"
-              >
-                <b-form-input
-                  id="input-1"
-                  v-model="p_username"
-                  required
-                  placeholder="Enter username"
-                ></b-form-input>
-              </b-form-group>
-
-              <b-form-group id="input-group-2" label="Your Password" label-for="input-2">
-                <b-form-input
-                  id="input-2"
-                  v-model="p_password"
-                  type="password"
-                  required
-                  placeholder="Enter password"
-                ></b-form-input>
-              </b-form-group>
-              <b-button variant="primary" type="submit">Create</b-button>
-            </b-form>
+          <!-- Box for child update form -->
+          <div v-if="editChild" style="margin-top:50px">
+            <h1>Update Child</h1>
+            <p>Leave blank if unchanged</p>
+            <UpdateChildForm v-on:updateChild="updateChild" />
+          </div>
+          <div v-if="viewChildren">
+            <h1>Children</h1>
+            <!-- Box for children (if selected) -->
+            <div v-for="child in children" v-bind:key="child._id">
+              <child-item v-bind:child="child"
+                v-on:del-child="deleteChild"
+                v-on:edit-child="toggleEditChild"
+              />
+            </div>
+          </div>
+        </b-col>
+        <b-col>
+          <!-- Box for parent creation form -->
+          <h1>Create new Parent</h1>
+          <PostParentForm v-on:postParent="postParent" />
+          <!-- Box for child creation form (if parent selected) -->
+          <div v-if="viewChildren" style="margin-top:50px">
+            <h1>Create new Child</h1>
+            <PostChildForm v-on:postChild="postChild" />
+          </div>
+          <!-- Box for parent update form (if parent selected) -->
+          <div v-if="editParent" style="margin-top:50px">
+            <h1>Update Parent</h1>
+            <p>Leave blank if unchanged</p>
+            <UpdateParentForm v-on:updateParent="updateParent" />
           </div>
         </b-col>
       </b-row>
@@ -95,12 +58,20 @@
 import { Api } from '@/Api'
 import ParentItem from '@/components/ParentItem.vue'
 import ChildItem from '@/components/ChildItem.vue'
+import PostParentForm from '@/components/PostParentForm.vue'
+import PostChildForm from '@/components/PostChildForm.vue'
+import UpdateParentForm from '@/components/UpdateParentForm.vue'
+import UpdateChildForm from '@/components/UpdateChildForm.vue'
 export default {
   beforeCreate: function () { document.body.className = 'home' },
   name: 'home',
   components: {
     ParentItem,
-    ChildItem
+    ChildItem,
+    PostChildForm,
+    PostParentForm,
+    UpdateParentForm,
+    UpdateChildForm
   },
   mounted() {
     console.log('PAGE is loaded')
@@ -120,13 +91,11 @@ export default {
       message: 'none',
       parents: [],
       children: [],
-      c_username: '',
-      c_password: '',
-      balance: '',
-      p_username: '',
-      p_password: '',
-      selected: false,
-      selectedId: ''
+      viewChildren: false,
+      parentId: '',
+      childId: '',
+      editChild: false,
+      editParent: false
     }
   },
   methods: {
@@ -139,11 +108,11 @@ export default {
           this.message = error
         })
     },
-    postParent() {
+    postParent(username, password) {
       Api.post('/parents',
         {
-          username: this.p_username,
-          password: this.p_password
+          username: username,
+          password: password
         }).then(response => {
         var parent = response.data
         this.parents.push(parent)
@@ -152,13 +121,72 @@ export default {
           console.error(error)
         })
     },
-    postChild() {
+    toggleEditParent(id) {
+      this.parentId = id
+      this.viewChildren = false
+      this.editChild = false
+      this.editParent = !this.editParent
+    },
+    updateParent(username, password) {
+      if ((username === null || password === null) || (username === null && password === null)) {
+        Api.patch('/parents/' + this.parentId,
+          {
+            username: username,
+            password: password
+          })
+          .then(response => {
+            const index = this.parents.findIndex(parent => parent._id === this.parentId)
+            this.parents.splice(index, 1,
+              {
+                username: response.data.username,
+                password: response.data.password
+              })
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      } else {
+        Api.put('/parents/' + this.parentId,
+          {
+            username: username,
+            password: password
+          })
+          .then(response => {
+            const index = this.parents.findIndex(parent => parent._id === this.parentId)
+            this.parents.splice(index, 1,
+              {
+                username: response.data.username,
+                password: response.data.password
+              })
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
+      this.parentId = false
+      this.editParent = false
+    },
+    deleteParent(id) {
+      Api.delete(`/parents/${id}`)
+        .then(reponse => {
+          const index = this.parents.findIndex(parent => parent._id === id)
+          this.parents.splice(index, 1)
+          if (this.parentId === id) {
+            this.children = []
+            this.parentId = ''
+          }
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    },
+    postChild(username, password, balance) {
       Api.post('/children',
         {
-          username: this.c_username,
-          password: this.c_password,
-          balance: this.balance,
-          parent: this.selectedId
+          username: username,
+          password: password,
+          balance: balance,
+          parent: this.parentId
         }).then(response => {
         var child = response.data
         this.children.push(child)
@@ -167,15 +195,53 @@ export default {
           console.error(error)
         })
     },
-    deleteParent(id) {
-      Api.delete(`/parents/${id}`)
-        .then(reponse => {
-          const index = this.parents.findIndex(parent => parent._id === id)
-          this.parents.splice(index, 1)
-        })
-        .catch(error => {
-          console.error(error)
-        })
+    toggleEditChild(id) {
+      this.childId = id
+      this.editChild = !this.editChild
+      this.editParent = false
+    },
+    updateChild(username, password, balance) {
+      if (username === null || password === null || balance === null) {
+        Api.patch('/children/' + this.childId,
+          {
+            username: username,
+            password: password,
+            balance: balance
+          })
+          .then(response => {
+            const index = this.children.findIndex(child => child._id === this.childId)
+            this.children.splice(index, 1,
+              {
+                username: response.data.username,
+                password: response.data.password,
+                balance: response.data.balance
+              })
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      } else {
+        Api.put('/children/' + this.childId,
+          {
+            username: username,
+            password: password,
+            balance: balance
+          })
+          .then(response => {
+            const index = this.children.findIndex(child => child._id === this.childId)
+            this.children.splice(index, 1,
+              {
+                username: response.data.username,
+                password: response.data.password,
+                balance: response.data.balance
+              })
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
+      this.editChild = false
+      this.childId = ''
     },
     deleteChild(id) {
       Api.delete(`/children/${id}`)
@@ -188,12 +254,15 @@ export default {
         })
     },
     getChildren(id) {
-      if (this.selectedId === id) {
-        this.selected = false
-        this.selectedId = ''
+      if (this.parentId === id && this.viewChildren) {
+        this.viewChildren = false
+        this.parentId = ''
+        this.children = []
       } else {
-        this.selected = true
-        this.selectedId = id
+        this.viewChildren = true
+        this.editChild = false
+        this.editParent = false
+        this.parentId = id
         Api.get('/parents/' + id + '/children').then(response => {
           this.children = response.data.children
         })
@@ -210,10 +279,7 @@ export default {
 }
 </script>
 
-<style>
-#b-jumbotron  {
-  background-color: brown;
-}
+<style scoped>
 .col {
   text-align: left;
 }

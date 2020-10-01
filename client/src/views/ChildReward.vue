@@ -2,12 +2,19 @@
   <div>
     <b-container>
       <b-row>
-        <b-col> <b-sidebar bg-variant="light" visible="true" right="true" width="35%" no-header-close > <div  v-for="reward in rewards" v-bind:key="reward._id">
-        <reward-item v-bind:reward="reward" v-on:del-reward="deleteReward"/>
-        </div> </b-sidebar>
-        <b-sidebar bg-variant="light" visible="true" width="20%" no-header-close > <div  v-for="child in children" v-bind:key="child._id">
-        <reward-item v-bind:reward="reward"/>
-        </div> </b-sidebar></b-col>
+            <b-col>
+                    <b-sidebar bg-variant="light" visible="true" width="20%" no-header-close >
+                        <div v-for="child in children" v-bind:key="child._id">
+                            <child-item v-bind:child="child" v-on:show-rewards="getRewards"/>
+                        </div>
+                    </b-sidebar>
+            </b-col>
+            <b-col>
+                <b-sidebar bg-variant="light" visible="true" right="true" width="35%" no-header-close >
+                    <div  v-for="reward in rewards" v-bind:key="reward._id">
+                    <reward-item v-bind:reward="reward" v-on:del-reward="deleteReward"/>
+                </div> </b-sidebar>
+            </b-col>
         </b-row>
     </b-container>
   </div>
@@ -16,22 +23,24 @@
 <script>
 import { Api } from '@/Api'
 import RewardItem from '@/components/RewardItem.vue'
+import ChildItem from '@/components/ChildItem.vue'
 export default {
   beforeCreate: function () { document.body.className = 'child-reward' },
   name: 'child-reward',
   components: {
-    RewardItem
+    RewardItem,
+    ChildItem
   },
   mounted() {
     console.log('PAGE is loaded')
-    Api.get('/rewards')
+    Api.get('/children')
       .then(response => {
-        this.rewards = response.data.rewards
+        this.children = response.data.children
       })
       .catch(error => {
         this.message = error.message
         console.error(error)
-        this.rewards = []
+        this.children = []
       })
       .then(() => {
       })
@@ -39,11 +48,16 @@ export default {
   data() {
     return {
       rewards: [],
+      children: [],
       name: '',
-      price: ''
+      price: '',
+      selected: false,
+      selectedId: ''
+
     }
   },
   methods: {
+    test(id) {},
     getMessage() {
       Api.get('/')
         .then(response => {
@@ -74,30 +88,25 @@ export default {
       Api.get('/rewards')
     },
     getRewards(id) {
-      if (this.selectedId === id) {
-        this.selected = false
-        this.selectedId = ''
-      } else {
-        this.selected = true
-        this.selectedId = id
-        Api.get('/parents/' + id + '/rewards').then(response => {
-          this.rewards = response.data.rewards
+      this.selected = true
+      this.selectedId = id
+      Api.get('/parents/' + id + '/rewards').then(response => {
+        this.rewards = response.data.rewards
+      })
+        .catch(error => {
+          this.message = error.message
+          console.error(error)
+          this.rewards = []
         })
-          .catch(error => {
-            this.message = error.message
-            console.error(error)
-            this.children = []
-          })
-          .then(() => {
-          })
-      }
+        .then(() => {
+        })
     }
   }
 }
 
 </script>
 
-<style scoped>
+<style>
 .child-reward{
   background-color: rgb(5, 109, 11);
 }
