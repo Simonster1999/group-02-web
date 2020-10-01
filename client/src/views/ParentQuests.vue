@@ -3,7 +3,7 @@
     <b-container>
       <b-row>
         <b-col>
-          <b-sidebar no-header-close bg-variant="dark" visible="true">
+          <b-sidebar width="20%" no-header-close bg-variant="dark" visible="true">
             <h1>Parent List</h1>
             <div v-for="parent in parents" v-bind:key="parent._id">
               <parent-item
@@ -26,7 +26,7 @@
         </b-col>
         <b-col>
           <div v-if="selected">
-            <b-sidebar right bg-variant="dark" visible="true" no-header-close>
+            <b-sidebar width="20%" right bg-variant="dark" visible="true" no-header-close>
               <h1>Quest List</h1>
               <b-col>
                 <b-button
@@ -56,7 +56,7 @@
                       v-model="value"
                       placeholder="Select date"
                     ></b-form-input>
-                    <b-button variant="light" v-on:click="putQuest"
+                    <b-button variant="light" v-on:click="patchQuest"
                       >Add
                     </b-button>
                     <b-button variant="warning" v-on:click="cancelEdit"
@@ -98,9 +98,7 @@
                 <quest-item
                   v-bind:quest="quest"
                   v-on:del-quest="deleteQuest"
-                  v-on:put-quest="
-                    (selectedEdit = true), (selectedCreate = false)
-                  "
+                  v-on:patch-quest="editQuest"
                 />
               </div>
             </b-sidebar>
@@ -148,7 +146,8 @@ export default {
       selected: false,
       selectedId: '',
       selectedCreate: false,
-      selectedEdit: false
+      selectedEdit: false,
+      questId: ''
     }
   },
   methods: {
@@ -162,19 +161,27 @@ export default {
           console.error(error)
         })
     },
-    putQuest(id) {
-      Api.put(`/quests/${id}`, {
+    patchQuest() {
+      Api.patch(`/quests/${this.questId}`, {
         quest_name: this.name,
         quest_desc: this.quest_desc,
         money_bounty: this.money_bounty,
         date: this.value
+      }).then((response) => {
+        var quest = response.data
+        this.quests.push(quest)
+      }).then((reponse) => {
+        const index = this.quests.findIndex((quest) => quest._id === this.questId)
+        this.quests.splice(index, 1)
       })
+      this.selectedEdit = false
     },
     editQuest(id) {
       if (this.selectedCreate) {
         this.selectedCreate = false
       }
       this.selectedEdit = true
+      this.questId = id
     },
     createQuest() {
       Api.post('/quests', {
