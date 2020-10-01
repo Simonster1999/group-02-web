@@ -12,6 +12,7 @@
               v-on:show-children="getChildren"
             />
           </div>
+          <b-button class="deleteParent" variant="danger" v-on:click="deleteAllParents">Delete All Parents</b-button>
         </b-col>
         <!-- Box for parents children (if selected) AND child update form -->
         <b-col>
@@ -180,6 +181,17 @@ export default {
           console.error(error)
         })
     },
+    deleteAllParents() {
+      if (confirm('Are you sure you want to delete everything?')) {
+        Api.delete('/parents')
+          .then(reponse => {})
+          .catch(error => {
+            console.error(error)
+          })
+        this.parents = []
+        this.children = []
+      }
+    },
     postChild(username, password, balance) {
       Api.post('/parents/' + this.parentId + '/children',
         {
@@ -256,6 +268,7 @@ export default {
     getChildren(id) {
       if (this.parentId === id && this.viewChildren) {
         this.viewChildren = false
+        this.editChild = false
         this.parentId = ''
         this.children = []
       } else {
@@ -284,6 +297,9 @@ export default {
   text-align: left;
 }
 .home .showQuests {
+  display: none;
+}
+.home .showRewards {
   display: none;
 }
 </style>

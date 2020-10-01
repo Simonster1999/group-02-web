@@ -249,6 +249,9 @@ export default {
 .parent-quest .createQuestBtn {
   margin-bottom: 10px;
 }
+.parent-quest .completeQuest {
+  display: none;
+}
 .parent-quest .calendar {
   background-color: rgb(82, 71, 36);
   color: rgba(247, 210, 2, 0.748);
