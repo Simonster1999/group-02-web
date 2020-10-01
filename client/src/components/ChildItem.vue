@@ -5,6 +5,7 @@
     <b-button class="delChild" variant="danger" v-on:click="$emit('del-child', child._id)">X</b-button>
     <b-button class="editChild" variant="warning" v-on:click="$emit('edit-child', child._id)">Edit</b-button>
     <b-button class="showQuests" variant="warning" v-on:click="$emit('show-quests', child.parent)">Show Quests</b-button>
+    <b-button variant="secondary" v-on:click="$emit('show-rewards', child.parent)">Show Rewards</b-button>
   </div>
 </template>
 
