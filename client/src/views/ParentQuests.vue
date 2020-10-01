@@ -170,13 +170,15 @@ export default {
       }).then((response) => {
         var quest = response.data
         this.quests.push(quest)
-      }).then((response) => {
         const index = this.quests.findIndex((quest) => quest._id === this.questId)
         this.quests.splice(index, 1)
       }).catch((error) => {
         console.error(error)
       })
       this.selectedEdit = false
+      this.name = ''
+      this.quest_desc = ''
+      this.money_bounty = ''
     },
     editQuest(id) {
       if (this.selectedCreate) {
