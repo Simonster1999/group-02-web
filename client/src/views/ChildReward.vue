@@ -108,14 +108,14 @@ export default {
     buyReward(id, price) {
       this.selected = true
       this.selectedId = id
-      Api.patch('/rewards/' + id, { is_bought: true }).then(response => {
-        const index = this.rewards.findIndex(reward => reward._id === id)
-        this.rewards.splice(index, 1)
-      })
-        .catch(error => {
-          console.error(error)
-        })
       if (this.childBalance - price >= 0) {
+        Api.patch('/rewards/' + id, { is_bought: true }).then(response => {
+          const index = this.rewards.findIndex(reward => reward._id === id)
+          this.rewards.splice(index, 1)
+        })
+          .catch(error => {
+            console.error(error)
+          })
         Api.patch('/children/' + this.childId, { balance: this.childBalance - price })
           .then(response => {
             const index = this.children.findIndex(child => child._id === id)
@@ -125,7 +125,8 @@ export default {
           .catch(error => {
             console.error(error)
           })
-      }
+        this.childBalance -= price
+      } else (alert("You can't afford this reward ;)"))
     }
   }
 }
