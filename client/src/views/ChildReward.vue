@@ -149,5 +149,8 @@ export default {
 .child-reward .delReward {
   display: none;
 }
+.child-reward .rewardBought {
+  display: none;
+}
 
 </style>
