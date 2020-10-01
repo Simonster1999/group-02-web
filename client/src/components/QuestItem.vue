@@ -5,11 +5,10 @@
     <p>Reward: {{quest.money_bounty}}</p>
     <p>Date: {{ quest.date }} </p>
     <b-button class="delQuest" variant="danger" v-on:click="$emit('del-quest', quest._id)">X</b-button>
-    <b-button class="editQuest" variant="warning" v-on:click="$emit('put-quest', quest._id)">Edit</b-button>
+    <b-button class="editQuest" variant="warning" v-on:click="$emit('patch-quest', quest._id)">Edit</b-button>
     <b-button class="completeQuest" variant="success" v-on:click="$emit('complete-quest', quest._id, quest.money_bounty)">Complete</b-button>
   </div>
 </template>
-
 <script>
 export default {
   name: 'quest-item',

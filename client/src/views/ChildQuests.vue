@@ -108,6 +108,10 @@ export default {
       Api.patch(`/quests/${id}`, {
         is_completed: true,
         completed_by: this.selectedChildId
+      }).then(response => {
+        const index = this.quests.findIndex(quest => quest._id === this.id)
+        var quest = response.data
+        this.quests.splice(index, 1, quest)
       }).catch(error => {
         console.error(error)
       })
@@ -118,11 +122,14 @@ export default {
         const index = this.children.findIndex(child => child._id === this.selectedChildId)
         var child = response.data
         this.children.splice(index, 1, child)
+      }).catch(error => {
+        console.error(error)
       })
       this.selectedChildBalance += reward
     }
   }
 }
+
 </script>
 
 <style>
