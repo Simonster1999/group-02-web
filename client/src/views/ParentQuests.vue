@@ -176,6 +176,9 @@ export default {
         console.error(error)
       })
       this.selectedEdit = false
+      this.name = ''
+      this.quest_desc = ''
+      this.money_bounty = ''
     },
     editQuest(id) {
       if (this.selectedCreate) {
