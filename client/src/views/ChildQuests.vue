@@ -3,7 +3,7 @@
     <b-container>
       <b-row>
         <b-col>
-          <b-sidebar no-header-close bg-variant="dark" visible="true">
+          <b-sidebar width="20%" no-header-close bg-variant="dark" visible="true">
             <h1>Child List</h1>
             <div v-for="child in children" v-bind:key="child._id">
               <child-item
@@ -27,7 +27,7 @@
         </b-col>
         <b-col>
           <div v-if="selected">
-            <b-sidebar right bg-variant="dark" visible="true" no-header-close>
+            <b-sidebar width="20%" right bg-variant="dark" visible="true" no-header-close>
               <h1>Quest List</h1>
               <div v-for="quest in specificQuests" v-bind:key="quest._id">
                 <quest-item
