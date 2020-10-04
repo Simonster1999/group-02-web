@@ -16,6 +16,7 @@
         <b-col>
           <b-calendar
             class="calendar"
+            :date-info-fn="getDates"
             v-model="value"
             selected-variant="danger"
             @context="value"
@@ -79,7 +80,8 @@ export default {
       selectedParentId: '',
       selectedChildId: '',
       selected: '',
-      selectedChildBalance: ''
+      selectedChildBalance: '',
+      questDates: []
     }
   },
   methods: {
@@ -102,6 +104,27 @@ export default {
             this.quests = []
           })
           .then(() => {})
+      }
+    },
+    getDates(ymd, date) {
+      this.getProperDate()
+      var day = ymd
+      for (var i = 0; i < this.questDates.length; i++) {
+        if (day === this.questDates[i]) {
+          return this.questDates[i] ? 'table-danger' : ''
+        }
+      }
+    },
+    getProperDate() {
+      this.questDates = []
+      if (this.selected) {
+        for (var i = 0; i < this.quests.length; i++) {
+          var questDate = this.quests[i].date
+          questDate = questDate.substring(0, questDate.length - 14)
+          this.questDates[i] = questDate
+        }
+      } else {
+        this.questDates = []
       }
     },
     completeQuest(id, reward) {
