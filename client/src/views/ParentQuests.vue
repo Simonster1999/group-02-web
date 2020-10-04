@@ -94,7 +94,7 @@
                   </b-form>
                 </div>
               </b-col>
-              <div v-for="quest in quests" v-bind:key="quest._id">
+              <div v-for="quest in specificQuests" v-bind:key="quest._id">
                 <quest-item
                   v-bind:quest="quest"
                   v-on:del-quest="deleteQuest"
@@ -148,7 +148,8 @@ export default {
       selectedCreate: false,
       selectedEdit: false,
       questId: '',
-      questDates: []
+      questDates: [],
+      specificQuests: []
     }
   },
   methods: {
@@ -164,6 +165,8 @@ export default {
     },
     getDates(ymd, date) {
       this.getProperDate()
+      this.specificQuests = []
+      this.getSpecificQuests()
       var day = ymd
       for (var i = 0; i < this.questDates.length; i++) {
         if (day === this.questDates[i]) {
@@ -181,6 +184,15 @@ export default {
         }
       } else {
         this.questDates = []
+      }
+    },
+    getSpecificQuests() {
+      var k = 0
+      for (var i = 0; i < this.quests.length; i++) {
+        if (this.quests[i].date === this.value + 'T00:00:00.000Z') {
+          this.specificQuests[k] = this.quests[i]
+          k++
+        }
       }
     },
     patchQuest() {
@@ -256,6 +268,7 @@ export default {
           })
           .then(() => {})
       }
+      this.specificQuests = []
     }
   }
 }
