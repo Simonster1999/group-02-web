@@ -6,7 +6,7 @@
       <b-button class="showChildren" variant="secondary" v-on:click="$emit('show-children', parent._id)">Show children</b-button>
       <b-button class="showQuests" variant="warning" v-on:click="$emit('show-quests', parent._id)">Show Quests</b-button>
       <b-button class="showRewards" variant="secondary" v-on:click="$emit('show-rewards', parent._id)">Select</b-button>
-      <b-button class="login" variant="secondary" v-on:click="$emit('login-parent', parent._id)">Login</b-button>
+      <b-button class="login" variant="secondary" v-on:click="$emit('login-parent', parent.password, parent._id)">Login</b-button>
     </div>
 </template>
 
