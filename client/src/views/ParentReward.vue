@@ -159,6 +159,9 @@ export default {
 .parent-reward .showQuests {
   display: none;
 }
+.parent-reward .login {
+  display: none;
+}
 .parent-reward .buyReward {
   display: none;
 }

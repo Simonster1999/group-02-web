@@ -5,6 +5,7 @@ import ParentQuests from './views/ParentQuests.vue'
 import ChildReward from './views/ChildReward.vue'
 import ParentReward from './views/ParentReward.vue'
 import ChildQuests from './views/ChildQuests.vue'
+import Parent from './views/Parent.vue'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/parent-rewards',
       name: 'Parent Reward',
       component: ParentReward
+    },
+    {
+      path: '/parent',
+      name: 'parent',
+      component: Parent
     }
   ]
 })

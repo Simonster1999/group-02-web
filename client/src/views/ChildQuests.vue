@@ -144,11 +144,11 @@ export default {
       Api.patch(`/quests/${id}`, {
         is_completed: true,
         completed_by: this.selectedChildId
-      }).then(response => {
-        const index = this.quests.findIndex(quest => quest._id === this.id)
+      }).then((response) => {
         var quest = response.data
+        const index = this.quests.findIndex((quest) => quest._id === id)
         this.quests.splice(index, 1, quest)
-      }).catch(error => {
+      }).catch((error) => {
         console.error(error)
       })
       Api.patch('/children/' + this.selectedChildId,

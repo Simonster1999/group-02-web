@@ -333,6 +333,9 @@ export default {
 .parent-quest .showRewards {
   display: none;
 }
+.parent-quest .login {
+  display: none;
+}
 .parent-quest .parentUsername {
   font-size: 1.5em;
 }
