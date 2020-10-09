@@ -264,7 +264,7 @@ export default {
 .parent .col {
   text-align: left;
 }
-.parent .showQuests, .parent .showRewards, .parent .login {
+.parent .showQuests, .parent .showRewards {
   display: none;
 }
 </style>
