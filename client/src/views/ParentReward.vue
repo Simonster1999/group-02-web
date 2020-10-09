@@ -9,19 +9,22 @@
             </div>
           </b-sidebar>
         </b-col>
-        <b-col>
-          <b-sidebar bg-variant="light" visible="true" right="true" width="20%" no-header-close >
+          <b-col>
             <div v-if="showRewards">
               <b-button class="createReward" v-on:click="(selectedCreate = true)">Create Reward</b-button>
               <div v-if="selectedCreate">
-              <PostRewardForm v-on:postReward="createReward"/>
-            </div>
-              <div  v-for="reward in rewards" v-bind:key="reward._id">
-                <reward-item v-bind:reward="reward" v-on:del-reward="deleteReward"/>
+                <PostRewardForm v-on:postReward="createReward"/>
               </div>
             </div>
-          </b-sidebar>
-        </b-col>
+            <div v-if="selectedUpdate">
+              <UpdateRewardForm v-on:updateReward="updateReward"/>
+            </div>
+            <div>
+              <div  v-for="reward in rewards" v-bind:key="reward._id">
+                <reward-item v-bind:reward="reward" v-on:patch-reward="toggleRewardEdit" v-on:del-reward="deleteReward"/>
+              </div>
+            </div>
+          </b-col>
       </b-row>
     </b-container>
   </div>
@@ -32,13 +35,15 @@ import { Api } from '@/Api'
 import RewardItem from '@/components/RewardItem.vue'
 import ParentItem from '@/components/ParentItem.vue'
 import PostRewardForm from '@/components/PostRewardForm.vue'
+import UpdateRewardForm from '@/components/UpdateRewardForm.vue'
 export default {
   beforeCreate: function () { document.body.className = 'parent-reward' },
   name: 'parent-reward',
   components: {
     RewardItem,
     ParentItem,
-    PostRewardForm
+    PostRewardForm,
+    UpdateRewardForm
   },
   mounted() {
     console.log('PAGE is loaded')
@@ -63,7 +68,9 @@ export default {
       is_bought: '',
       showRewards: false,
       selectedCreate: false,
-      selectedParentId: ''
+      selectedUpdate: false,
+      selectedParentId: '',
+      selectedRewardId: ''
     }
   },
   methods: {
@@ -92,6 +99,29 @@ export default {
       Api.get('/parents/' + id + '/rewards')
         .then(response => {
           this.rewards = response.data.rewards
+        })
+    },
+    toggleRewardEdit(id) {
+      if (this.selectedRewardId === id) {
+        this.selectedUpdate = false
+        this.selectedRewardId = ''
+      } else {
+        this.selectedUpdate = true
+        this.selectedRewardId = id
+      }
+    },
+    updateReward(name, rewardDesc, price) {
+      Api.put('/rewards/' + this.selectedRewardId, {
+        reward_name: name,
+        reward_desc: rewardDesc,
+        price: price
+      })
+        .then(response => {
+          const index = this.rewards.findIndex(reward => reward._id === this.selectedRewardId)
+          this.rewards.splice(index, 1, response.data)
+        })
+        .catch(error => {
+          console.error(error)
         })
     },
     createReward(name, rewardDesc, price) {

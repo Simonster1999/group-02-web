@@ -95,10 +95,7 @@ router.put('/api/rewards/:reward_id', function(req, res, next) {
         }
         reward.reward_name = req.body.reward_name;
         reward.reward_desc = req.body.reward_desc;
-        reward.is_bought   = req.body.is_bought;
         reward.price       = req.body.price;
-        reward.parent      = req.body.parent;
-        reward.bought_by   = req.body.bought_by;
         reward.save(function(err, reward) {
             if (err) {
                 res.status(400).json({'message': 'Bad Request'});
