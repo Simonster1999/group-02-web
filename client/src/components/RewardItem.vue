@@ -7,6 +7,7 @@
            <p><b-badge class="rewardBought" variant="success"> Bought: {{reward.is_bought}}</b-badge></p>
            <b-button class="delReward" variant="danger" v-on:click="$emit('del-reward', reward._id)">X</b-button>
            <b-button class="buyReward" variant="success" v-on:click="$emit('patch-reward', reward._id, reward.price)">Buy</b-button>
+           <b-button class="updateReward" variant="warning" v-on:click="$emit('patch-reward', reward._id)">Edit</b-button>
         </div>
 </template>
 
@@ -19,7 +20,7 @@ export default {
 </script>
 
 <style scoped>
-h1 {
+div {
 background-color:rgb(44, 207, 112);
 }
 p {
