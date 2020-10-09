@@ -194,13 +194,8 @@ export default {
             balance: balance
           })
           .then((response) => {
-            console.log(this.children[0]._id)
-            console.log('spacer')
-            console.log(this.childId)
-            var test = this.childId
-            console.log(test)
             var child = response.data
-            const index = this.children.findIndex((child) => child._id === test)
+            const index = this.children.findIndex((child) => child._id === this.childId)
             this.children.splice(index, 1, child)
           })
           .catch(error => {
