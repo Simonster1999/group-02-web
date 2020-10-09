@@ -1,20 +1,20 @@
 <template>
   <div>
     <b-container>
-      <b-row>
+      <b-row class="text-left">
         <!-- Box for parents -->
-        <b-col cols="10" md="4" offset-md="0" class="test">
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0">
           <h1>Parents</h1>
           <div v-for="parent in parents" v-bind:key="parent._id">
             <parent-item v-bind:parent="parent" />
           </div>
           <b-button variant="danger" v-on:click="deleteAllParents">Delete All Parents</b-button>
         </b-col>
-        <b-col>
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0">
           <h1>Login</h1>
           <ParentLoginForm v-on:loginParent="login"/>
         </b-col>
-        <b-col cols="10" md="4" sm="4" class="test">
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0">
           <!-- Box for parent creation form -->
           <h1>Create new Parent</h1>
           <PostParentForm v-on:postParent="postParent" />
@@ -109,7 +109,7 @@ export default {
 </script>
 
 <style>
-.home .test {
+.home .text-left {
   text-align: left;
 }
 .home .showQuests, .home .showRewards, .home .deleteParent, .home .editParent, .home .showChildren {
