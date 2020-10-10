@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/"> Home </router-link> |
-      <router-link to="parent-quests">ParentQuests</router-link> |
-      <router-link to="child-quests">ChildQuests</router-link> |
-      <router-link to="rewards">Rewards</router-link> |
-      <router-link to="parent-rewards">Parent Rewards</router-link>
+      <router-link to="/">Home</router-link> |
+      <router-link to="parent-quests">Manage Quests</router-link> |
+      <router-link to="parent-rewards">Manage Rewards</router-link> |
+      <router-link to="child-quests">Quests</router-link> |
+      <router-link to="rewards">Rewards</router-link>
     </div>
     <!-- Render the content of the current page view -->
     <router-view/>
