@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container>
-      <b-row class="text-left">
+      <b-row>
         <!-- Box for parents -->
         <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0">
           <h1>Parents</h1>
@@ -109,9 +109,7 @@ export default {
 </script>
 
 <style>
-.home .text-left {
-  text-align: left;
-}
+
 .home .showQuests, .home .showRewards, .home .deleteParent, .home .editParent, .home .showChildren {
   display: none;
 }

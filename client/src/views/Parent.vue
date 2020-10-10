@@ -261,9 +261,7 @@ export default {
 </script>
 
 <style>
-.parent .col {
-  text-align: left;
-}
+
 .parent .showQuests, .parent .showRewards {
   display: none;
 }
