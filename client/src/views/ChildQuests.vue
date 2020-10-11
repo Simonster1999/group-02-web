@@ -17,7 +17,6 @@
           v-model="value"
           selected-variant="danger"
           @context="value"
-          locale="en-US"
           width="480px"
           :hide-header="true"
         />
