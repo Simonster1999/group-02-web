@@ -1,17 +1,15 @@
 <template>
   <div>
     <b-container>
-      <b-row>
+      <b-row class="content-row">
         <b-col>
-          <b-sidebar width="20%" no-header-close bg-variant="dark" visible="true">
-            <h1>Parent List</h1>
-            <div v-for="parent in parents" v-bind:key="parent._id">
-              <parent-item
-                v-bind:parent="parent"
-                v-on:show-quests="getQuests"
-              />
-            </div>
-          </b-sidebar>
+          <h1>Parent List</h1>
+          <div v-for="parent in parents" v-bind:key="parent._id">
+            <parent-item
+              v-bind:parent="parent"
+              v-on:show-quests="getQuests"
+            />
+          </div>
         </b-col>
         <b-col>
           <b-calendar
@@ -26,82 +24,80 @@
         </b-col>
         <b-col>
           <div v-if="selected">
-            <b-sidebar width="20%" right bg-variant="dark" visible="true" no-header-close>
-              <h1>Quest List</h1>
-              <b-col>
-                <b-button
-                  class="createQuestBtn"
-                  variant="warning"
-                  v-on:click="(selectedCreate = true), (selectedEdit = false)"
-                  >Create Quest</b-button
-                >
-              </b-col>
-              <b-col v-if="selectedEdit">
-                <div class="createQuestFormBox">
-                  <h1 class="createQuestHeader">Edit Quest</h1>
-                  <b-form autocomplete="off">
-                    <b-form-input
-                      v-model="name"
-                      placeholder="Enter quest name"
-                    ></b-form-input>
-                    <b-form-input
-                      v-model="quest_desc"
-                      placeholder="Enter quest description"
-                    ></b-form-input>
-                    <b-form-input
-                      v-model="money_bounty"
-                      placeholder="Enter reward amount"
-                    ></b-form-input>
-                    <b-form-input
-                      v-model="value"
-                      placeholder="Select date"
-                    ></b-form-input>
-                    <b-button variant="light" v-on:click="patchQuest"
-                      >Add
-                    </b-button>
-                    <b-button variant="warning" v-on:click="cancelEdit"
-                      >Cancel
-                    </b-button>
-                  </b-form>
-                </div>
-              </b-col>
-              <b-col v-if="selectedCreate">
-                <div class="createQuestFormBox">
-                  <h1 class="createQuestHeader">Create Quest</h1>
-                  <b-form autocomplete="off">
-                    <b-form-input
-                      v-model="name"
-                      placeholder="Enter quest name"
-                    ></b-form-input>
-                    <b-form-input
-                      v-model="quest_desc"
-                      placeholder="Enter quest description"
-                    ></b-form-input>
-                    <b-form-input
-                      v-model="money_bounty"
-                      placeholder="Enter reward amount"
-                    ></b-form-input>
-                    <b-form-input
-                      v-model="value"
-                      placeholder="Select date"
-                    ></b-form-input>
-                    <b-button variant="light" v-on:click="createQuest"
-                      >Add
-                    </b-button>
-                    <b-button variant="warning" v-on:click="cancelCreate"
-                      >Cancel
-                    </b-button>
-                  </b-form>
-                </div>
-              </b-col>
-              <div v-for="quest in specificQuests" v-bind:key="quest._id">
-                <quest-item
-                  v-bind:quest="quest"
-                  v-on:del-quest="deleteQuest"
-                  v-on:patch-quest="editQuest"
-                />
+            <h1>Quest List</h1>
+            <b-col>
+              <b-button
+                class="createQuestBtn"
+                variant="warning"
+                v-on:click="(selectedCreate = true), (selectedEdit = false)"
+                >Create Quest</b-button
+              >
+            </b-col>
+            <b-col v-if="selectedEdit">
+              <div class="createQuestFormBox">
+                <h1 class="createQuestHeader">Edit Quest</h1>
+                <b-form autocomplete="off">
+                  <b-form-input
+                    v-model="name"
+                    placeholder="Enter quest name"
+                  ></b-form-input>
+                  <b-form-input
+                    v-model="quest_desc"
+                    placeholder="Enter quest description"
+                  ></b-form-input>
+                  <b-form-input
+                    v-model="money_bounty"
+                    placeholder="Enter reward amount"
+                  ></b-form-input>
+                  <b-form-input
+                    v-model="value"
+                    placeholder="Select date"
+                  ></b-form-input>
+                  <b-button variant="light" v-on:click="patchQuest"
+                    >Add
+                  </b-button>
+                  <b-button variant="warning" v-on:click="cancelEdit"
+                    >Cancel
+                  </b-button>
+                </b-form>
               </div>
-            </b-sidebar>
+            </b-col>
+            <b-col v-if="selectedCreate">
+              <div class="createQuestFormBox">
+                <h1 class="createQuestHeader">Create Quest</h1>
+                <b-form autocomplete="off">
+                  <b-form-input
+                    v-model="name"
+                    placeholder="Enter quest name"
+                  ></b-form-input>
+                  <b-form-input
+                    v-model="quest_desc"
+                    placeholder="Enter quest description"
+                  ></b-form-input>
+                  <b-form-input
+                    v-model="money_bounty"
+                    placeholder="Enter reward amount"
+                  ></b-form-input>
+                  <b-form-input
+                    v-model="value"
+                    placeholder="Select date"
+                  ></b-form-input>
+                  <b-button variant="light" v-on:click="createQuest"
+                    >Add
+                  </b-button>
+                  <b-button variant="warning" v-on:click="cancelCreate"
+                    >Cancel
+                  </b-button>
+                </b-form>
+              </div>
+            </b-col>
+            <div v-for="quest in specificQuests" v-bind:key="quest._id">
+              <quest-item
+                v-bind:quest="quest"
+                v-on:del-quest="deleteQuest"
+                v-on:patch-quest="editQuest"
+              />
+            </div>
           </div>
         </b-col>
       </b-row>

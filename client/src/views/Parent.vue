@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container>
-      <b-row>
+      <b-row class="content-row">
         <!-- Box for parents -->
         <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0" class="col">
           <h1>Parent</h1>

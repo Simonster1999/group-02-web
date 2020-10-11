@@ -1,45 +1,39 @@
 <template>
   <div>
-    <b-container>
-      <b-row>
-        <b-col>
-          <b-sidebar width="20%" no-header-close bg-variant="dark" visible="true">
-            <h1>Child List</h1>
-            <div v-for="child in children" v-bind:key="child._id">
-              <child-item
-                v-bind:child="child"
-                v-on:show-quests="getQuests"
-              />
-            </div>
-          </b-sidebar>
-        </b-col>
-        <b-col>
-          <b-calendar
-            class="calendar"
-            :date-info-fn="getDates"
-            v-model="value"
-            selected-variant="danger"
-            @context="value"
-            locale="en-US"
-            width="480px"
-            :hide-header="true"
+    <b-row class="content-row">
+      <b-col>
+        <h1>Child List</h1>
+        <div v-for="child in children" v-bind:key="child._id">
+          <child-item
+            v-bind:child="child"
+            v-on:show-quests="getQuests"
           />
-        </b-col>
-        <b-col>
-          <div v-if="selected">
-            <b-sidebar width="20%" right bg-variant="dark" visible="true" no-header-close>
-              <h1>Quest List</h1>
-              <div v-for="quest in specificQuests" v-bind:key="quest._id">
-                <quest-item
-                  v-bind:quest="quest"
-                  v-on:complete-quest="completeQuest"
-                />
-              </div>
-            </b-sidebar>
+        </div>
+      </b-col>
+      <b-col>
+        <b-calendar
+          class="calendar"
+          :date-info-fn="getDates"
+          v-model="value"
+          selected-variant="danger"
+          @context="value"
+          locale="en-US"
+          width="480px"
+          :hide-header="true"
+        />
+      </b-col>
+      <b-col>
+        <div v-if="selected">
+          <h1>Quest List</h1>
+          <div v-for="quest in specificQuests" v-bind:key="quest._id">
+            <quest-item
+              v-bind:quest="quest"
+              v-on:complete-quest="completeQuest"
+            />
           </div>
-        </b-col>
-      </b-row>
-    </b-container>
+        </div>
+      </b-col>
+    </b-row>
   </div>
 </template>
 

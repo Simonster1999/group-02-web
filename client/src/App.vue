@@ -22,7 +22,7 @@
 #nav {
   text-align: center;
 }
-.row {
+.content-row {
   margin-top: 30px;
 }
 .col {
