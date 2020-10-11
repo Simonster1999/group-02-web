@@ -134,11 +134,10 @@ export default {
 </script>
 
 <style>
-.child-reward .editChild,
-.child-reward .delChild,
-.child-reward .showQuests,
-.child-reward .delReward,
-.child-reward .rewardBought {
+.child-reward{
+  background-color: rgb(5, 109, 11);
+}
+.child-reward .editChild, .child-reward .delChild, .child-reward .showQuests, .child-reward .delReward, .child-reward .rewardBought, .child-reward .updateReward {
   display: none;
 }
 </style>
