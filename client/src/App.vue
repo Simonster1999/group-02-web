@@ -1,12 +1,20 @@
 <template>
   <div id="app">
     <b-navbar class="navigator">
-      <b-navbar-brand href="/">Home</b-navbar-brand>
+      <router-link to="/" class="navbar-brand">Home</router-link>
       <b-navbar-nav>
-      <b-nav-item href="parent-quests">Manage Quests</b-nav-item>
-      <b-nav-item href="parent-rewards">Manage Rewards</b-nav-item>
-      <b-nav-item href="child-quests">Quests</b-nav-item>
-      <b-nav-item href="rewards">Rewards</b-nav-item>
+      <li class="nav-item">
+        <router-link to="parent-quests" class="nav-link">Manage Quests</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="parent-rewards" class="nav-link">Manage Rewards</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="child-quests" class="nav-link">Quests</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="rewards" class="nav-link">Rewards</router-link>
+      </li>
       </b-navbar-nav>
     </b-navbar>
     <!-- Render the content of the current page view -->
