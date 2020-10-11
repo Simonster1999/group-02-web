@@ -14,7 +14,7 @@ router.get('/api/parents', function(req, res, next) {
 });
 
 // Create a new parent
-router.post('/api/parents', function(req, res, next) {
+router.post('/api/parents', function(req, res) {
     var parent = new Parent(req.body);
     parent.save(function(err) {
         if (err) {
@@ -77,7 +77,7 @@ router.put('/api/parents/:parent_id', function(req, res, next) {
             return res.status(400).json({'message': 'Bad request'});
         }
         if (parent === null) {
-            return res.status(404).json({"message" : "Parent not found"});
+            return res.status(404).json({'message' : 'Parent not found'});
         }
         parent.username = req.body.username;
         parent.password = req.body.password;
@@ -94,13 +94,30 @@ router.patch('/api/parents/:parent_id', function(req, res, next) {
             return res.status(400).json({'message': 'Bad request'});
         }
         if (parent === null) {
-            return res.status(404).json({"message" : "Parent not found"});
+            return res.status(404).json({'message' : 'Parent not found'});
         }
         parent.username = ( req.body.username || parent.username );
         parent.password = ( req.body.password || parent.password );
         parent.save();
         res.json(parent);
     });
+});
+
+// Login for parents on Home screen
+router.get('/api/parents/login/:username/:password', function(req, res) {
+    var user = req.params.username;
+    var pass = req.params.password;
+    Parent.findOne({username: user}, function(err, parent) {
+        if (err) {
+            return res.status(400).json({'message': 'Bad request', 'status': false});
+        } else if (parent === null) {
+            return res.status(404).json({'message' : 'Parent not found', 'status': false});
+        } else if (parent.password === pass) {
+            return res.json({'message': 'Login successful', 'status': true, 'id': parent._id});
+        } else {
+            return res.status(401).json({'message': 'Login failed', 'status': false});
+        }
+    })
 });
 
 module.exports = router;

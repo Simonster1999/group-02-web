@@ -3,7 +3,7 @@
     <b-container>
       <b-row>
         <!-- Box for parents -->
-        <b-col>
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0" class="col">
           <h1>Parent</h1>
           <parent-item v-bind:parent="parent"
             v-on:del-parent="deleteParent"
@@ -12,9 +12,9 @@
           />
           </b-col>
         <!-- Box for parents children (if selected) AND child update form -->
-        <b-col>
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0" class="col">
           <!-- Box for child update form -->
-          <div v-if="editChild" style="margin-top:50px">
+          <div v-if="editChild">
             <h1>Update Child</h1>
             <p>Leave blank if unchanged</p>
             <UpdateChildForm v-on:updateChild="updateChild" />
@@ -30,14 +30,14 @@
             </div>
           </div>
         </b-col>
-        <b-col>
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0">
           <!-- Box for child creation form (if parent selected) -->
-          <div v-if="viewChildren" style="margin-top:50px">
+          <div v-if="viewChildren">
             <h1>Create new Child</h1>
             <PostChildForm v-on:postChild="postChild" />
           </div>
           <!-- Box for parent update form (if parent selected) -->
-          <div v-if="editParent" style="margin-top:50px">
+          <div v-if="editParent">
             <h1>Update Parent</h1>
             <p>Leave blank if unchanged</p>
             <UpdateParentForm v-on:updateParent="updateParent" />
@@ -194,13 +194,8 @@ export default {
             balance: balance
           })
           .then((response) => {
-            console.log(this.children[0]._id)
-            console.log('spacer')
-            console.log(this.childId)
-            var test = this.childId
-            console.log(test)
             var child = response.data
-            const index = this.children.findIndex((child) => child._id === test)
+            const index = this.children.findIndex((child) => child._id === this.childId)
             this.children.splice(index, 1, child)
           })
           .catch(error => {
@@ -266,10 +261,8 @@ export default {
 </script>
 
 <style>
-.parent .col {
-  text-align: left;
-}
-.parent .showQuests, .parent .showRewards, .parent .login {
+
+.parent .showQuests, .parent .showRewards {
   display: none;
 }
 </style>

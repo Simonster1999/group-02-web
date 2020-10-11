@@ -20,9 +20,14 @@ export default {
 <style scoped>
 div {
   margin-bottom: 10px;
-  padding: 5px;
+  padding: 10px;
   border: solid;
-  border-radius: 5px;
+  border-color: rgb(84, 84, 84);
+  border-radius: 10px;
+  background-image: linear-gradient(140deg, rgb(211, 211, 210), rgb(138, 139, 127));
+}
+.childP {
+  font-size: 1.5em;
 }
 button {
   margin-right: 5px;

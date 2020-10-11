@@ -169,24 +169,10 @@ export default {
 </script>
 
 <style>
-.child-quest {
-  background-color: rgb(44, 42, 49);
-}
-.child-quest .delChild {
-  display: none;
-}
-.child-quest .editChild {
-  display: none;
-}
-.child-quest .childP {
-  font-size: 1.5em;
-}
-.child-quest .delQuest {
-  display: none;
-}
-.child-quest .editQuest {
-  display: none;
-}
+.child-quest .delChild,
+.child-quest .editChild,
+.child-quest .delQuest,
+.child-quest .editQuest,
 .child-quest .showRewards {
   display: none;
 }
@@ -197,23 +183,8 @@ export default {
   border: solid;
   border-radius: 20px;
 }
-.child-quest .childDiv {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: solid;
-  border-color: rgb(84, 84, 84);
-  border-radius: 20px;
-  background-color: rgb(179, 181, 166);
-}
 .child-quest .createQuestBtn {
   margin-bottom: 10px;
-}
-.child-quest .calendar {
-  background-color: rgb(82, 71, 36);
-  color: rgba(247, 210, 2, 0.748);
-  padding: 15px;
-  border: solid;
-  border-radius: 20px;
 }
 .child-quest .createQuestHeader {
   background-color: rgb(114, 85, 46);
@@ -222,12 +193,5 @@ export default {
   border: solid;
   border-radius: 5px;
   font-size: 1.2em;
-}
-.child-quest h1 {
-  background-color: rgb(114, 85, 46);
-  color: rgba(247, 210, 2, 0.748);
-  padding: 5px;
-  border: solid;
-  border-radius: 5px;
 }
 </style>

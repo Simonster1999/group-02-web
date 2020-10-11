@@ -20,14 +20,8 @@ export default {
 </script>
 
 <style scoped>
-div {
-background-color:rgb(44, 207, 112);
-}
 p {
 font-size: 20px
-}
-.b-jumbotron {
-  background-color:rgb(48, 104, 52);
 }
 
 </style>

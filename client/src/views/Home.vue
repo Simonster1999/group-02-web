@@ -3,14 +3,18 @@
     <b-container>
       <b-row>
         <!-- Box for parents -->
-        <b-col>
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0" class="col">
           <h1>Parents</h1>
           <div v-for="parent in parents" v-bind:key="parent._id">
-            <parent-item v-bind:parent="parent" v-on:login-parent="login" />
+            <parent-item v-bind:parent="parent" />
           </div>
-          <b-button class="deleteParent" variant="danger" v-on:click="deleteAllParents">Delete All Parents</b-button>
+          <b-button variant="danger" v-on:click="deleteAllParents">Delete All Parents</b-button>
         </b-col>
-        <b-col>
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0">
+          <h1>Login</h1>
+          <ParentLoginForm v-on:loginParent="login"/>
+        </b-col>
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0">
           <!-- Box for parent creation form -->
           <h1>Create new Parent</h1>
           <PostParentForm v-on:postParent="postParent" />
@@ -25,12 +29,14 @@
 import { Api } from '@/Api'
 import ParentItem from '@/components/ParentItem.vue'
 import PostParentForm from '@/components/PostParentForm.vue'
+import ParentLoginForm from '@/components/ParentLoginForm.vue'
 export default {
   beforeCreate: function () { document.body.className = 'home' },
   name: 'home',
   components: {
     ParentItem,
-    PostParentForm
+    PostParentForm,
+    ParentLoginForm
   },
   mounted() {
     console.log('PAGE is loaded')
@@ -47,8 +53,7 @@ export default {
   data() {
     return {
       message: 'none',
-      parents: [],
-      parentId: ''
+      parents: []
     }
   },
   methods: {
@@ -84,23 +89,32 @@ export default {
         this.parents = []
       }
     },
-    login(password, id) {
-      var userPass = prompt('Password')
-      if (userPass === password) {
-        this.$router.push({ path: 'parent', query: { id: id } })
-      } else {
-        alert('Incorrect password')
-      }
+    login(username, password) {
+      Api.get('/parents/login/' + username + '/' + password)
+        .then(response => {
+          if (response.data.status === true) {
+            this.$router.push({ path: 'parent', query: { id: response.data.id } })
+          } else {
+            alert('Incorrect password')
+          }
+        })
+        .catch(error => {
+          this.message = error.message
+          console.error(error)
+          alert('Incorrect password')
+        })
     }
   }
 }
 </script>
 
 <style>
-.home .col {
-  text-align: left;
-}
-.home .showQuests, .home .showRewards, .home .deleteParent, .home .editParent, .home .showChildren {
+
+.home .showQuests,
+.home .showRewards,
+.home .deleteParent,
+.home .editParent,
+.home .showChildren {
   display: none;
 }
 </style>

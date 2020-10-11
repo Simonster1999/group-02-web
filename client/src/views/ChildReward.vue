@@ -140,5 +140,4 @@ export default {
 .child-reward .editChild, .child-reward .delChild, .child-reward .showQuests, .child-reward .delReward, .child-reward .rewardBought, .child-reward .updateReward {
   display: none;
 }
-
 </style>
