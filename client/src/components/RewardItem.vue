@@ -1,6 +1,6 @@
 <template>
        <div>
-           <h1 class="p-3 mb-2 bg-dark text-light" {{reward.reward_name}}/>
+           <h1 class="p-3 mb-2 bg-dark text-light">{{reward.reward_name}}</h1>
            <p>Name: {{reward.reward_name}}</p>
            <p>Description: {{reward.reward_desc}}</p>
            <p>Price: {{reward.price}}</p>
