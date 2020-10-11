@@ -285,55 +285,16 @@ export default {
   border: solid;
   border-radius: 20px;
 }
-.parent-quest .parentDiv {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: solid;
-  border-color: rgb(84, 84, 84);
-  border-radius: 20px;
-  background-color: rgb(179, 181, 166);
-}
 .parent-quest .createQuestBtn {
   margin-bottom: 10px;
 }
 .parent-quest .completeQuest {
   display: none;
 }
-.parent-quest .calendar {
-  background-color: rgb(82, 71, 36);
-  color: rgba(247, 210, 2, 0.748);
-  padding: 15px;
-  border: solid;
-  border-radius: 20px;
-}
-.parent-quest .createQuestHeader {
-  background-color: rgb(114, 85, 46);
-  color: rgba(247, 210, 2, 0.748);
-  padding: 5px;
-  border: solid;
-  border-radius: 5px;
-  font-size: 1.2em;
-}
-.parent-quest h1 {
-  background-color: rgb(114, 85, 46);
-  color: rgba(247, 210, 2, 0.748);
-  padding: 5px;
-  border: solid;
-  border-radius: 5px;
-}
-.parent-quest .showChildren {
-  display: none;
-}
-.parent-quest .deleteParent {
-  display: none;
-}
-.parent-quest .editParent {
-  display: none;
-}
+.parent-quest .showChildren,
+.parent-quest .deleteParent,
+.parent-quest .editParent,
 .parent-quest .showRewards {
   display: none;
-}
-.parent-quest .parentUsername {
-  font-size: 1.5em;
 }
 </style>

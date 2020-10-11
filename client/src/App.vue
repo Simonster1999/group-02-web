@@ -17,14 +17,39 @@
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: rgb(211, 211, 211);
 }
-
 #nav {
   text-align: center;
 }
-
+.row {
+  margin-top: 30px;
+}
 html, body {
   height: 100%;
 }
+form {
+  padding-bottom: 25px;
+}
+.calendar {
+  background-color: rgb(82, 71, 36);
+  color: rgba(247, 210, 2, 0.748);
+  padding: 15px;
+  border: solid;
+  border-radius: 20px;
+}
+h1 {
+  background-color: rgb(114, 85, 46);
+  color: rgba(247, 210, 2, 0.748);
+  padding: 5px;
+  border: solid;
+  border-radius: 5px;
+}
+
+@media only screen and (min-width: 768px) {
+  body {
+    background-image: linear-gradient(130deg, rgb(48, 85, 99), rgb(14, 50, 65));
+  }
+}
+
 </style>

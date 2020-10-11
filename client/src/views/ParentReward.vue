@@ -144,21 +144,10 @@ export default {
 </script>
 
 <style>
-.parent-reward{
-  background-color: rgb(5, 109, 11);
-}
-.parent-reward .deleteParent {
-  display: none;
-}
-.parent-reward .editParent {
-  display: none;
-}
-.parent-reward .showChildren {
-  display: none;
-}
-.parent-reward .showQuests {
-  display: none;
-}
+.parent-reward .deleteParent,
+.parent-reward .editParent,
+.parent-reward .showChildren,
+.parent-reward .showQuests,
 .parent-reward .buyReward {
   display: none;
 }

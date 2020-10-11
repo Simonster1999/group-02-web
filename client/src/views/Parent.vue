@@ -14,7 +14,7 @@
         <!-- Box for parents children (if selected) AND child update form -->
         <b-col>
           <!-- Box for child update form -->
-          <div v-if="editChild" style="margin-top:50px">
+          <div v-if="editChild">
             <h1>Update Child</h1>
             <p>Leave blank if unchanged</p>
             <UpdateChildForm v-on:updateChild="updateChild" />
@@ -32,12 +32,12 @@
         </b-col>
         <b-col>
           <!-- Box for child creation form (if parent selected) -->
-          <div v-if="viewChildren" style="margin-top:50px">
+          <div v-if="viewChildren">
             <h1>Create new Child</h1>
             <PostChildForm v-on:postChild="postChild" />
           </div>
           <!-- Box for parent update form (if parent selected) -->
-          <div v-if="editParent" style="margin-top:50px">
+          <div v-if="editParent">
             <h1>Update Parent</h1>
             <p>Leave blank if unchanged</p>
             <UpdateParentForm v-on:updateParent="updateParent" />

@@ -110,7 +110,11 @@ export default {
 
 <style>
 
-.home .showQuests, .home .showRewards, .home .deleteParent, .home .editParent, .home .showChildren {
+.home .showQuests,
+.home .showRewards,
+.home .deleteParent,
+.home .editParent,
+.home .showChildren {
   display: none;
 }
 </style>
