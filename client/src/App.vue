@@ -49,10 +49,9 @@ h1 {
   border-radius: 5px;
 }
 
-@media only screen and (min-width: 768px) {
-  body {
-    background-image: linear-gradient(130deg, rgb(48, 85, 99), rgb(14, 50, 65));
-  }
+body {
+  background-image: linear-gradient(130deg, rgb(48, 85, 99), rgb(14, 50, 65));
+  background-attachment: fixed;
 }
 
 </style>
