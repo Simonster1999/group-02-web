@@ -25,15 +25,13 @@
         <b-col>
           <div v-if="selected">
             <h1>Quest List</h1>
-            <b-col>
               <b-button
                 class="createQuestBtn"
                 variant="warning"
                 v-on:click="(selectedCreate = true), (selectedEdit = false)"
                 >Create Quest</b-button
               >
-            </b-col>
-            <b-col v-if="selectedEdit">
+            <div v-if="selectedEdit">
               <div class="createQuestFormBox">
                 <h1 class="createQuestHeader">Edit Quest</h1>
                 <b-form autocomplete="off">
@@ -61,8 +59,8 @@
                   </b-button>
                 </b-form>
               </div>
-            </b-col>
-            <b-col v-if="selectedCreate">
+            </div>
+            <div v-if="selectedCreate">
               <div class="createQuestFormBox">
                 <h1 class="createQuestHeader">Create Quest</h1>
                 <b-form autocomplete="off">
@@ -90,7 +88,7 @@
                   </b-button>
                 </b-form>
               </div>
-            </b-col>
+            </div>
             <div v-for="quest in specificQuests" v-bind:key="quest._id">
               <quest-item
                 v-bind:quest="quest"
