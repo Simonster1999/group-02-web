@@ -1,15 +1,17 @@
 <template>
   <div>
     <b-container>
-      <b-row>
+      <b-row class="content-row">
         <b-col>
-          <b-sidebar bg-variant="light" visible="true" width="20%" no-header-close >
+          <b-col >
+            <h1>Parents</h1>
             <div  v-for="parent in parents" v-bind:key="parent._id">
             <parent-item v-bind:parent="parent" v-on:show-rewards="getRewards"/>
             </div>
-          </b-sidebar>
+          </b-col>
         </b-col>
           <b-col>
+          <h1>Rewards</h1>
             <div v-if="showRewards">
               <b-button class="createReward" v-on:click="(selectedCreate = true)">Create Reward</b-button>
               <div v-if="selectedCreate">
