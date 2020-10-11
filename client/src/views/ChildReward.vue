@@ -137,19 +137,7 @@ export default {
 .child-reward{
   background-color: rgb(5, 109, 11);
 }
-.child-reward .editChild {
-  display: none;
-}
-.child-reward .delChild {
-  display: none;
-}
-.child-reward .showQuests {
-  display: none;
-}
-.child-reward .delReward {
-  display: none;
-}
-.child-reward .rewardBought {
+.child-reward .editChild, .child-reward .delChild, .child-reward .showQuests, .child-reward .delReward, .child-reward .rewardBought, .child-reward .updateReward {
   display: none;
 }
 
