@@ -1,12 +1,14 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="parent-quests">Manage Quests</router-link> |
-      <router-link to="parent-rewards">Manage Rewards</router-link> |
-      <router-link to="child-quests">Quests</router-link> |
-      <router-link to="rewards">Rewards</router-link>
-    </div>
+    <b-navbar class="navigator">
+      <b-navbar-brand href="/">Home</b-navbar-brand>
+      <b-navbar-nav>
+      <b-nav-item href="parent-quests">Manage Quests</b-nav-item>
+      <b-nav-item href="parent-rewards">Manage Rewards</b-nav-item>
+      <b-nav-item href="child-quests">Quests</b-nav-item>
+      <b-nav-item href="rewards">Rewards</b-nav-item>
+      </b-navbar-nav>
+    </b-navbar>
     <!-- Render the content of the current page view -->
     <router-view/>
   </div>
@@ -19,8 +21,15 @@
   -moz-osx-font-smoothing: grayscale;
   color: rgb(211, 211, 211);
 }
-#nav {
+.navigator {
   text-align: center;
+  background-image: linear-gradient(230deg, rgb(94, 85, 64), rgb(114, 85, 46));
+  color: rgb(247, 210, 2, 0.748);
+  border-top: solid;
+  border-bottom: solid;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  vertical-align: center;
 }
 .content-row {
   margin-top: 30px;
@@ -42,7 +51,7 @@ form {
   border-radius: 20px;
 }
 h1 {
-  background-color: rgb(114, 85, 46);
+  background-image: linear-gradient(230deg, rgb(94, 85, 64), rgb(114, 85, 46));
   color: rgba(247, 210, 2, 0.748);
   padding: 5px;
   border: solid;
