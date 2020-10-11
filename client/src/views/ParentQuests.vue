@@ -16,7 +16,6 @@
             :date-info-fn="getDates"
             v-model="value"
             selected-variant="danger"
-            @context="value"
             width="480px"
             :hide-header="true"
           />
