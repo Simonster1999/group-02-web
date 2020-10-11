@@ -40,7 +40,7 @@ div {
   border: solid;
   border-color:rgb(84, 84, 84);
   border-radius: 20px;
-  background-color:rgb(179, 181, 166)
+  background-image: linear-gradient(140deg, rgb(211, 211, 210), rgb(138, 139, 127));
 }
 
 </style>
