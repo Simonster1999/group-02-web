@@ -3,17 +3,19 @@
     <b-container>
       <b-row class="content-row">
             <b-col>
-                    <b-sidebar bg-variant="light" visible="true" width="20%" no-header-close >
+                    <b-col>
+                      <h1>Children</h1>
                         <div v-for="child in children" v-bind:key="child._id">
                             <child-item v-bind:child="child" v-on:show-rewards="getRewards"/>
                         </div>
-                    </b-sidebar>
+                    </b-col>
             </b-col>
             <b-col>
-                <b-sidebar bg-variant="light" visible="true" right="true" width="35%" no-header-close >
+                <b-col>
+                  <h1>Rewards</h1>
                     <div  v-for="reward in rewards" v-bind:key="reward._id">
                     <reward-item v-bind:reward="reward" v-on:patch-reward="buyReward"/>
-                </div> </b-sidebar>
+                </div> </b-col>
             </b-col>
         </b-row>
     </b-container>
@@ -134,9 +136,6 @@ export default {
 </script>
 
 <style>
-.child-reward{
-  background-color: rgb(5, 109, 11);
-}
 .child-reward .editChild, .child-reward .delChild, .child-reward .showQuests, .child-reward .delReward, .child-reward .rewardBought, .child-reward .updateReward {
   display: none;
 }

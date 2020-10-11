@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="parent-quests">Manage Quests</router-link> |
-      <router-link to="parent-rewards">Manage Rewards</router-link> |
+      <router-link to="manage-rewards">Manage Rewards</router-link> |
       <router-link to="child-quests">Quests</router-link> |
       <router-link to="rewards">Rewards</router-link>
     </div>
