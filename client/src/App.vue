@@ -25,6 +25,9 @@
 .row {
   margin-top: 30px;
 }
+.col {
+  padding-bottom: 25px;
+}
 html, body {
   height: 100%;
 }

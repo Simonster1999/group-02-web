@@ -3,7 +3,7 @@
     <b-container>
       <b-row>
         <!-- Box for parents -->
-        <b-col>
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0" class="col">
           <h1>Parent</h1>
           <parent-item v-bind:parent="parent"
             v-on:del-parent="deleteParent"
@@ -12,7 +12,7 @@
           />
           </b-col>
         <!-- Box for parents children (if selected) AND child update form -->
-        <b-col>
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0" class="col">
           <!-- Box for child update form -->
           <div v-if="editChild">
             <h1>Update Child</h1>
@@ -30,7 +30,7 @@
             </div>
           </div>
         </b-col>
-        <b-col>
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0">
           <!-- Box for child creation form (if parent selected) -->
           <div v-if="viewChildren">
             <h1>Create new Child</h1>

@@ -3,7 +3,7 @@
     <b-container>
       <b-row>
         <!-- Box for parents -->
-        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0">
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0" class="col">
           <h1>Parents</h1>
           <div v-for="parent in parents" v-bind:key="parent._id">
             <parent-item v-bind:parent="parent" />
