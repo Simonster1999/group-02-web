@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container>
-      <b-row>
+      <b-row class="content-row">
             <b-col>
                     <b-sidebar bg-variant="light" visible="true" width="20%" no-header-close >
                         <div v-for="child in children" v-bind:key="child._id">
