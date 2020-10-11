@@ -1,6 +1,5 @@
 <template>
   <div>
-    <b-container>
       <b-row class="content-row">
         <b-col>
           <h1>Parent List</h1>
@@ -99,7 +98,6 @@
           </div>
         </b-col>
       </b-row>
-    </b-container>
   </div>
 </template>
 

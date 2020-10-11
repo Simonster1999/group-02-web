@@ -1,12 +1,22 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="parent-quests">Manage Quests</router-link> |
-      <router-link to="manage-rewards">Manage Rewards</router-link> |
-      <router-link to="child-quests">Quests</router-link> |
-      <router-link to="rewards">Rewards</router-link>
-    </div>
+    <b-navbar class="navigator">
+      <router-link to="/" class="navbar-brand">Home</router-link>
+      <b-navbar-nav>
+      <li class="nav-item">
+        <router-link to="parent-quests" class="nav-link">Manage Quests</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="parent-rewards" class="nav-link">Manage Rewards</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="child-quests" class="nav-link">Quests</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="rewards" class="nav-link">Rewards</router-link>
+      </li>
+      </b-navbar-nav>
+    </b-navbar>
     <!-- Render the content of the current page view -->
     <router-view/>
   </div>
@@ -19,8 +29,15 @@
   -moz-osx-font-smoothing: grayscale;
   color: rgb(211, 211, 211);
 }
-#nav {
+.navigator {
   text-align: center;
+  background-image: linear-gradient(230deg, rgb(94, 85, 64), rgb(114, 85, 46));
+  color: rgb(247, 210, 2, 0.748);
+  border-top: solid;
+  border-bottom: solid;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  vertical-align: center;
 }
 .content-row {
   margin-top: 30px;
@@ -42,17 +59,16 @@ form {
   border-radius: 20px;
 }
 h1 {
-  background-color: rgb(114, 85, 46);
+  background-image: linear-gradient(230deg, rgb(94, 85, 64), rgb(114, 85, 46));
   color: rgba(247, 210, 2, 0.748);
   padding: 5px;
   border: solid;
   border-radius: 5px;
 }
 
-@media only screen and (min-width: 768px) {
-  body {
-    background-image: linear-gradient(130deg, rgb(48, 85, 99), rgb(14, 50, 65));
-  }
+body {
+  background-image: linear-gradient(130deg, rgb(48, 85, 99), rgb(14, 50, 65));
+  background-attachment: fixed;
 }
 
 </style>
