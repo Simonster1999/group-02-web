@@ -13,7 +13,7 @@
           <b-col>
           <h1>Rewards</h1>
             <div v-if="showRewards">
-              <b-button class="createReward" v-on:click="(selectedCreate = true)">Create Reward</b-button>
+              <b-button class="createReward" variant= "warning" v-on:click="(selectedCreate = !selectedCreate)">Create Reward</b-button>
               <div v-if="selectedCreate">
                 <PostRewardForm v-on:postReward="createReward"/>
               </div>
