@@ -1,7 +1,8 @@
 <template>
   <div>
+    <b-container>
       <b-row class="content-row">
-        <b-col>
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="0" md="3" offset-md="0" class="col">
           <h1>Parent List</h1>
           <div v-for="parent in parents" v-bind:key="parent._id">
             <parent-item
@@ -10,18 +11,18 @@
             />
           </div>
         </b-col>
-        <b-col>
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="0" md="6" offset-md="0" class="col">
           <b-calendar
             class="calendar"
             :date-info-fn="getDates"
             v-model="value"
+            block
             selected-variant="danger"
-            width="480px"
             :hide-header="true"
           />
         </b-col>
-        <b-col>
-          <div v-if="selected">
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="0" md="3" offset-md="0" class="col">
+          <div class="div-button" v-if="selected">
             <h1>Quest List</h1>
               <b-button
                 class="createQuestBtn"
@@ -97,6 +98,7 @@
           </div>
         </b-col>
       </b-row>
+      </b-container>
   </div>
 </template>
 
@@ -275,12 +277,22 @@ export default {
   padding: 15px;
   border: solid;
   border-radius: 20px;
+  text-align: center;
+}
+.parent-quest h1 {
+  text-align: center;
+}
+.parent-quest .parentDiv {
+  text-align: center;
 }
 .parent-quest .createQuestBtn {
   margin-bottom: 10px;
 }
 .parent-quest .completeQuest {
   display: none;
+}
+.parent-quest .div-button {
+  text-align: center;
 }
 .parent-quest .showChildren,
 .parent-quest .deleteParent,

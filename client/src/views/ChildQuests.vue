@@ -1,7 +1,8 @@
 <template>
   <div>
+    <b-container>
     <b-row class="content-row">
-      <b-col>
+      <b-col cols="12" offset-xs="0" sm="10" offset-sm="0" md="3" offset-md="0" class="col">
         <h1>Child List</h1>
         <div v-for="child in children" v-bind:key="child._id">
           <child-item
@@ -10,17 +11,17 @@
           />
         </div>
       </b-col>
-      <b-col>
+      <b-col cols="12" offset-xs="0" sm="10" offset-sm="0" md="6" offset-md="0" class="col">
         <b-calendar
           class="calendar"
           :date-info-fn="getDates"
           v-model="value"
           selected-variant="danger"
-          width="480px"
+          block
           :hide-header="true"
         />
       </b-col>
-      <b-col>
+      <b-col cols="12" offset-xs="0" sm="10" offset-sm="0" md="3" offset-md="0" class="col">
         <div v-if="selected">
           <h1>Quest List</h1>
           <div v-for="quest in specificQuests" v-bind:key="quest._id">
@@ -32,6 +33,7 @@
         </div>
       </b-col>
     </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -177,6 +179,12 @@ export default {
 }
 .child-quest .createQuestBtn {
   margin-bottom: 10px;
+}
+.child-quest .childDiv {
+  text-align: center;
+}
+.child-quest h1 {
+  text-align: center;
 }
 .child-quest .createQuestHeader {
   background-color: rgb(114, 85, 46);
