@@ -170,7 +170,7 @@ export default {
 }
 .child-quest .createQuestFormBox {
   background-color: rgb(82, 71, 36);
-  color: rgba(247, 210, 2, 0.748);
+  color: rgba(247, 210, 2, 0.75);
   padding: 15px;
   border: solid;
   border-radius: 20px;
@@ -180,7 +180,7 @@ export default {
 }
 .child-quest .createQuestHeader {
   background-color: rgb(114, 85, 46);
-  color: rgba(247, 210, 2, 0.748);
+  color: rgba(247, 210, 2, 0.75);
   padding: 5px;
   border: solid;
   border-radius: 5px;
