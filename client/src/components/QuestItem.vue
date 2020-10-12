@@ -1,12 +1,21 @@
 <template>
   <div>
+    <div class="div-border" v-if="quest.is_completed === false">
     <p>Name: {{quest.quest_name}}</p>
     <p>Quest Description: {{quest.quest_desc}}</p>
     <p>Reward: {{quest.money_bounty}}</p>
-    <p>Date: {{ quest.date }} </p>
     <b-button class="delQuest" variant="danger" v-on:click="$emit('del-quest', quest._id)">X</b-button>
     <b-button class="editQuest" variant="warning" v-on:click="$emit('patch-quest', quest._id)">Edit</b-button>
     <b-button class="completeQuest" variant="success" v-on:click="$emit('complete-quest', quest._id, quest.money_bounty)">Complete</b-button>
+    </div>
+    <div class="div-bordercomplete" v-if="quest.is_completed">
+    <p>Name: {{quest.quest_name}}</p>
+    <p>Quest Description: {{quest.quest_desc}}</p>
+    <p>Reward: {{quest.money_bounty}}</p>
+    <p class="p-center">Completed!</p>
+    <b-button class="delQuest" variant="danger" v-on:click="$emit('del-quest', quest._id)">X</b-button>
+    <b-button class="editQuest" variant="warning" v-on:click="$emit('patch-quest', quest._id)">Edit</b-button>
+    </div>
   </div>
 </template>
 <script>
@@ -34,13 +43,28 @@ p {
 .row {
   border: solid;
 }
-div {
+.p-center {
+  text-align: center;
+  padding: 0px;
+  border: 0px;
+  margin: 0px
+}
+.div-border{
   margin-bottom: 10px;
-  padding: 10px;
   border: solid;
   border-color:rgb(84, 84, 84);
-  border-radius: 20px;
   background-image: linear-gradient(140deg, rgb(211, 211, 210), rgb(138, 139, 127));
+  text-align:center;
+  border-radius: 10px;
+  padding-bottom: 5px
 }
-
+.div-bordercomplete{
+  margin-bottom: 10px;
+  border: solid;
+  border-color:rgb(11, 65, 11);
+  background-image: linear-gradient(140deg, rgb(115, 238, 115), rgb(41, 92, 41));
+  text-align: center;
+  border-radius: 10px;
+  padding-bottom: 5px
+}
 </style>
