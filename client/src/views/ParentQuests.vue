@@ -7,7 +7,7 @@
           <div v-for="parent in parents" v-bind:key="parent._id">
             <parent-item
               v-bind:parent="parent"
-              v-on:show-quests="getQuests"
+              v-on:show-quests="login"
             />
           </div>
         </b-col>
@@ -143,7 +143,8 @@ export default {
       selectedEdit: false,
       questId: '',
       questDates: [],
-      specificQuests: []
+      specificQuests: [],
+      password: ''
     }
   },
   methods: {
@@ -244,24 +245,40 @@ export default {
       this.quest_desc = ''
       this.money_bounty = ''
     },
-    getQuests(id) {
+    login(id, username) {
       if (this.selectedId === id) {
         this.selected = false
         this.selectedId = ''
       } else {
-        this.selected = true
-        this.selectedId = id
-        Api.get('/parents/' + id + '/quests')
-          .then((response) => {
-            this.quests = response.data.quests
+        this.password = prompt('Enter password')
+        Api.get('/parents/login/' + username + '/' + this.password)
+          .then(response => {
+            if (response.data.status === true) {
+              this.getQuests(response.data.id)
+            } else {
+              alert('Incorrect password')
+            }
           })
-          .catch((error) => {
+          .catch(error => {
             this.message = error.message
             console.error(error)
-            this.quests = []
+            alert('Incorrect password')
           })
-          .then(() => {})
       }
+    },
+    getQuests(id) {
+      this.selected = true
+      this.selectedId = id
+      Api.get('/parents/' + id + '/quests')
+        .then((response) => {
+          this.quests = response.data.quests
+        })
+        .catch((error) => {
+          this.message = error.message
+          console.error(error)
+          this.quests = []
+        })
+        .then(() => {})
       this.specificQuests = []
     },
     acceptComplete(id, reward) {
@@ -283,10 +300,10 @@ export default {
                 var questcomplete = response.data
                 const index = this.quests.findIndex((questcomplete) => questcomplete._id === id)
                 this.quests.splice(index, 1, questcomplete)
-                  .catch((error) => {
-                    console.error(error)
-                  })
               })
+                .catch((error) => {
+                  console.error(error)
+                })
             })
         })
     }

@@ -7,7 +7,7 @@
         <div v-for="child in children" v-bind:key="child._id">
           <child-item
             v-bind:child="child"
-            v-on:show-quests="getQuests"
+            v-on:show-quests="login"
           />
         </div>
       </b-col>
@@ -76,31 +76,48 @@ export default {
       selected: '',
       selectedChildBalance: '',
       questDates: [],
-      specificQuests: []
+      specificQuests: [],
+      password: ''
     }
   },
   methods: {
-    getQuests(id, childId, childBalance) {
+    getQuests(id, childId, childBalance, username) {
       this.selectedChildId = childId
       this.selectedChildBalance = childBalance
-      if (this.selectedParentId === id) {
+      this.selected = true
+      this.selectedParentId = id
+      Api.get('/parents/' + id + '/quests')
+        .then((response) => {
+          this.quests = response.data.quests
+        })
+        .catch((error) => {
+          this.message = error.message
+          console.error(error)
+          this.quests = []
+        })
+        .then(() => {})
+      this.specificQuests = []
+    },
+    login(parent, id, balance, username) {
+      if (this.selectedChildId === id) {
         this.selected = false
-        this.selectedParentId = ''
+        this.selectedChildId = ''
       } else {
-        this.selected = true
-        this.selectedParentId = id
-        Api.get('/parents/' + id + '/quests')
-          .then((response) => {
-            this.quests = response.data.quests
+        this.password = prompt('Enter password')
+        Api.get('/children/login/' + username + '/' + this.password)
+          .then(response => {
+            if (response.data.status === true) {
+              this.getQuests(parent, response.data.id, balance, username)
+            } else {
+              alert('Incorrect password')
+            }
           })
-          .catch((error) => {
+          .catch(error => {
             this.message = error.message
             console.error(error)
-            this.quests = []
+            alert('Incorrect password')
           })
-          .then(() => {})
       }
-      this.specificQuests = []
     },
     getDates(ymd, date) {
       this.getProperDate()
