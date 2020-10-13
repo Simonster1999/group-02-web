@@ -26,9 +26,28 @@
 </template>
 
 <script>
+import { Api } from '@/Api'
 export default {
   name: 'reward-item',
-  props: ['reward']
+  props: ['reward'],
+  data() {
+    return {
+      childName: ''
+    }
+  },
+  created: function () {
+    var child = ''
+    if (this.$props.reward.is_bought) {
+      Api.get('/children/' + this.$props.reward.bought_by)
+        .then(response => {
+          child = response.data
+          this.childName = child.username
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    }
+  }
 }
 
 </script>
