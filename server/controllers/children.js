@@ -135,4 +135,21 @@ router.patch('/api/children/:child_id', function(req, res, next) {
     });
 });
 
+// Login for children on quest screen
+router.get('/api/children/login/:username/:password', function(req, res) {
+    var user = req.params.username;
+    var pass = req.params.password;
+    Child.findOne({username: user}, function(err, child) {
+        if (err) {
+            return res.status(400).json({'message': 'Bad request', 'status': false});
+        } else if (child === null) {
+            return res.status(404).json({'message' : 'Child not found', 'status': false});
+        } else if (child.password === pass) {
+            return res.json({'message': 'Login successful', 'status': true, 'id': child._id});
+        } else {
+            return res.status(401).json({'message': 'Login failed', 'status': false});
+        }
+    })
+});
+
 module.exports = router;
