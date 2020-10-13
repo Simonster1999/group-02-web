@@ -42,7 +42,7 @@ export default {
   },
   created: function () {
     var child = ''
-    if (this.$props.quest.is_completed) {
+    if (this.$props.quest.is_completed || this.$props.quest.is_pending) {
       Api.get('/children/' + this.$props.quest.completed_by)
         .then(response => {
           child = response.data
