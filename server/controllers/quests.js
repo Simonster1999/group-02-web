@@ -151,6 +151,7 @@ router.patch('/api/quests/:quest_id', function(req, res, next) {
         quest.quest_desc    = (req.body.quest_desc   || quest.quest_desc);
         quest.date          = (req.body.date         || quest.date);
         quest.completed_by  = (req.body.completed_by || quest.completed_by);
+        quest.is_pending    = (req.body.is_pending   || quest.is_pending);
         quest.save(function(err, quest){
             if(err){
                 res.status(400).json({'message': 'Bad Request'});

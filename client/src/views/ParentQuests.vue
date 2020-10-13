@@ -93,6 +93,7 @@
                 v-bind:quest="quest"
                 v-on:del-quest="deleteQuest"
                 v-on:patch-quest="editQuest"
+                v-on:accept-quest="acceptComplete"
               />
             </div>
           </div>
@@ -262,6 +263,32 @@ export default {
           .then(() => {})
       }
       this.specificQuests = []
+    },
+    acceptComplete(id, reward) {
+      var quest = ''
+      var selectedchild = ''
+      Api.get('/quests/' + id)
+        .then((response) => {
+          quest = response.data
+          Api.get('/children/' + quest.completed_by)
+            .then((response) => {
+              selectedchild = response.data
+              Api.patch('/children/' + quest.completed_by,
+                {
+                  balance: selectedchild.balance + reward
+                })
+              Api.patch(`/quests/${id}`, {
+                is_completed: true
+              }).then((response) => {
+                var questcomplete = response.data
+                const index = this.quests.findIndex((questcomplete) => questcomplete._id === id)
+                this.quests.splice(index, 1, questcomplete)
+                  .catch((error) => {
+                    console.error(error)
+                  })
+              })
+            })
+        })
     }
   }
 }

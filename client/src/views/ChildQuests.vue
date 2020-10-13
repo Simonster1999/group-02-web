@@ -134,9 +134,9 @@ export default {
         this.questDates = []
       }
     },
-    completeQuest(id, reward) {
+    completeQuest(id) {
       Api.patch(`/quests/${id}`, {
-        is_completed: true,
+        is_pending: true,
         completed_by: this.selectedChildId
       }).then((response) => {
         var quest = response.data
@@ -145,17 +145,6 @@ export default {
       }).catch((error) => {
         console.error(error)
       })
-      Api.patch('/children/' + this.selectedChildId,
-        {
-          balance: this.selectedChildBalance + reward
-        }).then(response => {
-        const index = this.children.findIndex(child => child._id === this.selectedChildId)
-        var child = response.data
-        this.children.splice(index, 1, child)
-      }).catch(error => {
-        console.error(error)
-      })
-      this.selectedChildBalance += reward
     }
   }
 }
@@ -163,6 +152,7 @@ export default {
 </script>
 
 <style>
+.child-quest .acceptQuest,
 .child-quest .delChild,
 .child-quest .editChild,
 .child-quest .delQuest,
