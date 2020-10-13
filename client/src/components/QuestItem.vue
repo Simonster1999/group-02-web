@@ -12,7 +12,7 @@
     <p>Name: {{quest.quest_name}}</p>
     <p>Quest Description: {{quest.quest_desc}}</p>
     <p>Reward: {{quest.money_bounty}}</p>
-    <p>Completed by: {{childName}}</p>
+    <p class="pending">Completed by: {{childName}}</p>
     <p class="p-center">Pending...</p>
     <b-button class="delQuest" variant="danger" v-on:click="$emit('del-quest', quest._id)">X</b-button>
     <b-button class="editQuest" variant="warning" v-on:click="$emit('patch-quest', quest._id)">Edit</b-button>

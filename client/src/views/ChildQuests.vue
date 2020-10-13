@@ -201,4 +201,7 @@ export default {
   border-radius: 5px;
   font-size: 1.2em;
 }
+.child-quest .pending {
+  display: none;
+}
 </style>
