@@ -1,15 +1,28 @@
 <template>
-       <div>
+  <div>
+       <div class="rewardBought" v-if="reward.is_bought">
            <h4>{{reward.reward_name}}</h4>
            <h6>{{reward.reward_desc}}</h6>
            <h6>Price: {{reward.price}}</h6>
-           <b-badge class="rewardBought" variant="success"> Bought: {{reward.is_bought}}</b-badge>
+           <b-badge class="rewardBadge" variant="success">Sold</b-badge>
            <p class ="buttons">
              <b-button class="delReward" variant="danger" v-on:click="$emit('del-reward', reward._id)">Delete</b-button>
              <b-button class="buyReward" variant="success" v-on:click="$emit('patch-reward', reward._id, reward.price)">Buy</b-button>
              <b-button class="updateReward" variant="warning" v-on:click="$emit('patch-reward', reward._id)">Edit</b-button>
            </p>
         </div>
+        <div class="rewardNotBought" v-if="reward.is_bought === false">
+            <h4>{{reward.reward_name}}</h4>
+            <h6>{{reward.reward_desc}}</h6>
+            <h6>Price: {{reward.price}}</h6>
+            <b-badge class="rewardBadge" variant="warning">For sale</b-badge>
+            <p class ="buttons">
+              <b-button class="delReward" variant="danger" v-on:click="$emit('del-reward', reward._id)">Delete</b-button>
+              <b-button class="buyReward" variant="success" v-on:click="$emit('patch-reward', reward._id, reward.price)">Buy</b-button>
+              <b-button class="updateReward" variant="warning" v-on:click="$emit('patch-reward', reward._id)">Edit</b-button>
+          </p>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -26,14 +39,13 @@ h4, h6 {
 p {
   font-size: 20px;
   text-align: left;
-  margin-left: 5px;
+  margin-left: 0px;
   color:black;
 }
-
 .row {
   border: solid;
 }
-div {
+.rewardBought, .rewardNotBought {
   margin-bottom: 10px;
   padding: 10px;
   border: solid;
@@ -44,11 +56,8 @@ div {
 .delReward {
   margin-right: 10px;
 }
-.rewardBought {
+.rewardBadge {
   margin-bottom: 10px;
-}
-.buttons {
-  margin-left: 0px
 }
 
 </style>

@@ -120,7 +120,11 @@ router.patch('/api/children/:child_id', function(req, res, next) {
         }
         child.username = ( req.body.username || child.username );
         child.password = ( req.body.password || child.password );
-        child.balance  = ( req.body.balance  || child.balance );
+        if(req.body.balance === 0){
+            child.balance = 0
+        } else {
+            child.balance  = ( req.body.balance  || child.balance );
+        }
         child.save(function (err, child){
             if(err){
                 res.status(400).json({'message': 'Bad Request'});
