@@ -12,6 +12,7 @@
     <p>Name: {{quest.quest_name}}</p>
     <p>Quest Description: {{quest.quest_desc}}</p>
     <p>Reward: {{quest.money_bounty}}</p>
+    <p>Completed by: {{childName}}</p>
     <p class="p-center">Pending...</p>
     <b-button class="delQuest" variant="danger" v-on:click="$emit('del-quest', quest._id)">X</b-button>
     <b-button class="editQuest" variant="warning" v-on:click="$emit('patch-quest', quest._id)">Edit</b-button>
@@ -21,6 +22,7 @@
     <p>Name: {{quest.quest_name}}</p>
     <p>Quest Description: {{quest.quest_desc}}</p>
     <p>Reward: {{quest.money_bounty}}</p>
+    <p>Completed by: {{childName}}</p>
     <p class="p-center">Completed!</p>
     <b-button class="delQuest" variant="danger" v-on:click="$emit('del-quest', quest._id)">X</b-button>
     <b-button class="editQuest" variant="warning" v-on:click="$emit('patch-quest', quest._id)">Edit</b-button>
@@ -28,12 +30,27 @@
   </div>
 </template>
 <script>
+import { Api } from '@/Api'
 export default {
   name: 'quest-item',
   props: ['quest'],
   data() {
     return {
-      value: ''
+      value: '',
+      childName: ''
+    }
+  },
+  created: function () {
+    var child = ''
+    if (this.$props.quest.is_completed) {
+      Api.get('/children/' + this.$props.quest.completed_by)
+        .then(response => {
+          child = response.data
+          this.childName = child.username
+        })
+        .catch(error => {
+          console.error(error)
+        })
     }
   },
   methods: {
