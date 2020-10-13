@@ -2,10 +2,10 @@
   <div>
     <div class="rewardBought" v-if="reward.is_bought">
       <h4>{{reward.reward_name}}</h4>
+      <b-badge class="rewardBadge" variant="success">Sold</b-badge>
       <h6>{{reward.reward_desc}}</h6>
       <h6>Price: {{reward.price}}</h6>
       <p>Bought by: {{childName}}</p>
-      <b-badge class="rewardBadge" variant="success">Sold</b-badge>
       <p class ="buttons">
         <b-button class="delReward" variant="danger" v-on:click="$emit('del-reward', reward._id)">Delete</b-button>
         <b-button class="buyReward" variant="success" v-on:click="$emit('patch-reward', reward._id, reward.price)">Buy</b-button>
@@ -14,9 +14,9 @@
     </div>
     <div class="rewardNotBought" v-if="reward.is_bought === false">
       <h4>{{reward.reward_name}}</h4>
+      <b-badge class="rewardBadge" variant="warning">For sale</b-badge>
       <h6>{{reward.reward_desc}}</h6>
       <h6>Price: {{reward.price}}</h6>
-      <b-badge class="rewardBadge" variant="warning">For sale</b-badge>
       <p class ="buttons">
         <b-button class="delReward" variant="danger" v-on:click="$emit('del-reward', reward._id)">Delete</b-button>
         <b-button class="buyReward" variant="success" v-on:click="$emit('patch-reward', reward._id, reward.price)">Buy</b-button>
