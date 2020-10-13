@@ -3,6 +3,7 @@
            <h4>{{reward.reward_name}}</h4>
            <h6>{{reward.reward_desc}}</h6>
            <h6>Price: {{reward.price}}</h6>
+           <p v-if="reward.is_bought"></p>
            <b-badge class="rewardBought" variant="success"> Bought: {{reward.is_bought}}</b-badge>
            <p class ="buttons">
              <b-button class="delReward" variant="danger" v-on:click="$emit('del-reward', reward._id)">Delete</b-button>
@@ -13,9 +14,28 @@
 </template>
 
 <script>
+import { Api } from '@/Api'
 export default {
   name: 'reward-item',
-  props: ['reward']
+  props: ['reward'],
+  data() {
+    return {
+      childName: ''
+    }
+  },
+  created: function () {
+    var child = ''
+    if (this.$props.reward.is_bought) {
+      Api.get('/children/' + this.$props.reward.bought_by)
+        .then(response => {
+          child = response.data
+          this.childName = child.username
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    }
+  }
 }
 
 </script>
