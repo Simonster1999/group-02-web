@@ -2,7 +2,7 @@
   <div>
     <b-container>
       <b-row class="content-row">
-        <b-col cols="12" offset-xs="0" sm="10" offset-sm="0" md="3" offset-md="0" class="col">
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="3" offset-md="0" class="col">
           <h1>Parent List</h1>
           <div v-for="parent in parents" v-bind:key="parent._id">
             <parent-item
@@ -11,7 +11,7 @@
             />
           </div>
         </b-col>
-        <b-col cols="12" offset-xs="0" sm="10" offset-sm="0" md="6" offset-md="0" class="col">
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="6" offset-md="0" class="col">
           <b-calendar
             class="calendar"
             :date-info-fn="getDates"
@@ -21,7 +21,7 @@
             :hide-header="true"
           />
         </b-col>
-        <b-col cols="12" offset-xs="0" sm="10" offset-sm="0" md="3" offset-md="0" class="col">
+        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="3" offset-md="0" class="col">
           <div class="div-button" v-if="selected">
             <h1>Quest List</h1>
               <b-button
