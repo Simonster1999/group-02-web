@@ -111,7 +111,7 @@ export default {
       this.selected = true
       this.selectedId = id
       if ((this.childBalance - price) >= 0) {
-        Api.patch('/rewards/' + id, { is_bought: true }).then(response => {
+        Api.patch('/rewards/' + id, { is_bought: true, bought_by: this.childId }).then(response => {
           const index = this.rewards.findIndex(reward => reward._id === id)
           this.rewards.splice(index, 1)
         })
