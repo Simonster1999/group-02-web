@@ -71,21 +71,21 @@ On the home screen, the user can choose to create a parent. This prompts them to
 Pressing the "Show children" button presents the user with a form for creating a new child account which, upon creation, will be tied to the currently selected parent account. The user selects a username, password and balance for the child account before finally pressing the "Create"-button, after which it will be listed in the second list to the right of the parent list. This list contains buttons for deleting and editing each child account that is tied to the currently selected parent.
 
 
-* Quests (Parent)
+* Manage Quests
 
 The parent quest page allows a parent to create quests that will be available to their children. A user can press the "Show Quests"-button on any parent to display the quests that have been created by that parent. The user can then also create a quest on the rightmost part of the page. Pressing the "Create quest"-button will present a form where the user can enter quest details before pressing the add button to add it into the selected parent's list. Each object in the list can be edited or deleted.
 
 
-* Quests (Child)
+* Quests
 
 The child quest page displays a list of children on the left side, with buttons for displaying that child's available quests in the second list on the right side. The page has a calendar in the middle, and its currently selected date will determine what quests are shown on the right side based on the date they were created. The list of available quests has a "Complete"-button for each quest that marks the quest as completed and adds that quest's reward amount to the child's balance.
 
 
-* Rewards (Parent)
+* Manage Rewards
 
 This page is where parents create rewards for the children to spend their reward currency on. Creating a reward adds it into the list of rewards that are available to that parent's children. The user can edit and delete each reward from this page. When a reward is bought, this page will show what child bought the reward. That way, a parent can keep track of what real-life rewards shall be awarded to whom.
 
-* Rewards (Child)
+* Rewards
 
 This page shows all rewards that are available to the currently selected child. The list shows rewards that have a parent ID equal to the parent ID of the child. 
 From here, the children can select a reward and press the "Buy"-button. This will subtract the price of the reward from the child's balance and set the item to bought, removing it from the list of available rewards. If a child's balance is too low to buy a reward, they will be alerted that they don't have enough to buy it. The item will then remain on the list and the child's balance will remain the same as before attempting to buy it.

@@ -2,15 +2,13 @@
   <div>
     <b-container>
       <b-row class="content-row">
-        <b-col>
-          <b-col >
+        <b-col cols="8" offset="2" sm="8" offset-sm="2" md="6" offset-md="0" class="col">
             <h1>Parents</h1>
             <div  v-for="parent in parents" v-bind:key="parent._id">
             <parent-item v-bind:parent="parent" v-on:show-rewards="getRewards"/>
             </div>
-          </b-col>
         </b-col>
-          <b-col>
+        <b-col cols="8" offset="2" sm="8" offset-sm="2" md="6" offset-md="0" class="col">
           <h1>Rewards</h1>
             <div v-if="showRewards">
               <b-button class="createReward" variant= "warning" v-on:click="(selectedCreate = !selectedCreate)">Create Reward</b-button>
@@ -26,7 +24,7 @@
                 <reward-item v-bind:reward="reward" v-on:patch-reward="toggleRewardEdit" v-on:del-reward="deleteReward"/>
               </div>
             </div>
-          </b-col>
+        </b-col>
       </b-row>
     </b-container>
   </div>
@@ -152,5 +150,8 @@ export default {
 .parent-reward .showQuests,
 .parent-reward .buyReward {
   display: none;
+}
+.createReward{
+  margin-bottom: 5px
 }
 </style>
