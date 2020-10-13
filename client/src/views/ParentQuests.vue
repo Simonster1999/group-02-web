@@ -46,10 +46,7 @@
                     v-model="money_bounty"
                     placeholder="Enter reward amount"
                   ></b-form-input>
-                  <b-form-input
-                    v-model="value"
-                    placeholder="Select date"
-                  ></b-form-input>
+                    <p> Selected date: {{ value}} </p>
                   <b-button variant="light" v-on:click="patchQuest"
                     >Add
                   </b-button>
@@ -75,10 +72,7 @@
                     v-model="money_bounty"
                     placeholder="Enter reward amount"
                   ></b-form-input>
-                  <b-form-input
-                    v-model="value"
-                    placeholder="Select date"
-                  ></b-form-input>
+                  <p> Selected date: {{ value}} </p>
                   <b-button variant="light" v-on:click="createQuest"
                     >Add
                   </b-button>
@@ -191,22 +185,26 @@ export default {
       }
     },
     patchQuest() {
-      Api.patch(`/quests/${this.questId}`, {
-        quest_name: this.name,
-        quest_desc: this.quest_desc,
-        money_bounty: this.money_bounty,
-        date: this.value
-      }).then((response) => {
-        var quest = response.data
-        const index = this.quests.findIndex((quest) => quest._id === this.questId)
-        this.quests.splice(index, 1, quest)
-      }).catch((error) => {
-        console.error(error)
-      })
-      this.selectedEdit = false
-      this.name = ''
-      this.quest_desc = ''
-      this.money_bounty = ''
+      if (this.value !== '') {
+        Api.patch(`/quests/${this.questId}`, {
+          quest_name: this.name,
+          quest_desc: this.quest_desc,
+          money_bounty: this.money_bounty,
+          date: this.value
+        }).then((response) => {
+          var quest = response.data
+          const index = this.quests.findIndex((quest) => quest._id === this.questId)
+          this.quests.splice(index, 1, quest)
+        }).catch((error) => {
+          console.error(error)
+        })
+        this.selectedEdit = false
+        this.name = ''
+        this.quest_desc = ''
+        this.money_bounty = ''
+      } else {
+        alert('Date is required')
+      }
     },
     editQuest(id) {
       if (this.selectedCreate) {
@@ -216,22 +214,26 @@ export default {
       this.questId = id
     },
     createQuest() {
-      Api.post('/quests', {
-        quest_name: this.name,
-        quest_desc: this.quest_desc,
-        money_bounty: this.money_bounty,
-        date: this.value,
-        parent: this.selectedId
-      }).then((response) => {
-        var quest = response.data
-        this.quests.push(quest)
-      }).catch((error) => {
-        console.error(error)
-      })
-      this.selectedCreate = false
-      this.name = ''
-      this.quest_desc = ''
-      this.money_bounty = ''
+      if (this.value !== '') {
+        Api.post('/quests', {
+          quest_name: this.name,
+          quest_desc: this.quest_desc,
+          money_bounty: this.money_bounty,
+          date: this.value,
+          parent: this.selectedId
+        }).then((response) => {
+          var quest = response.data
+          this.quests.push(quest)
+        }).catch((error) => {
+          console.error(error)
+        })
+        this.selectedCreate = false
+        this.name = ''
+        this.quest_desc = ''
+        this.money_bounty = ''
+      } else {
+        alert('Date is required')
+      }
     },
     cancelCreate() {
       this.selectedCreate = false
