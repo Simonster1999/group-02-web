@@ -110,7 +110,7 @@ export default {
     buyReward(id, price) {
       this.selected = true
       this.selectedId = id
-      if (this.childBalance - price >= 0) {
+      if ((this.childBalance - price) >= 0) {
         Api.patch('/rewards/' + id, { is_bought: true }).then(response => {
           const index = this.rewards.findIndex(reward => reward._id === id)
           this.rewards.splice(index, 1)
@@ -120,8 +120,10 @@ export default {
           })
         Api.patch('/children/' + this.childId, { balance: this.childBalance - price })
           .then(response => {
-            const index = this.children.findIndex(child => child._id === id)
+            const index = this.children.findIndex(child => child._id === this.childId)
+            alert(index)
             var child = response.data
+            alert(child.balance)
             this.children.splice(index, 1, child)
           })
           .catch(error => {
@@ -136,7 +138,7 @@ export default {
 </script>
 
 <style>
-.child-reward .editChild, .child-reward .delChild, .child-reward .showQuests, .child-reward .delReward, .child-reward .rewardBought, .child-reward .updateReward {
+.child-reward .editChild, .child-reward .delChild, .child-reward .showQuests, .child-reward .delReward, .child-reward .rewardBadge, .child-reward .updateReward {
   display: none;
 }
 </style>
