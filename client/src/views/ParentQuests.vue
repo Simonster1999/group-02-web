@@ -2,16 +2,16 @@
   <div>
     <b-container>
       <b-row class="content-row">
-        <b-col cols="12" offset-xs="0" sm="10" offset-sm="0" md="3" offset-md="0" class="col">
+        <b-col cols="12" offset="0" sm="10" offset-sm="1" md="3" offset-md="0" class="col">
           <h1>Parent List</h1>
           <div v-for="parent in parents" v-bind:key="parent._id">
             <parent-item
               v-bind:parent="parent"
-              v-on:show-quests="getQuests"
+              v-on:show-quests="login"
             />
           </div>
         </b-col>
-        <b-col cols="12" offset-xs="0" sm="10" offset-sm="0" md="6" offset-md="0" class="col">
+        <b-col cols="12" offset="0" sm="10" offset-sm="1" md="6" offset-md="0" class="col">
           <b-calendar
             class="calendar"
             :date-info-fn="getDates"
@@ -21,7 +21,7 @@
             :hide-header="true"
           />
         </b-col>
-        <b-col cols="12" offset-xs="0" sm="10" offset-sm="0" md="3" offset-md="0" class="col">
+        <b-col cols="12" offset="0" sm="10" offset-sm="1" md="3" offset-md="0" class="col">
           <div class="div-button" v-if="selected">
             <h1>Quest List</h1>
               <b-button
@@ -46,10 +46,7 @@
                     v-model="money_bounty"
                     placeholder="Enter reward amount"
                   ></b-form-input>
-                  <b-form-input
-                    v-model="value"
-                    placeholder="Select date"
-                  ></b-form-input>
+                    <p> Selected date: {{ value}} </p>
                   <b-button variant="light" v-on:click="patchQuest"
                     >Add
                   </b-button>
@@ -75,10 +72,7 @@
                     v-model="money_bounty"
                     placeholder="Enter reward amount"
                   ></b-form-input>
-                  <b-form-input
-                    v-model="value"
-                    placeholder="Select date"
-                  ></b-form-input>
+                  <p> Selected date: {{ value}} </p>
                   <b-button variant="light" v-on:click="createQuest"
                     >Add
                   </b-button>
@@ -143,7 +137,8 @@ export default {
       selectedEdit: false,
       questId: '',
       questDates: [],
-      specificQuests: []
+      specificQuests: [],
+      password: ''
     }
   },
   methods: {
@@ -190,22 +185,26 @@ export default {
       }
     },
     patchQuest() {
-      Api.patch(`/quests/${this.questId}`, {
-        quest_name: this.name,
-        quest_desc: this.quest_desc,
-        money_bounty: this.money_bounty,
-        date: this.value
-      }).then((response) => {
-        var quest = response.data
-        const index = this.quests.findIndex((quest) => quest._id === this.questId)
-        this.quests.splice(index, 1, quest)
-      }).catch((error) => {
-        console.error(error)
-      })
-      this.selectedEdit = false
-      this.name = ''
-      this.quest_desc = ''
-      this.money_bounty = ''
+      if (this.value !== '') {
+        Api.patch(`/quests/${this.questId}`, {
+          quest_name: this.name,
+          quest_desc: this.quest_desc,
+          money_bounty: this.money_bounty,
+          date: this.value
+        }).then((response) => {
+          var quest = response.data
+          const index = this.quests.findIndex((quest) => quest._id === this.questId)
+          this.quests.splice(index, 1, quest)
+        }).catch((error) => {
+          console.error(error)
+        })
+        this.selectedEdit = false
+        this.name = ''
+        this.quest_desc = ''
+        this.money_bounty = ''
+      } else {
+        alert('Date is required')
+      }
     },
     editQuest(id) {
       if (this.selectedCreate) {
@@ -215,22 +214,26 @@ export default {
       this.questId = id
     },
     createQuest() {
-      Api.post('/quests', {
-        quest_name: this.name,
-        quest_desc: this.quest_desc,
-        money_bounty: this.money_bounty,
-        date: this.value,
-        parent: this.selectedId
-      }).then((response) => {
-        var quest = response.data
-        this.quests.push(quest)
-      }).catch((error) => {
-        console.error(error)
-      })
-      this.selectedCreate = false
-      this.name = ''
-      this.quest_desc = ''
-      this.money_bounty = ''
+      if (this.value !== '') {
+        Api.post('/quests', {
+          quest_name: this.name,
+          quest_desc: this.quest_desc,
+          money_bounty: this.money_bounty,
+          date: this.value,
+          parent: this.selectedId
+        }).then((response) => {
+          var quest = response.data
+          this.quests.push(quest)
+        }).catch((error) => {
+          console.error(error)
+        })
+        this.selectedCreate = false
+        this.name = ''
+        this.quest_desc = ''
+        this.money_bounty = ''
+      } else {
+        alert('Date is required')
+      }
     },
     cancelCreate() {
       this.selectedCreate = false
@@ -244,24 +247,40 @@ export default {
       this.quest_desc = ''
       this.money_bounty = ''
     },
-    getQuests(id) {
+    login(id, username) {
       if (this.selectedId === id) {
         this.selected = false
         this.selectedId = ''
       } else {
-        this.selected = true
-        this.selectedId = id
-        Api.get('/parents/' + id + '/quests')
-          .then((response) => {
-            this.quests = response.data.quests
+        this.password = prompt('Enter password')
+        Api.get('/parents/login/' + username + '/' + this.password)
+          .then(response => {
+            if (response.data.status === true) {
+              this.getQuests(response.data.id)
+            } else {
+              alert('Incorrect password')
+            }
           })
-          .catch((error) => {
+          .catch(error => {
             this.message = error.message
             console.error(error)
-            this.quests = []
+            alert('Incorrect password')
           })
-          .then(() => {})
       }
+    },
+    getQuests(id) {
+      this.selected = true
+      this.selectedId = id
+      Api.get('/parents/' + id + '/quests')
+        .then((response) => {
+          this.quests = response.data.quests
+        })
+        .catch((error) => {
+          this.message = error.message
+          console.error(error)
+          this.quests = []
+        })
+        .then(() => {})
       this.specificQuests = []
     },
     acceptComplete(id, reward) {
@@ -283,10 +302,10 @@ export default {
                 var questcomplete = response.data
                 const index = this.quests.findIndex((questcomplete) => questcomplete._id === id)
                 this.quests.splice(index, 1, questcomplete)
-                  .catch((error) => {
-                    console.error(error)
-                  })
               })
+                .catch((error) => {
+                  console.error(error)
+                })
             })
         })
     }

@@ -3,18 +3,18 @@
     <b-container>
       <b-row class="content-row">
         <!-- Box for parents -->
-        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0" class="col">
+        <b-col cols="12" offset="0" sm="10" offset-sm="1" md="4" offset-md="0" class="col">
           <h1>Parents</h1>
           <div v-for="parent in parents" v-bind:key="parent._id">
             <parent-item v-bind:parent="parent" />
           </div>
           <b-button variant="danger" v-on:click="deleteAllParents">Delete All Parents</b-button>
         </b-col>
-        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0">
+        <b-col cols="12" offset="0" sm="10" offset-sm="1" md="4" offset-md="0">
           <h1>Login</h1>
           <ParentLoginForm v-on:loginParent="login"/>
         </b-col>
-        <b-col cols="12" offset-xs="0" sm="10" offset-sm="1" md="4" offset-md="0">
+        <b-col cols="12" offset="0" sm="10" offset-sm="1" md="4" offset-md="0">
           <!-- Box for parent creation form -->
           <h1>Create new Parent</h1>
           <PostParentForm v-on:postParent="postParent" />
@@ -80,14 +80,26 @@ export default {
         })
     },
     deleteAllParents() {
-      if (confirm('Are you sure you want to delete everything?')) {
-        Api.delete('/parents')
-          .then(reponse => {})
-          .catch(error => {
-            console.error(error)
-          })
-        this.parents = []
-      }
+      var param = prompt('Enter super secret password', '')
+      Api.get('/validate/' + param)
+        .then(response => {
+          if (response.data.answer === true) {
+            if (confirm('Are you sure you want to delete everything?')) {
+              Api.delete('/parents')
+                .then(reponse => {})
+                .catch(error => {
+                  console.error(error)
+                })
+              this.parents = []
+            }
+          } else {
+            alert('Incorrect password')
+          }
+        })
+        .catch(error => {
+          this.message = error.message
+          console.error(error)
+        })
     },
     login(username, password) {
       Api.get('/parents/login/' + username + '/' + password)
