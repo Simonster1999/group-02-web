@@ -88,6 +88,7 @@
                 v-on:del-quest="deleteQuest"
                 v-on:patch-quest="editQuest"
                 v-on:accept-quest="acceptComplete"
+                v-on:deny-quest="denyComplete"
               />
             </div>
           </div>
@@ -282,6 +283,18 @@ export default {
         })
         .then(() => {})
       this.specificQuests = []
+    },
+    denyComplete(id) {
+      Api.patch(`/quests/${id}`, {
+        is_pending: 'false',
+        completed_by: null
+      }).then((response) => {
+        var quest = response.data
+        const index = this.quests.findIndex((quest) => quest._id === id)
+        this.quests.splice(index, 1, quest)
+      }).catch((error) => {
+        console.error(error)
+      })
     },
     acceptComplete(id, reward) {
       var quest = ''

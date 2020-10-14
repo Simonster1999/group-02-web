@@ -126,6 +126,7 @@ router.put('/api/quests/:quest_id', function(req, res, next) {
         quest.is_completed = req.body.is_completed;
         quest.quest_desc   = req.body.quest_desc;
         quest.date         = req.body.date;
+        quest.is_pending   = req.body.is_pending;
         quest.completed_by = req.body.completed_by;
         quest.save(function(err, quest){
             if (err){

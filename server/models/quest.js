@@ -9,7 +9,7 @@ var questSchema = new Schema({
     date         : { type: Date, required: true, },
     parent       : { type: Schema.Types.ObjectId, ref: 'Parent', required: true},
     completed_by : { type: Schema.Types.ObjectId, ref: 'Child', default: null},
-    is_pending      : { type: Boolean, default: false }
+    is_pending   : { type: Boolean, default: false }
 });
 
 module.exports = mongoose.model('quests', questSchema);

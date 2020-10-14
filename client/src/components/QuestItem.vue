@@ -14,9 +14,8 @@
     <p>Reward: {{quest.money_bounty}}</p>
     <p class="pending">Completed by: {{childName}}</p>
     <p class="p-center">Pending...</p>
-    <b-button class="delQuest" variant="danger" v-on:click="$emit('del-quest', quest._id)">X</b-button>
-    <b-button class="editQuest" variant="warning" v-on:click="$emit('patch-quest', quest._id)">Edit</b-button>
     <b-button class="acceptQuest" variant="success" v-on:click="$emit('accept-quest', quest._id, quest.money_bounty)">Accept</b-button>
+    <b-button class="denyQuest" variant="danger" v-on:click="$emit('deny-quest', quest._id)">Deny</b-button>
     </div>
     <div class="div-bordercomplete" v-if="quest.is_completed && quest.is_pending === true">
     <p>Name: {{quest.quest_name}}</p>
@@ -25,7 +24,6 @@
     <p>Completed by: {{childName}}</p>
     <p class="p-center">Completed!</p>
     <b-button class="delQuest" variant="danger" v-on:click="$emit('del-quest', quest._id)">X</b-button>
-    <b-button class="editQuest" variant="warning" v-on:click="$emit('patch-quest', quest._id)">Edit</b-button>
     </div>
   </div>
 </template>

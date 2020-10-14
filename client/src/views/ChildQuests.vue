@@ -169,6 +169,7 @@ export default {
 </script>
 
 <style>
+.child-quest .denyQuest,
 .child-quest .acceptQuest,
 .child-quest .delChild,
 .child-quest .editChild,
