@@ -80,13 +80,17 @@ export default {
         })
     },
     deleteAllParents() {
-      if (confirm('Are you sure you want to delete everything?')) {
-        Api.delete('/parents')
-          .then(reponse => {})
-          .catch(error => {
-            console.error(error)
-          })
-        this.parents = []
+      if (prompt('Enter password') === 'badboy') {
+        if (confirm('Are you sure you want to delete everything?')) {
+          Api.delete('/parents')
+            .then(reponse => {})
+            .catch(error => {
+              console.error(error)
+            })
+          this.parents = []
+        }
+      } else {
+        alert('Incorrect password')
       }
     },
     login(username, password) {
