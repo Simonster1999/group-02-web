@@ -80,18 +80,26 @@ export default {
         })
     },
     deleteAllParents() {
-      if (prompt('Enter password') === 'badboy') {
-        if (confirm('Are you sure you want to delete everything?')) {
-          Api.delete('/parents')
-            .then(reponse => {})
-            .catch(error => {
-              console.error(error)
-            })
-          this.parents = []
-        }
-      } else {
-        alert('Incorrect password')
-      }
+      var param = prompt('Enter super secret password', '')
+      Api.get('/validate/' + param)
+        .then(response => {
+          if (response.data.answer === true) {
+            if (confirm('Are you sure you want to delete everything?')) {
+              Api.delete('/parents')
+                .then(reponse => {})
+                .catch(error => {
+                  console.error(error)
+                })
+              this.parents = []
+            }
+          } else {
+            alert('Incorrect password')
+          }
+        })
+        .catch(error => {
+          this.message = error.message
+          console.error(error)
+        })
     },
     login(username, password) {
       Api.get('/parents/login/' + username + '/' + password)

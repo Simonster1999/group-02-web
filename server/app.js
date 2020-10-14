@@ -14,6 +14,7 @@ var rewardController = require('./controllers/rewards');
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/questRewardDB';
 var port = process.env.PORT || 3000;
+const superSecretPassword = 'badboy'
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
@@ -40,6 +41,17 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
 });
 
+// Validate that the correct password is provided when deleting all
+app.get('/api/validate/:password', function(req, res) {
+    var pass = req.params.password;
+    if (pass === superSecretPassword) {
+        res.json({'answer': true});
+    } else {
+        res.status(401).json({'answer': false});
+    }
+})
+
+// Use controllers
 app.use(childrenController);
 app.use(parentController);
 app.use(questController);
