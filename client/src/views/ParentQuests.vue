@@ -341,7 +341,7 @@ export default {
 .parent-quest h1 {
   text-align: center;
 }
-.parent-quest .parentDiv {
+.parent-quest #parentDiv {
   text-align: center;
 }
 .parent-quest .createQuestBtn {

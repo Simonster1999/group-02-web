@@ -1,5 +1,5 @@
 <template>
-  <div class="parentDiv">
+  <div id="parentDiv">
     <p class="parentUsername">{{parent.username}}</p>
     <b-button class="deleteParent" variant="danger" v-on:click="$emit('del-parent', parent._id)">X</b-button>
     <b-button class="editParent" variant="warning" v-on:click="$emit('edit-parent', parent._id)">Edit</b-button>
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style scoped>
-.parentDiv {
+#parentDiv {
   margin-bottom: 10px;
   padding: 10px;
   border: solid;

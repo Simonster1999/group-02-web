@@ -1,5 +1,5 @@
 <template>
-  <div class="childDiv">
+  <div id="childDiv">
     <p class="childP">{{child.username}}</p>
     <p class="childP">Balance: {{child.balance}}</p>
     <b-button class="delChild" variant="danger" v-on:click="$emit('del-child', child._id)">X</b-button>

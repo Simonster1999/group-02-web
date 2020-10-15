@@ -188,7 +188,7 @@ export default {
 .child-quest .createQuestBtn {
   margin-bottom: 10px;
 }
-.child-quest .childDiv {
+.child-quest #childDiv {
   text-align: center;
 }
 .child-quest h1 {
