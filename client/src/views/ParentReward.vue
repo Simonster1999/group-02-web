@@ -5,7 +5,7 @@
         <b-col cols="12" offset="0" sm="8" offset-sm="2" md="6" offset-md="0" class="col">
             <h1>Parents</h1>
             <div  v-for="parent in parents" v-bind:key="parent._id">
-            <parent-item v-bind:parent="parent" v-on:show-rewards="getRewards"/>
+            <parent-item v-bind:parent="parent" v-on:show-rewards="login"/>
             </div>
         </b-col>
         <b-col cols="12" offset="0" sm="8" offset-sm="2" md="6" offset-md="0" class="col">
@@ -70,7 +70,8 @@ export default {
       selectedCreate: false,
       selectedUpdate: false,
       selectedParentId: '',
-      selectedRewardId: ''
+      selectedRewardId: '',
+      password: ''
     }
   },
   methods: {
@@ -123,6 +124,27 @@ export default {
         .catch(error => {
           console.error(error)
         })
+    },
+    login(id, username) {
+      if (this.selectedParentId === id) {
+        this.showRewards = false
+        this.selectedParentId = ''
+      } else {
+        this.password = prompt('Enter password')
+        Api.get('/parents/login/' + username + '/' + this.password)
+          .then(response => {
+            if (response.data.status === true) {
+              this.getRewards(response.data.id)
+            } else {
+              alert('Incorrect password')
+            }
+          })
+          .catch(error => {
+            this.message = error.message
+            console.error(error)
+            alert('Incorrect password')
+          })
+      }
     },
     createReward(name, rewardDesc, price) {
       Api.post('/parents/' + this.selectedParentId + '/rewards',

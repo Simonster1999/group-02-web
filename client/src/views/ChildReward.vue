@@ -5,13 +5,15 @@
         <b-col cols="12" offset="0" sm="8" offset-sm="2" md="6" offset-md="0" class="col">
           <h1>Children</h1>
           <div v-for="child in children" v-bind:key="child._id">
-            <child-item v-bind:child="child" v-on:show-rewards="getRewards"/>
+            <child-item v-bind:child="child" v-on:show-rewards="login"/>
           </div>
         </b-col>
         <b-col cols="12" offset="0" sm="8" offset-sm="2" md="6" offset-md="0" class="col">
           <h1>Rewards</h1>
+          <div v-if="selected">
           <div  v-for="reward in rewards" v-bind:key="reward._id">
             <reward-item v-bind:reward="reward" v-on:patch-reward="buyReward"/>
+          </div>
           </div>
         </b-col>
       </b-row>
@@ -53,7 +55,8 @@ export default {
       selected: false,
       selectedId: '',
       childId: '',
-      childBalance: ''
+      childBalance: '',
+      password: ''
     }
   },
   methods: {
@@ -77,6 +80,27 @@ export default {
           console.error(error)
         })
     },
+    login(parent, id, balance, username) {
+      if (this.selectedId === id) {
+        this.selected = false
+        this.selectedId = ''
+      } else {
+        this.password = prompt('Enter password')
+        Api.get('/children/login/' + username + '/' + this.password)
+          .then(response => {
+            if (response.data.status === true) {
+              this.getRewards(parent, response.data.id, balance, username)
+            } else {
+              alert('Incorrect password')
+            }
+          })
+          .catch(error => {
+            this.message = error.message
+            console.error(error)
+            alert('Incorrect password')
+          })
+      }
+    },
     createReward() {
       Api.post('/rewards',
         {
@@ -87,10 +111,9 @@ export default {
         })
       Api.get('/rewards')
     },
-    getRewards(id, child, balance) {
+    getRewards(id, child, balance, username) {
       this.selected = true
-      this.selectedId = id
-      this.childId = child
+      this.selectedId = child
       this.childBalance = balance
       Api.get('/parents/' + id + '/rewards').then(response => {
         this.rewards = response.data.rewards
