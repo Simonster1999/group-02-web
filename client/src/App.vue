@@ -17,7 +17,7 @@
         <router-link to="rewards" class="nav-link">Rewards</router-link>
       </li>
       </b-navbar-nav>
-      <img src="AdvenchoreIcon.png" class="ml-auto" style="margin-right: 4px">
+      <img alt="An image of a sword and mop crossing eachother" src="AdvenchoreIcon.png" class="ml-auto" style="margin-right: 4px">
     </b-navbar>
     <!-- Render the content of the current page view -->
     <router-view/>
