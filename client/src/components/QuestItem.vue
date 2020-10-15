@@ -2,7 +2,7 @@
   <div>
     <div class="div-border" v-if="quest.is_completed === false && quest.is_pending === false">
     <p>Name: {{quest.quest_name}}</p>
-    <p>Quest Description: {{quest.quest_desc}}</p>
+    <p><span style="font-weight: bold">Quest Description: </span>{{quest.quest_desc}}</p>
     <p>Reward: {{quest.money_bounty}}</p>
     <b-button class="delQuest" variant="danger" v-on:click="$emit('del-quest', quest._id)">X</b-button>
     <b-button class="editQuest" variant="warning" v-on:click="$emit('patch-quest', quest._id)">Edit</b-button>
@@ -10,7 +10,7 @@
     </div>
     <div class="div-borderpending" v-if="quest.is_pending === true && quest.is_completed === false">
     <p>Name: {{quest.quest_name}}</p>
-    <p>Quest Description: {{quest.quest_desc}}</p>
+    <p><span style="font-weight: bold">Quest Description: </span>{{quest.quest_desc}}</p>
     <p>Reward: {{quest.money_bounty}}</p>
     <p class="pending">Completed by: {{childName}}</p>
     <p class="p-center">Pending...</p>
@@ -19,7 +19,7 @@
     </div>
     <div class="div-bordercomplete" v-if="quest.is_completed && quest.is_pending === true">
     <p>Name: {{quest.quest_name}}</p>
-    <p>Quest Description: {{quest.quest_desc}}</p>
+    <p><span style="font-weight: bold">Quest Description: </span>{{quest.quest_desc}}</p>
     <p>Reward: {{quest.money_bounty}}</p>
     <p>Completed by: {{childName}}</p>
     <p class="p-center">Completed!</p>
