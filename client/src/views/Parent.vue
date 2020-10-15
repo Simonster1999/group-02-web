@@ -9,6 +9,7 @@
             v-on:del-parent="deleteParent"
             v-on:edit-parent="toggleEditParent"
             v-on:show-children="getChildren"
+            v-if="parent !== null"
           />
           </b-col>
         <!-- Box for parents children (if selected) AND child update form -->
@@ -88,7 +89,7 @@ export default {
   data() {
     return {
       message: 'none',
-      parent: '',
+      parent: null,
       children: [],
       viewChildren: false,
       parentId: '',
@@ -121,12 +122,7 @@ export default {
             password: password
           })
           .then(response => {
-            const index = this.parents.findIndex(parent => parent._id === this.parentId)
-            this.parents.splice(index, 1,
-              {
-                username: response.data.username,
-                password: response.data.password
-              })
+            this.parent = response.data
           })
           .catch(error => {
             console.error(error)
@@ -154,12 +150,9 @@ export default {
     deleteParent(id) {
       Api.delete(`/parents/${id}`)
         .then(reponse => {
-          const index = this.parents.findIndex(parent => parent._id === id)
-          this.parents.splice(index, 1)
-          if (this.parentId === id) {
-            this.children = []
-            this.parentId = ''
-          }
+          this.children = []
+          this.parentId = ''
+          this.parent = null
         })
         .catch(error => {
           console.error(error)
