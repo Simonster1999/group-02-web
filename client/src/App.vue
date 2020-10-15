@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <b-navbar class="navigator">
+      <img alt="An image of a sword and mop crossing eachother" src="AdvenchoreIcon.png" style="margin-left: 4px">
       <router-link to="/" class="navbar-brand">Home</router-link>
       <b-navbar-nav>
       <li class="nav-item">
@@ -16,6 +17,7 @@
         <router-link to="rewards" class="nav-link">Rewards</router-link>
       </li>
       </b-navbar-nav>
+      <img src="AdvenchoreIcon.png" class="ml-auto" style="margin-right: 4px">
     </b-navbar>
     <!-- Render the content of the current page view -->
     <router-view/>
@@ -72,6 +74,11 @@ body {
 }
 .bold {
   font-weight: bold;
+}
+@media only screen and (max-width: 609px) {
+  .ml-auto {
+    display: none;
+  }
 }
 
 </style>
