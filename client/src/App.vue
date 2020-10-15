@@ -70,5 +70,8 @@ body {
   background-image: linear-gradient(130deg, rgb(48, 85, 99), rgb(14, 50, 65));
   background-attachment: fixed;
 }
+.bold {
+  font-weight: bold;
+}
 
 </style>
