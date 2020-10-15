@@ -153,6 +153,9 @@ export default {
           this.children = []
           this.parentId = ''
           this.parent = null
+          this.editChild = false
+          this.editParent = false
+          this.viewChildren = false
         })
         .catch(error => {
           console.error(error)
