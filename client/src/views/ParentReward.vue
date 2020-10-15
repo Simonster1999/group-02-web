@@ -2,13 +2,13 @@
   <div>
     <b-container>
       <b-row class="content-row">
-        <b-col cols="8" offset="2" sm="8" offset-sm="2" md="6" offset-md="0" class="col">
+        <b-col cols="12" offset="0" sm="8" offset-sm="2" md="6" offset-md="0" class="col">
             <h1>Parents</h1>
             <div  v-for="parent in parents" v-bind:key="parent._id">
             <parent-item v-bind:parent="parent" v-on:show-rewards="getRewards"/>
             </div>
         </b-col>
-        <b-col cols="8" offset="2" sm="8" offset-sm="2" md="6" offset-md="0" class="col">
+        <b-col cols="12" offset="0" sm="8" offset-sm="2" md="6" offset-md="0" class="col">
           <h1>Rewards</h1>
             <div v-if="showRewards">
               <b-button class="createReward" variant= "warning" v-on:click="(selectedCreate = !selectedCreate)">Create Reward</b-button>
