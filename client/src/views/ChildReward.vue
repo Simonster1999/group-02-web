@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container>
+    <b-container v-if="isConnected">
       <b-row class="content-row">
         <b-col cols="12" offset="0" sm="8" offset-sm="2" md="6" offset-md="0" class="col">
           <h1>Children</h1>
@@ -26,7 +26,15 @@ import { Api } from '@/Api'
 import RewardItem from '@/components/RewardItem.vue'
 import ChildItem from '@/components/ChildItem.vue'
 export default {
-  beforeCreate: function () { document.body.className = 'child-reward' },
+  beforeCreate: function () {
+    document.body.className = 'child-reward'
+    Api.get('/poke').then(response => {
+      this.isConnected = response.data.isConnected
+    }).catch(error => {
+      alert('Server unavailable')
+      console.error(error)
+    })
+  },
   name: 'child-reward',
   components: {
     RewardItem,
@@ -34,17 +42,19 @@ export default {
   },
   mounted() {
     console.log('PAGE is loaded')
-    Api.get('/children')
-      .then(response => {
-        this.children = response.data.children
-      })
-      .catch(error => {
-        this.message = error.message
-        console.error(error)
-        this.children = []
-      })
-      .then(() => {
-      })
+    if (this.isConnected !== false) {
+      Api.get('/children')
+        .then(response => {
+          this.children = response.data.children
+        })
+        .catch(error => {
+          this.message = error.message
+          console.error(error)
+          this.children = []
+        })
+        .then(() => {
+        })
+    }
   },
   data() {
     return {
@@ -56,7 +66,8 @@ export default {
       selectedId: '',
       childId: '',
       childBalance: '',
-      password: ''
+      password: '',
+      isConnected: false
     }
   },
   methods: {

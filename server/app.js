@@ -51,6 +51,10 @@ app.get('/api/validate/:password', function(req, res) {
     }
 })
 
+app.get('/api/poke', function(req, res) {
+    res.json({'isConnected': true});
+})
+
 // Use controllers
 app.use(childrenController);
 app.use(parentController);

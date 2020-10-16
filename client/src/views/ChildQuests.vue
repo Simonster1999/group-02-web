@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container>
+    <b-container v-if="isConnected">
     <b-row class="content-row">
       <b-col cols="12" offset="0" sm="10" offset-sm="1" md="3" offset-md="0" class="col">
         <h1>Child List</h1>
@@ -44,6 +44,12 @@ import ChildItem from '@/components/ChildItem.vue'
 export default {
   beforeCreate: function () {
     document.body.className = 'child-quest'
+    Api.get('/poke').then(response => {
+      this.isConnected = response.data.isConnected
+    }).catch(error => {
+      alert('Server unavailable')
+      console.error(error)
+    })
   },
   name: 'child-quests',
   components: {
@@ -52,16 +58,18 @@ export default {
   },
   mounted() {
     console.log('PAGE is loaded')
-    Api.get('/children')
-      .then((response) => {
-        this.children = response.data.children
-      })
-      .catch((error) => {
-        this.message = error.message
-        console.error(error)
-        this.quests = []
-      })
-      .then(() => {})
+    if (this.isConnected !== false) {
+      Api.get('/children')
+        .then((response) => {
+          this.children = response.data.children
+        })
+        .catch((error) => {
+          this.message = error.message
+          console.error(error)
+          this.quests = []
+        })
+        .then(() => {})
+    }
   },
   data() {
     return {
@@ -77,7 +85,8 @@ export default {
       selectedChildBalance: '',
       questDates: [],
       specificQuests: [],
-      password: ''
+      password: '',
+      isConnected: false
     }
   },
   methods: {

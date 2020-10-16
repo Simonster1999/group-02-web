@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container>
+    <b-container v-if="isConnected">
       <b-row class="content-row">
         <!-- Box for parents -->
         <b-col cols="12" offset="0" sm="10" offset-sm="1" md="4" offset-md="0" class="col">
@@ -58,7 +58,15 @@ import PostChildForm from '@/components/PostChildForm.vue'
 import UpdateParentForm from '@/components/UpdateParentForm.vue'
 import UpdateChildForm from '@/components/UpdateChildForm.vue'
 export default {
-  beforeCreate: function () { document.body.className = 'parent' },
+  beforeCreate: function () {
+    document.body.className = 'parent'
+    Api.get('/poke').then(response => {
+      this.isConnected = response.data.isConnected
+    }).catch(error => {
+      alert('Server unavailable')
+      console.error(error)
+    })
+  },
   name: 'home',
   components: {
     ParentItem,
@@ -73,7 +81,7 @@ export default {
     var id = url.searchParams.get('id')
     if (id === null) {
       alert('No id provided')
-    } else {
+    } else if (this.isConnected !== false) {
       Api.get('/parents/' + id).then(response => {
         this.parent = response.data
       })
@@ -95,7 +103,8 @@ export default {
       parentId: '',
       childId: '',
       editChild: false,
-      editParent: false
+      editParent: false,
+      isConnected: false
     }
   },
   methods: {

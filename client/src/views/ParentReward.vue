@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container>
+    <b-container v-if="isConnected">
       <b-row class="content-row">
         <b-col cols="12" offset="0" sm="8" offset-sm="2" md="6" offset-md="0" class="col">
             <h1>Parents</h1>
@@ -37,7 +37,15 @@ import ParentItem from '@/components/ParentItem.vue'
 import PostRewardForm from '@/components/PostRewardForm.vue'
 import UpdateRewardForm from '@/components/UpdateRewardForm.vue'
 export default {
-  beforeCreate: function () { document.body.className = 'parent-reward' },
+  beforeCreate: function () {
+    document.body.className = 'parent-reward'
+    Api.get('/poke').then(response => {
+      this.isConnected = response.data.isConnected
+    }).catch(error => {
+      alert('Server unavailable')
+      console.error(error)
+    })
+  },
   name: 'parent-reward',
   components: {
     RewardItem,
@@ -47,17 +55,19 @@ export default {
   },
   mounted() {
     console.log('PAGE is loaded')
-    Api.get('/parents')
-      .then(response => {
-        this.parents = response.data.parents
-      })
-      .catch(error => {
-        this.message = error.message
-        console.error(error)
-        this.parents = []
-      })
-      .then(() => {
-      })
+    if (this.isConnected !== false) {
+      Api.get('/parents')
+        .then(response => {
+          this.parents = response.data.parents
+        })
+        .catch(error => {
+          this.message = error.message
+          console.error(error)
+          this.parents = []
+        })
+        .then(() => {
+        })
+    }
   },
   data() {
     return {
@@ -71,7 +81,8 @@ export default {
       selectedUpdate: false,
       selectedParentId: '',
       selectedRewardId: '',
-      password: ''
+      password: '',
+      isConnected: false
     }
   },
   methods: {
