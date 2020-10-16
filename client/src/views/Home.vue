@@ -35,6 +35,7 @@ export default {
     document.body.className = 'home'
     Api.get('/poke').then(response => {
       this.isConnected = response.data.isConnected
+      this.start()
     }).catch(error => {
       alert('Server unavailable')
       console.error(error)
@@ -48,17 +49,6 @@ export default {
   },
   mounted() {
     console.log('PAGE is loaded')
-    if (this.isConnected !== false) {
-      Api.get('/parents').then(response => {
-        this.parents = response.data.parents
-      })
-        .catch(error => {
-          this.message = error.message
-          console.error(error)
-        })
-        .then(() => {
-        })
-    }
   },
   data() {
     return {
@@ -68,6 +58,17 @@ export default {
     }
   },
   methods: {
+    start() {
+      Api.get('/parents').then(response => {
+        this.parents = response.data.parents
+      })
+        .catch(error => {
+          this.message = error.message
+          console.error(error)
+        })
+        .then(() => {
+        })
+    },
     getMessage() {
       Api.get('/')
         .then(response => {

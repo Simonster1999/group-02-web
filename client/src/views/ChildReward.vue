@@ -30,6 +30,7 @@ export default {
     document.body.className = 'child-reward'
     Api.get('/poke').then(response => {
       this.isConnected = response.data.isConnected
+      this.start()
     }).catch(error => {
       alert('Server unavailable')
       console.error(error)
@@ -42,19 +43,6 @@ export default {
   },
   mounted() {
     console.log('PAGE is loaded')
-    if (this.isConnected !== false) {
-      Api.get('/children')
-        .then(response => {
-          this.children = response.data.children
-        })
-        .catch(error => {
-          this.message = error.message
-          console.error(error)
-          this.children = []
-        })
-        .then(() => {
-        })
-    }
   },
   data() {
     return {
@@ -71,7 +59,19 @@ export default {
     }
   },
   methods: {
-    test(id) {},
+    start() {
+      Api.get('/children')
+        .then(response => {
+          this.children = response.data.children
+        })
+        .catch(error => {
+          this.message = error.message
+          console.error(error)
+          this.children = []
+        })
+        .then(() => {
+        })
+    },
     getMessage() {
       Api.get('/')
         .then(response => {

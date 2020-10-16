@@ -62,6 +62,7 @@ export default {
     document.body.className = 'parent'
     Api.get('/poke').then(response => {
       this.isConnected = response.data.isConnected
+      this.start()
     }).catch(error => {
       alert('Server unavailable')
       console.error(error)
@@ -77,22 +78,6 @@ export default {
   },
   mounted() {
     console.log('PAGE is loaded')
-    var url = new URL(window.location.href)
-    var id = url.searchParams.get('id')
-    if (id === null) {
-      alert('No id provided')
-    } else if (this.isConnected !== false) {
-      Api.get('/parents/' + id).then(response => {
-        this.parent = response.data
-      })
-        .catch(error => {
-          this.message = error.message
-          console.error(error)
-          this.children = []
-        })
-        .then(() => {
-        })
-    }
   },
   data() {
     return {
@@ -108,6 +93,24 @@ export default {
     }
   },
   methods: {
+    start() {
+      var url = new URL(window.location.href)
+      var id = url.searchParams.get('id')
+      if (id === null) {
+        alert('No id provided')
+      } else {
+        Api.get('/parents/' + id).then(response => {
+          this.parent = response.data
+        })
+          .catch(error => {
+            this.message = error.message
+            console.error(error)
+            this.children = []
+          })
+          .then(() => {
+          })
+      }
+    },
     getMessage() {
       Api.get('/')
         .then(response => {
