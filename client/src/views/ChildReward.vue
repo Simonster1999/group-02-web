@@ -48,13 +48,9 @@ export default {
     return {
       rewards: [],
       children: [],
-      name: '',
-      price: '',
       selected: false,
-      selectedId: '',
       childId: '',
       childBalance: '',
-      password: '',
       isConnected: false
     }
   },
@@ -91,13 +87,13 @@ export default {
           console.error(error)
         })
     },
-    login(parent, id, balance, username) {
-      if (this.selectedId === id) {
+    login(parent, child, balance, username) {
+      if (this.childId === child) {
         this.selected = false
-        this.selectedId = ''
+        this.childId = ''
       } else {
-        this.password = prompt('Enter password')
-        Api.get('/children/login/' + username + '/' + this.password)
+        var password = prompt('Enter password')
+        Api.get('/children/login/' + username + '/' + password)
           .then(response => {
             if (response.data.status === true) {
               this.getRewards(parent, response.data.id, balance, username)
@@ -112,23 +108,12 @@ export default {
           })
       }
     },
-    createReward() {
-      Api.post('/rewards',
-        {
-          reward_name: this.name,
-          reward_desc: this.reward_desc,
-          price: this.price,
-          parent: '5f60b206ea77e02c3c712dc2'
-        })
-      Api.get('/rewards')
-    },
-    getRewards(id, child, balance, username) {
+    getRewards(parent, child, balance, username) {
       this.selected = true
-      this.selectedId = child
+      this.childId = child
       this.childBalance = balance
-      Api.get('/parents/' + id + '/rewards').then(response => {
-        this.rewards = response.data.rewards
-        this.rewards = this.rewards.filter(reward => !reward.is_bought)
+      Api.get('/parents/' + parent + '/rewards').then(response => {
+        this.rewards = response.data.rewards.filter(reward => !reward.is_bought)
       })
         .catch(error => {
           this.message = error.message
@@ -138,23 +123,21 @@ export default {
         .then(() => {
         })
     },
-    buyReward(id, price) {
+    buyReward(rewardId, price) {
       this.selected = true
-      this.selectedId = id
       if ((this.childBalance - price) >= 0) {
-        Api.patch('/rewards/' + id, { is_bought: true, bought_by: this.childId }).then(response => {
-          const index = this.rewards.findIndex(reward => reward._id === id)
-          this.rewards.splice(index, 1)
-        })
+        Api.patch('/rewards/' + rewardId, { is_bought: true, bought_by: this.childId })
+          .then(response => {
+            const index = this.rewards.findIndex(reward => reward._id === rewardId)
+            this.rewards.splice(index, 1)
+          })
           .catch(error => {
             console.error(error)
           })
         Api.patch('/children/' + this.childId, { balance: this.childBalance - price })
           .then(response => {
             const index = this.children.findIndex(child => child._id === this.childId)
-            alert(index)
             var child = response.data
-            alert(child.balance)
             this.children.splice(index, 1, child)
           })
           .catch(error => {
@@ -169,7 +152,12 @@ export default {
 </script>
 
 <style>
-.child-reward .editChild, .child-reward .delChild, .child-reward .showQuests, .child-reward .delReward, .child-reward .rewardBadge, .child-reward .updateReward {
+.child-reward .editChild,
+.child-reward .delChild,
+.child-reward .showQuests,
+.child-reward .delReward,
+.child-reward .rewardBadge,
+.child-reward .updateReward {
   display: none;
 }
 </style>
