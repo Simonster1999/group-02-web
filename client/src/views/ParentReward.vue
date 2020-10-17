@@ -143,19 +143,21 @@ export default {
         this.selectedParentId = ''
       } else {
         this.password = prompt('Enter password')
-        Api.get('/parents/login/' + username + '/' + this.password)
-          .then(response => {
-            if (response.data.status === true) {
-              this.getRewards(response.data.id)
-            } else {
+        if (this.password !== null) {
+          Api.get('/parents/login/' + username + '/' + this.password)
+            .then(response => {
+              if (response.data.status === true) {
+                this.getRewards(response.data.id)
+              } else {
+                alert('Incorrect password')
+              }
+            })
+            .catch(error => {
+              this.message = error.message
+              console.error(error)
               alert('Incorrect password')
-            }
-          })
-          .catch(error => {
-            this.message = error.message
-            console.error(error)
-            alert('Incorrect password')
-          })
+            })
+        }
       }
     },
     createReward(name, rewardDesc, price) {

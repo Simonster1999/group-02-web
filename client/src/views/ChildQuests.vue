@@ -114,19 +114,21 @@ export default {
         this.selectedChildId = ''
       } else {
         this.password = prompt('Enter password')
-        Api.get('/children/login/' + username + '/' + this.password)
-          .then(response => {
-            if (response.data.status === true) {
-              this.getQuests(parent, response.data.id, balance, username)
-            } else {
+        if (this.password !== null) {
+          Api.get('/children/login/' + username + '/' + this.password)
+            .then(response => {
+              if (response.data.status === true) {
+                this.getQuests(parent, response.data.id, balance, username)
+              } else {
+                alert('Incorrect password')
+              }
+            })
+            .catch(error => {
+              this.message = error.message
+              console.error(error)
               alert('Incorrect password')
-            }
-          })
-          .catch(error => {
-            this.message = error.message
-            console.error(error)
-            alert('Incorrect password')
-          })
+            })
+        }
       }
     },
     getDates(ymd, date) {

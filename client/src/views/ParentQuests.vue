@@ -298,19 +298,21 @@ export default {
         this.selectedId = ''
       } else {
         this.password = prompt('Enter password')
-        Api.get('/parents/login/' + username + '/' + this.password)
-          .then(response => {
-            if (response.data.status === true) {
-              this.getQuests(response.data.id)
-            } else {
+        if (this.password !== null) {
+          Api.get('/parents/login/' + username + '/' + this.password)
+            .then(response => {
+              if (response.data.status === true) {
+                this.getQuests(response.data.id)
+              } else {
+                alert('Incorrect password')
+              }
+            })
+            .catch(error => {
+              this.message = error.message
+              console.error(error)
               alert('Incorrect password')
-            }
-          })
-          .catch(error => {
-            this.message = error.message
-            console.error(error)
-            alert('Incorrect password')
-          })
+            })
+        }
       }
     },
     getQuests(id) {

@@ -51,7 +51,8 @@ export default {
       selected: false,
       childId: '',
       childBalance: '',
-      isConnected: false
+      isConnected: false,
+      password: ''
     }
   },
   methods: {
@@ -92,20 +93,22 @@ export default {
         this.selected = false
         this.childId = ''
       } else {
-        var password = prompt('Enter password')
-        Api.get('/children/login/' + username + '/' + password)
-          .then(response => {
-            if (response.data.status === true) {
-              this.getRewards(parent, response.data.id, balance, username)
-            } else {
+        this.password = prompt('Enter password')
+        if (this.password !== null) {
+          Api.get('/children/login/' + username + '/' + this.password)
+            .then(response => {
+              if (response.data.status === true) {
+                this.getRewards(parent, response.data.id, balance, username)
+              } else {
+                alert('Incorrect password')
+              }
+            })
+            .catch(error => {
+              this.message = error.message
+              console.error(error)
               alert('Incorrect password')
-            }
-          })
-          .catch(error => {
-            this.message = error.message
-            console.error(error)
-            alert('Incorrect password')
-          })
+            })
+        }
       }
     },
     getRewards(parent, child, balance, username) {
