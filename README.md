@@ -61,34 +61,48 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-This is a chore reward application that helps parents create incentives for children to complete daily chores. A parent can set up custom tasks that reward the child with an in-app currency. This currency can then be exchanged for items in a shop. Items available in the shop are all created by the parent and represent real-life rewards provided by the parent for the child.
+This is a chore reward application that helps parents create incentives for children to complete daily chores. A parent can set up custom tasks that reward the child with an in-app currency. This currency can then be exchanged for items in a reward shop. Items available in the shop are all created by the parent and represent real-life rewards provided by the parent for the child.
 
 ### Pages
 
 * Home
 
-On the home screen, the user can choose to create a parent. This prompts them to choose a username and account password. After filling out the parent creation form, the parent will be listed in the left part of the page. This list has functionality for deleting a parent and editing a parent, as well as showing the children that are tied to the parent. 
-Pressing the "Show children" button presents the user with a form for creating a new child account which, upon creation, will be tied to the currently selected parent account. The user selects a username, password and balance for the child account before finally pressing the "Create"-button, after which it will be listed in the second list to the right of the parent list. This list contains buttons for deleting and editing each child account that is tied to the currently selected parent.
+On the home screen, the user can fill out the parent creation form to create a parent account, after which the parent will be listed in the left part of the page. Underneath the list is a button for deleting all parents. It should be noted that this feature, aside from deleting all parents, also deletes all children, quests and rewards tied to those parents, effectively resetting the entire database. As such, it is only available using a secret password. 
+Upon creating a parent, the user can log into the parent account using the login form located next to the parent creation form. This takes the user to the parent page.
+
+
+* Parent Page
+
+When logging into a parent account using the login form on the home page, the user will see their own parent account name with three buttons. These buttons are labeled as "X", "Edit" and "Show Children". The "X" button deletes the parent account along with any children, quests and rewards tied to it. The "Edit" buttong will make a form show up that allows the user to edit the parent's username and password. Finally, the "Show Children" button lists all children tied to that parent, and also brings up the child creation form, which can be used to create a new child account that will be tied to the parent that's currently logged in. 
+The child creation form works the same way as the parent creation form, aside from also allowing the user to decide what balance the child will have upon creation.
+When the parent has created (a) child account(s), they will be listed in the children list. Each child listed here also comes with "X" and "Edit" buttons, which both function the same as the buttons with the same names on the parent page.
 
 
 * Manage Quests
 
-The parent quest page allows a parent to create quests that will be available to their children. A user can press the "Show Quests"-button on any parent to display the quests that have been created by that parent. The user can then also create a quest on the rightmost part of the page. Pressing the "Create quest"-button will present a form where the user can enter quest details before pressing the add button to add it into the selected parent's list. Each object in the list can be edited or deleted.
+The Manage Quests page lets a parent manage quests with features that are only available to the parent. From this view, a parent can log in to their account by pressing the "Show Quests" button. This will prompt them with entering their password. After logging in, the user can use the "Create Quest" button on the right side of the page to access the quest creation form. Pressing "Create" button near the bottom of the form after entering a name, description and a reward number, as well as selecting a date in the calendar shown in the middle of the screen, will create the quest and list it in the quest list. This quest will only be available to the children of that parent account.
+When logged into an account, the calendar will glow red on the dates that have available quests. Selecting a date in the calendar will list the quests that were created with that date selected. The quests come with "X" and "Edit" buttons to delete a quest and edit a quest's info.
+When a child has completed a quest, it will be shown as "Pending". When a quest is pending, the parent of said child can choose to either accept or deny the quest by using buttons that are only available on pending quests in particular. Pressing the "Accept" button will label the quest "Completed" and will update the child's balance with the reward amount that was listed on said quest. Completed quests will remain in the list of that date for the user to go back and look at later if they so desire.
+Pressing the "Deny" button will remove the "Pending" label and return the quest to its uncompleted stage. If the parent deems the quest incomplete, it can therefore be returned to the list of uncompleted quests, so that the child can return to fulfilling the requirements that had not yet been fulfilled.
 
 
 * Quests
 
-The child quest page displays a list of children on the left side, with buttons for displaying that child's available quests in the second list on the right side. The page has a calendar in the middle, and its currently selected date will determine what quests are shown on the right side based on the date they were created. The list of available quests has a "Complete"-button for each quest that marks the quest as completed and adds that quest's reward amount to the child's balance.
+The Quests page looks very similar to the Manage Quests page, but has a list of children instead of parents. Like the Manage Quests page, it has a calendar component in the middle of the page. Each child has their balance displayed under their name, as well as a "Show Quests" button. Pressing it will prompt the user with entering the password of the child account that was selected. Upon entering the password correctly, the quest list will show up next to the calendar. From here, the child can select a date in the calendar. Dates that have quests available glow red, so that the user won't have to search through every date to find a quest. 
+All available quests for the selected date will be listed in the quest list along with the quest name, quest description and reward amount. All available quests also has a "Complete" button. Pressing this button will, as mentioned in the Manage Quests page description, put the quest in the pending state. After the parent accepts the child's request of quest completion, the reward amount will be added to the child's balance. If the parent denies the reward, the quest will be returned to the list without adding anything to the child's balance.
 
 
 * Manage Rewards
 
-This page is where parents create rewards for the children to spend their reward currency on. Creating a reward adds it into the list of rewards that are available to that parent's children. The user can edit and delete each reward from this page. When a reward is bought, this page will show what child bought the reward. That way, a parent can keep track of what real-life rewards shall be awarded to whom.
+This page is where parents create rewards for the children to spend their reward currency on. The page has a list that shows all parents, as well as a reward list. The user can click the "Select" button on any one parent account to view all rewards that parent has created. This prompts the user to enter their password. 
+This view also comes with the "Create Reward" button to allow for a parent to create a reward for their children. Pressing it will prompt the user with entering a reward name, description and price.
+When a reward has been created, it will be listed in the Rewards list. Each item in the list is either labelled "For sale" or "Sold". When an item is sold, it will also show who it was bought by, so that a parent can keep track of who is going to receive the reward.
+All rewards have individual "Delete" and "Edit" buttons. The user can remove a reward from the list or edit its name, description and price using these buttons.
+When a parent has handed out a reward to the child that bought it, they can delete it from the list. This allows for an easy way to keep track of what rewards have yet to be handed out, and who shall receive it.
 
 * Rewards
 
-This page shows all rewards that are available to the currently selected child. The list shows rewards that have a parent ID equal to the parent ID of the child. 
-From here, the children can select a reward and press the "Buy"-button. This will subtract the price of the reward from the child's balance and set the item to bought, removing it from the list of available rewards. If a child's balance is too low to buy a reward, they will be alerted that they don't have enough to buy it. The item will then remain on the list and the child's balance will remain the same as before attempting to buy it.
+This page shows all rewards that are available to the currently selected child. When selecting a child, the user will be prompted to enter their password, after which, the rewards available to that child will be listed on the right side of the page. Each listed reward shows its name, description and price. A child can press the "Buy" button, which removes the item from the list and deducts the price amount from the selected child's balance. It will then be listed as "Bought by: " followed by the selected child's name in the Manage Rewards view for that child's parent.
 
 ### Entity-Relationship (ER) Diagram
 
