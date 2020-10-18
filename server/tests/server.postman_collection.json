@@ -193,16 +193,24 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/api/parents/login/parent_acc/123",
+					"raw": "{{host}}/api/parents/login?username=parent_acc&password=123",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"parents",
-						"login",
-						"parent_acc",
-						"123"
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "parent_acc"
+						},
+						{
+							"key": "password",
+							"value": "123"
+						}
 					]
 				}
 			},
@@ -234,16 +242,24 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/api/parents/login/parent_acc/456",
+					"raw": "{{host}}/api/parents/login?username=parent_acc&password=1321",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"parents",
-						"login",
-						"parent_acc",
-						"456"
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "parent_acc"
+						},
+						{
+							"key": "password",
+							"value": "1321"
+						}
 					]
 				}
 			},
@@ -275,16 +291,24 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/api/parents/login/super_parent123/789",
+					"raw": "{{host}}/api/parents/login?username=super_parent&password=123",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
 						"parents",
-						"login",
-						"super_parent123",
-						"789"
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "super_parent"
+						},
+						{
+							"key": "password",
+							"value": "123"
+						}
 					]
 				}
 			},
@@ -508,6 +532,154 @@
 					"path": [
 						"api",
 						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "23fdb977-bcaa-48d4-b5b1-6044e3d033d2",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get correct data back\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Login successful\");\r",
+							"    pm.expect(jsonData.status).to.eql(true);\r",
+							"    pm.expect(jsonData.id).to.eql(environment.child_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children/login?username=child_acc&password=123",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "child_acc"
+						},
+						{
+							"key": "password",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login child with wrong password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "748a1a70-b1b3-4582-b4eb-5ec69b11c375",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get correct data back\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Login failed\");\r",
+							"    pm.expect(jsonData.status).to.eql(false);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children/login?username=child_acc&password=1234",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "child_acc"
+						},
+						{
+							"key": "password",
+							"value": "1234"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login non-existing child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ebfd64f3-0687-4333-a783-505efa3b2caf",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get correct data back\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Child not found\");\r",
+							"    pm.expect(jsonData.status).to.eql(false);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children/login?username=super_child&password=123",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "super_child"
+						},
+						{
+							"key": "password",
+							"value": "123"
+						}
 					]
 				}
 			},
@@ -3425,14 +3597,19 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/api/validate/goodboy",
+					"raw": "{{host}}/api/validate?password=goodboy",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"validate",
-						"goodboy"
+						"validate"
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "goodboy"
+						}
 					]
 				}
 			},
@@ -3464,14 +3641,19 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/api/validate/badboy",
+					"raw": "{{host}}/api/validate?password=badboy",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"api",
-						"validate",
-						"badboy"
+						"validate"
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "badboy"
+						}
 					]
 				}
 			},
@@ -3502,7 +3684,7 @@
 	],
 	"variable": [
 		{
-			"id": "c28e2f35-8a09-4023-b8ee-f4586ded7569",
+			"id": "8ccc041d-3507-41af-beb9-dedaae3e61ff",
 			"key": "host",
 			"value": "advenchore.herokuapp.com"
 		}
