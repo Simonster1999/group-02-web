@@ -299,7 +299,7 @@ export default {
       } else {
         this.password = prompt('Enter password')
         if (this.password !== null) {
-          Api.get('/parents/login/' + username + '/' + this.password)
+          Api.get('/parents/login?username=' + username + '&password=' + this.password)
             .then(response => {
               if (response.data.status === true) {
                 this.getQuests(response.data.id)

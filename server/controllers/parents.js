@@ -24,6 +24,23 @@ router.post('/api/parents', function(req, res) {
     });
 });
 
+// Login for parents
+router.get('/api/parents/login', function(req, res) {
+    var user = req.query.username;
+    var pass = req.query.password;
+    Parent.findOne({username: user}, function(err, parent) {
+        if (err) {
+            return res.status(400).json({'message': 'Bad request', 'status': false});
+        } else if (parent === null) {
+            return res.status(404).json({'message' : 'Parent not found', 'status': false});
+        } else if (parent.password === pass) {
+            return res.json({'message': 'Login successful', 'status': true, 'id': parent._id});
+        } else {
+            return res.status(401).json({'message': 'Login failed', 'status': false});
+        }
+    })
+});
+
 // Return the parent with the given ID
 router.get('/api/parents/:parent_id', function(req, res, next) {
     var id = req.params.parent_id;
@@ -103,21 +120,6 @@ router.patch('/api/parents/:parent_id', function(req, res, next) {
     });
 });
 
-// Login for parents on Home screen
-router.get('/api/parents/login/:username/:password', function(req, res) {
-    var user = req.params.username;
-    var pass = req.params.password;
-    Parent.findOne({username: user}, function(err, parent) {
-        if (err) {
-            return res.status(400).json({'message': 'Bad request', 'status': false});
-        } else if (parent === null) {
-            return res.status(404).json({'message' : 'Parent not found', 'status': false});
-        } else if (parent.password === pass) {
-            return res.json({'message': 'Login successful', 'status': true, 'id': parent._id});
-        } else {
-            return res.status(401).json({'message': 'Login failed', 'status': false});
-        }
-    })
-});
+
 
 module.exports = router;

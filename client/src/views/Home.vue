@@ -93,7 +93,7 @@ export default {
     },
     deleteAllParents() {
       var param = prompt('Enter super secret password', '')
-      Api.get('/validate/' + param)
+      Api.get('/validate?password=' + param)
         .then(response => {
           if (response.data.answer === true) {
             if (confirm('Are you sure you want to delete everything?')) {
@@ -114,7 +114,7 @@ export default {
         })
     },
     login(username, password) {
-      Api.get('/parents/login/' + username + '/' + password)
+      Api.get('/parents/login?username=' + username + '&password=' + password)
         .then(response => {
           if (response.data.status === true) {
             this.$router.push({ path: 'parent', query: { id: response.data.id } })

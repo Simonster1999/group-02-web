@@ -14,7 +14,7 @@ var rewardController = require('./controllers/rewards');
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/questRewardDB';
 var port = process.env.PORT || 3000;
-const superSecretPassword = 'badboy'
+const superSecretPassword = 'badboy';
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
@@ -42,8 +42,8 @@ app.get('/api', function(req, res) {
 });
 
 // Validate that the correct password is provided when deleting all
-app.get('/api/validate/:password', function(req, res) {
-    var pass = req.params.password;
+app.get('/api/validate', function(req, res) {
+    var pass = req.query.password;
     if (pass === superSecretPassword) {
         res.json({'answer': true});
     } else {

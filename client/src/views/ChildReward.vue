@@ -95,7 +95,7 @@ export default {
       } else {
         this.password = prompt('Enter password')
         if (this.password !== null) {
-          Api.get('/children/login/' + username + '/' + this.password)
+          Api.get('/children/login?username=' + username + '&password=' + this.password)
             .then(response => {
               if (response.data.status === true) {
                 this.getRewards(parent, response.data.id, balance, username)
