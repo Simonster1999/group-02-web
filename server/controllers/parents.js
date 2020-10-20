@@ -98,8 +98,13 @@ router.put('/api/parents/:parent_id', function(req, res, next) {
         }
         parent.username = req.body.username;
         parent.password = req.body.password;
-        parent.save();
-        res.json(parent);
+        parent.save(function (err, parent){
+            if (err){
+                res.status(400).json({'message': 'Bad Request'});
+            } else {
+                res.json(parent)
+            }
+        });
     });
 });
 
@@ -115,8 +120,13 @@ router.patch('/api/parents/:parent_id', function(req, res, next) {
         }
         parent.username = ( req.body.username || parent.username );
         parent.password = ( req.body.password || parent.password );
-        parent.save();
-        res.json(parent);
+        parent.save(function (err, parent){
+            if (err){
+                res.status(400).json({'message': 'Bad Request'});
+            } else {
+                res.json(parent)
+            }
+        });
     });
 });
 
