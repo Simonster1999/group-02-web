@@ -146,12 +146,7 @@ export default {
             password: password
           })
           .then(response => {
-            const index = this.parents.findIndex(parent => parent._id === this.parentId)
-            this.parents.splice(index, 1,
-              {
-                username: response.data.username,
-                password: response.data.password
-              })
+            this.parent = response.data
           })
           .catch(error => {
             console.error(error)
