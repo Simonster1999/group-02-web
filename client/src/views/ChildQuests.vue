@@ -131,6 +131,7 @@ export default {
         }
       }
     },
+    //Highlights dates in the calendar
     getDates(ymd, date) {
       this.getProperDate()
       this.specificQuests = []
@@ -142,6 +143,7 @@ export default {
         }
       }
     },
+    //Gets all quests for selected parent and compares the date to the current selected date
     getSpecificQuests() {
       var k = 0
       for (var i = 0; i < this.quests.length; i++) {
@@ -151,6 +153,7 @@ export default {
         }
       }
     },
+    //Gets all quests for current selected parent and changes the date to fit YYYY-MM-DD
     getProperDate() {
       this.questDates = []
       if (this.selected) {
