@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# test
-=======
 # Backend and Frontend Template
 
 Latest version: https://git.ita.chalmers.se/courses/dit341/group-00-web (public Github [mirror](https://github.com/dit341/group-00-web))
@@ -114,4 +111,3 @@ This page shows all rewards that are available to the currently selected child. 
 ## Teaser (MS3)
 
 ![Teaser](./images/teaser.png)
->>>>>>> 03bcf16c136c90942cb678d8df85573b3bb932a0
