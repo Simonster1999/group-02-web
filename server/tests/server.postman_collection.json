@@ -1,0 +1,3693 @@
+{
+	"info": {
+		"_postman_id": "e2be5894-d13a-4b9d-a637-00de5493d594",
+		"name": "server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Poke backend",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "21ee2c17-9abb-44fb-8bf9-59094b1a8012",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"List is empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.isConnected).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/poke",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"poke"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List All Parents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2de31422-b52e-47f6-91fe-eaa58d1995ec",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"List is empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.parents).to.eql([]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f79d0357-6b1e-49e9-971c-ad06b455e2e2",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"parent_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Parent is created\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('parent_acc');\r",
+							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"parent_acc\", \"password\": \"123\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List All Parents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "17a980a4-f2d5-46ee-9c13-aaee8f509ff1",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Username for [0] is Simonsterxx\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.parents[0].username).to.eql('parent_acc');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5f25a80f-aed8-438d-b16d-7016eb307763",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get correct data back\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Login successful\");\r",
+							"    pm.expect(jsonData.status).to.eql(true);\r",
+							"    pm.expect(jsonData.id).to.eql(environment.parent_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents/login?username=parent_acc&password=123",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "parent_acc"
+						},
+						{
+							"key": "password",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login parent with wrong password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7ae3e86c-91e3-4303-925d-63fdb0ea1ae6",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get correct data back\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Login failed\");\r",
+							"    pm.expect(jsonData.status).to.eql(false);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents/login?username=parent_acc&password=1321",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "parent_acc"
+						},
+						{
+							"key": "password",
+							"value": "1321"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login non-existing parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6322780d-8f51-4795-95bd-296dd7121a38",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get correct data back\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Parent not found\");\r",
+							"    pm.expect(jsonData.status).to.eql(false);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents/login?username=super_parent&password=123",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "super_parent"
+						},
+						{
+							"key": "password",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return parent with given ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c217daf-c2b2-4ac6-a635-c86a5b0c959a",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct parent\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('parent_acc');\r",
+							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update entire parent with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1d755755-56a0-4700-ae72-c92c9e30f8df",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Parent info is updated\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('parent_acc2');\r",
+							"    pm.expect(jsonData.password).to.eql(\"143\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"parent_acc2\", \"password\": \"143\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update password for given parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ba89a5cc-223c-46d8-8549-470a9ce91f41",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Parent password is updated\", function () {\r",
+							"    pm.expect(jsonData.password).to.eql(\"333\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"password\": \"333\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all children",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ce54cbdf-cd69-4b77-87f4-02eb0284a4ae",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"List is empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.children).to.eql([]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b7891a86-6ff7-4b4a-82ac-e907df7117f5",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"child_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Child is created\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('child_acc');\r",
+							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"child_acc\", \"password\": \"123\", \"parent\": \"{{parent_id}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/children",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "23fdb977-bcaa-48d4-b5b1-6044e3d033d2",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get correct data back\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Login successful\");\r",
+							"    pm.expect(jsonData.status).to.eql(true);\r",
+							"    pm.expect(jsonData.id).to.eql(environment.child_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children/login?username=child_acc&password=123",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "child_acc"
+						},
+						{
+							"key": "password",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login child with wrong password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "748a1a70-b1b3-4582-b4eb-5ec69b11c375",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get correct data back\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Login failed\");\r",
+							"    pm.expect(jsonData.status).to.eql(false);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children/login?username=child_acc&password=1234",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "child_acc"
+						},
+						{
+							"key": "password",
+							"value": "1234"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login non-existing child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ebfd64f3-0687-4333-a783-505efa3b2caf",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get correct data back\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Child not found\");\r",
+							"    pm.expect(jsonData.status).to.eql(false);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children/login?username=super_child&password=123",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "super_child"
+						},
+						{
+							"key": "password",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all children",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "af4eccc5-eb62-46b8-bdde-b1d199fb564c",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Username for [0] is Simonsterxx\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.children[0].username).to.eql('child_acc');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all children for a given parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c56b6c64-4a69-444b-b627-22adc284e362",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Username for [0] is Simonsterxx\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.children[0].username).to.eql('child_acc');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/children",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return child with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ff1e9a90-a988-466a-abe2-04d09249a26c",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct child\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('child_acc');\r",
+							"    pm.expect(jsonData.password).to.eql(\"123\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children/{{child_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update entire child with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ee34e9d1-4c34-4871-8c5b-1799cbaa290a",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Child info is updated\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('child_acc2');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"child_acc2\", \"password\": \"123\", \"balance\": 100}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/children/{{child_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Partially update child with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d741740-62fc-4a60-bb46-6d3b9d27c331",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Child balance is updated\", function () {\r",
+							"    pm.expect(jsonData.balance).to.eql(9999);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"balance\" : 9999}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/children/{{child_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete child with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9b2b7ab0-8dd4-4845-8c00-fa2f44257b2f",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children/{{child_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get non extisting child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "537f2e01-8de0-4a69-b41a-8492ea0133b6",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response should have valid JSON data\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"Child not found\");\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children/{{child_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create child for given parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58bf6dec-5e3b-46d1-93a3-f41512647465",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"child_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Child is created with correct data\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('child1');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"child1\",\r\n    \"password\": \"password\",\r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/children",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete given parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2f1b110c-95fe-466a-a7c1-766e59f62eae",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get non existing parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fde67fd5-ba99-4e40-852b-b28643d3da71",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response should have valid JSON data\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql(\"Parent not found\");\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List All Quests (empty)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2920f009-7dab-4a99-8887-3a03981ed9e3",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"List is empty\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.quests).to.eql([]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Quest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6217dd13-59e2-4a3f-9308-c2915cda3da9",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"quest_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Quest is created\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql('test quest');\r",
+							"    pm.expect(jsonData.money_bounty).to.eql(5);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quest_name\": \"test quest\", \r\n    \"money_bounty\": \"5\", \r\n    \"date\": \"2020-09-15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return quest with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4cd101c8-0f58-4c66-8170-78679537d2f0",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Returns correct quest\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql(\"test quest\");\r",
+							"    pm.expect(jsonData.money_bounty).to.eql(5);\r",
+							"    //check for date\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/quests/{{quest_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"quests",
+						"{{quest_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List All Quests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6815adb9-6cbd-46f0-b79f-79c08eb2e6b7",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct quests\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.quests[0].quest_name).to.eql('test quest');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return all quests for given parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "93d2c040-1f2c-4bde-8dfa-3c5da88b940c",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct quests\", function () {\r",
+							"    pm.expect(jsonData.quests[0].quest_name).to.eql('test quest');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return a given quest for a given parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bd5907c4-856f-465d-8715-0c51a54b2dd2",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct quest\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql('test quest');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/quests/{{quest_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests",
+						"{{quest_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete the quest with the given ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f45c8578-70b2-423c-a219-b9f6ea172bd0",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/quests/{{quest_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"quests",
+						"{{quest_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Quest Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ca857699-a9d7-45a5-b115-fea210b5317a",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"quest_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Quest is created\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql('delete me');\r",
+							"    pm.expect(jsonData.money_bounty).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"quest_name\": \"delete me\", \"money_bounty\": \"404\", \"date\": \"2020-09-19\", \"parent\": \"{{parent_id}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change entire quest entity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "363c90a6-8259-42d9-9073-71c1220c9962",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Quest has been replaced\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql('The new, refined test quest');\r",
+							"    pm.expect(jsonData.quest_desc).to.eql('A much more lucrative quest than its predecessor');\r",
+							"    pm.expect(jsonData.is_completed).to.eql(false);\r",
+							"    pm.expect(jsonData.money_bounty).to.eql(13.37);\r",
+							"    //Research date datatype\r",
+							"    //pm.expect(jsonData.date).to.eql(\"2020-09-16\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quest_name\": \"The new, refined test quest\", \r\n    \"money_bounty\": \"13.37\",\r\n    \"is_completed\": \"false\", \r\n    \"quest_desc\": \"A much more lucrative quest than its predecessor\", \r\n    \"date\": \"2020-09-16\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/quests/{{quest_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"quests",
+						"{{quest_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Quest Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d7e0c3c7-30fe-4b3d-ba9d-bdc846a50298",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"quest_id2\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Quest is created\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql('delete me');\r",
+							"    pm.expect(jsonData.money_bounty).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"quest_name\": \"delete me\", \"money_bounty\": \"404\", \"date\": \"2020-09-19\", \"parent\": \"{{parent_id}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change specified quest attribute",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cc1946fe-6111-4621-9122-6498a3a15587",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Attributes have been updated\", function () {\r",
+							"    pm.expect(jsonData.quest_name).to.eql(\"test quest 2\");\r",
+							"    pm.expect(jsonData.money_bounty).to.eql(10);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"quest_name\": \"test quest 2\",\r\n    \"money_bounty\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/quests/{{quest_id2}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"quests",
+						"{{quest_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return all quests sorted by money_bounty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2ae47d4f-ab33-44fc-89af-c844b999db78",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct quests\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var lastElement = jsonData.quests.length - 1;\r",
+							"    pm.expect(jsonData.quests[0].money_bounty).to.lessThan(jsonData.quests[jsonData.quests.length - 1].money_bounty);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/quests?sort_bounty=asc",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"quests"
+					],
+					"query": [
+						{
+							"key": "sort_bounty",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete the quest with the given ID for the given parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2ed9659c-2325-418f-8ad9-eaaa74a7202a",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/quests/{{quest_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests",
+						"{{quest_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Rewards (empty)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4aa5ae43-f489-47a5-9167-d03a66257a46",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"List is empty\", function () {\r",
+							"    pm.expect(jsonData.rewards).to.eql([]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/rewards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Parent For Reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b836e06a-214e-433e-95af-4d204a6dfcc2",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"parent_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Correct parent is created\", function () {\r",
+							"    pm.expect(jsonData.username).to.eql('parent_acc1');\r",
+							"    pm.expect(jsonData.password).to.eql(\"1234\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"parent_acc1\", \r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "54bd1f3a-e4d4-46cb-a6a8-b6b05475154c",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"reward_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Reward is created\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('Candy');\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('1 piece of candy');\r",
+							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
+							"    pm.expect(jsonData.price).to.eql(15);\r",
+							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"Candy\", \r\n    \"reward_desc\": \"1 piece of candy\", \r\n    \"price\": \"15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get reward with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "952444c4-dceb-45f9-a75e-3a15cdc1bbdc",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct reward\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('Candy');\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('1 piece of candy');\r",
+							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
+							"    pm.expect(jsonData.price).to.eql(15);\r",
+							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/rewards/{{reward_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create 2nd Reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a129df1d-387a-4e08-b77b-8875ff747928",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"reward_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Reward is created\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('2nd');\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('');\r",
+							"    pm.expect(jsonData.is_bought).to.eql(true);\r",
+							"    pm.expect(jsonData.price).to.eql(25);\r",
+							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd\", \r\n    \"is_bought\": \"true\", \r\n    \"price\": \"25\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all rewards with given parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "88c51185-06ef-4db3-87bd-6b7a36406a1b",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns correct rewards\", function () {\r",
+							"    pm.expect(jsonData.rewards[0].reward_name).to.eql('Candy');\r",
+							"    pm.expect(jsonData.rewards[1].reward_name).to.eql('2nd');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/rewards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eef8c820-cad8-4d93-a40f-916294d59470",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Reward is replaced\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('2nd v2');\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('Now replaced');\r",
+							"    pm.expect(jsonData.price).to.eql(30);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v2\", \r\n    \"reward_desc\": \"Now replaced\",\r\n    \"price\": \"30\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards/{{reward_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e6912e68-09b2-4818-a03f-9819f475772f",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Reward is updated\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('2nd v3');\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('Now replaced');\r",
+							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
+							"    pm.expect(jsonData.price).to.eql(10);\r",
+							"    pm.expect(jsonData.parent).to.eql(environment.parent_id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v3\", \r\n    \"is_bought\": \"false\", \r\n    \"price\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards/{{reward_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3ebd888-9811-4411-880a-21ec0a8815ad",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v3\", \r\n    \"is_bought\": \"false\", \r\n    \"price\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards/{{reward_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get non existing reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1658ec79-3fbf-4727-b8ee-79c30eb3c9af",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns no reward\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql('Reward not found');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/rewards/{{reward_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete non existing reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1fe8980f-3029-4a56-aa8f-209c7f54a421",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns no reward\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql('Reward not found');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v3\", \r\n    \"is_bought\": \"false\", \r\n    \"price\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards/{{reward_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace non existing reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7e8cbca4-bd44-4005-be98-303079b9bb33",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns no reward\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql('Reward not found');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v2\", \r\n    \"reward_desc\": \"Now replaced\",\r\n    \"is_bought\": \"true\", \r\n    \"price\": \"30\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards/{{reward_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update non existing reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fff9391a-10bc-4dd2-9b67-2e37780eb38a",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns no reward\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql('Reward not found');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v3\", \r\n    \"is_bought\": \"false\", \r\n    \"price\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards/{{reward_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7beb1b89-2358-41ae-8549-ec8d79604a79",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"parent_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Parent\", \r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Reward For Fake Parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a512d3e-3485-4e53-8888-326ccba46ea4",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response is correct\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Error message recieved\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql('Reward does not belong to this parent');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"Reward\", \r\n    \"price\": \"123\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/123/rewards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"123",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Reward For Parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "69e2fad9-e514-4216-93c9-5a068a409b9a",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"reward_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"Reward\", \r\n    \"price\": \"123\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/rewards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4d317880-bf7f-402b-8864-426b65583394",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/rewards/{{reward_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace reward with bad data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a4e0a829-5b85-402a-8096-d4fa3cecc285",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns no reward\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql('Bad Request');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v2\", \r\n    \"reward_desc\": \"Now replaced\",\r\n    \"price\": \"hej\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards/{{reward_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update reward with bad data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "96e75320-c231-4b1f-b3b3-9f2c799bcdc9",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Returns no reward\", function () {\r",
+							"    pm.expect(jsonData.message).to.eql('Bad Request');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"2nd v3\", \r\n    \"is_bought\": \"1a2b3c\", \r\n    \"price\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards/{{reward_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get reward again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "94fbf234-74e8-4e16-a0d8-8e1c7a4ddf7b",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Bad data was not saved\", function () {\r",
+							"    pm.expect(jsonData.reward_name).to.eql('Reward');\r",
+							"    pm.expect(jsonData.reward_desc).to.eql('');\r",
+							"    pm.expect(jsonData.is_bought).to.eql(false);\r",
+							"    pm.expect(jsonData.price).to.eql(123);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/rewards/{{reward_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"rewards",
+						"{{reward_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6559ceb6-bd4f-455e-b454-76e7fdfe9bc2",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"child_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"child_acc\", \"password\": \"123\", \"parent\": \"{{parent_id}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/children",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Quest Completed By Child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5e2ee3b6-c531-4f57-bcaf-e294d91ea086",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"quest_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quest_name\": \"delete me\", \r\n    \"money_bounty\": \"404\", \r\n    \"date\": \"2020-09-19\", \r\n    \"parent\": \"{{parent_id}}\",\r\n    \"completed_by\": \"{{child_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bda0af30-e22e-4259-8732-7071cac2424c",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children/{{child_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check that quest was deleted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "691cb04f-45db-4e52-9276-429e1c9f89cc",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Quest was deleted\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/quests/{{child_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"quests",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check that child was deleted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eda1513c-9c2c-4151-a765-d9bd5b608566",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children/{{child_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children",
+						"{{child_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create second child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0ff0be4-24b3-4229-9312-30916897c505",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"child_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"child\", \r\n    \"password\": \"321\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/children",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "577abc30-4257-4b79-b227-ef54f590fea6",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0c024174-d04a-44ce-a089-81da2dadc1cf",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"parent_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"parent_acc\", \"password\": \"123\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1bb6dfe2-68d1-4db6-91f2-d97a7f191ede",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"parent_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"parent_acc2\", \"password\": \"123\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Parent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "813ead68-b9c9-4316-8bb0-157b13722deb",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"parent_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"parent_acc3\", \"password\": \"123\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d23e5c05-69b1-4930-b173-11529eec6a42",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"child_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"child_acc\", \"password\": \"123\", \"parent\": \"{{parent_id}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/children",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cf28f4a0-4d3a-49de-985f-23a72021983f",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"child_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"child_acc2\", \"password\": \"123\", \"parent\": \"{{parent_id}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/children",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Child",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c5bc07d9-3b00-472a-8503-7bb2ddb1ce41",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"child_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"child_acc3\", \"password\": \"123\", \"parent\": \"{{parent_id}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/children",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Quest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "83944702-bad6-477a-8c29-3d52756a1f65",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"quest_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quest_name\": \"test quest\", \r\n    \"money_bounty\": \"5\", \r\n    \"date\": \"2020-09-15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Quest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58825551-8774-4ed6-b1e2-37097d98368f",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"quest_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quest_name\": \"test quest2\", \r\n    \"money_bounty\": \"5\", \r\n    \"date\": \"2020-09-15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Quest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8cd433f8-4cd7-41de-ba68-74996711c73b",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"quest_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quest_name\": \"test quest3\", \r\n    \"money_bounty\": \"5\", \r\n    \"date\": \"2020-09-15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/parents/{{parent_id}}/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents",
+						"{{parent_id}}",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "933526ab-abdf-4d9e-8b5e-99b0fb6d8db7",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"reward_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"Candy\", \r\n    \"reward_desc\": \"1 piece of candy\", \r\n    \"price\": \"15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "61b5b234-6251-42c4-899e-8c37ceb86e0a",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"reward_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"Extra Homework\", \r\n    \"reward_desc\": \"Your reward is more hard work\", \r\n    \"price\": \"15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Reward",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "82c5ea04-9220-4587-b53b-0f52a7d2de30",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"reward_id\", jsonData._id);\r",
+							"\r",
+							"pm.test(\"Response is CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"reward_name\": \"Friendship\", \r\n    \"reward_desc\": \"The true reward is the friendships we created along the way.\", \r\n    \"price\": \"15\", \r\n    \"parent\": \"{{parent_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/rewards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete All Quests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "215d27eb-13fb-4ed6-ae38-d3343ede7edd",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/quests",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"quests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete All Rewards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a6c915f-9069-416a-af1f-d5c221fa0d13",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/rewards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"rewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all children",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "afbbdc3a-4425-4e04-b9d2-34a34777242a",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/children",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"children"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete All Parents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bf1ab10a-90dd-44ef-85c9-331b07a143d5",
+						"exec": [
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/parents",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"parents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate password for delete all function (false)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2e694f19-b23a-41b2-b0d3-7df617305e53",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Correct response\", function () {\r",
+							"    pm.expect(jsonData.answer).to.eql(false);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/validate?password=goodboy",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"validate"
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "goodboy"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate password for delete all function (true)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8950ba29-1283-488e-8ce6-fa1f4f9323cf",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Correct status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Correct response\", function () {\r",
+							"    pm.expect(jsonData.answer).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/validate?password=badboy",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"validate"
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "badboy"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "8b4e5532-f5bf-477f-a4d4-2ea49ef8a4bb",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "24defadd-0b52-47a5-980f-8f1e9de84c82",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "8ccc041d-3507-41af-beb9-dedaae3e61ff",
+			"key": "host",
+			"value": "advenchore.herokuapp.com"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
